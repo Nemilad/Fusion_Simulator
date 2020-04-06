@@ -1321,12 +1321,9 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QTextBrowser" name="textBrowser_macro">
-            <property name="readOnly">
-             <bool>false</bool>
-            </property>
-            <property name="overwriteMode">
-             <bool>false</bool>
+           <widget class="QPlainTextEdit" name="textEdit_macro">
+            <property name="enabled">
+             <bool>true</bool>
             </property>
            </widget>
           </item>

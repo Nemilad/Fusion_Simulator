@@ -1,5 +1,6 @@
 import copy
 import sys
+
 import Arch_Settings
 from PyQt5 import QtWidgets
 from PyQt5 import uic
@@ -40,11 +41,22 @@ class Ui(QtWidgets.QMainWindow):
         for box in self.scrollArea_micro_conditions.findChildren(QtWidgets.QCheckBox):
             box.stateChanged.connect(self.micro_conditions_change_state)
         self.pushButton_simulate.clicked.connect(self.simulate)
+        self.textEdit_macro.mousePressEvent = self.clear_color
         self.set_enabled_second_pair(0)
         self.show()
 
+    # Main button to start simulation
     def simulate(self):
-        print(User_settings)
+        if self.comboBox_arch.currentText() == 'Своя':
+            current_settings = User_settings
+        else:
+            current_settings = Arch_Dict[self.comboBox_arch.currentText()]
+        if self.general_check(self.textEdit_macro.toPlainText()):
+            print(current_settings)
+        else:
+            return 0
+
+    # ____Settings tab functions____
 
     def arch_change(self):
         sender = self.sender()
@@ -152,6 +164,27 @@ class Ui(QtWidgets.QMainWindow):
     def set_enabled_second_pair(self, state):
         for box in self.scrollArea_macro_second_pair.findChildren(QtWidgets.QCheckBox):
             box.setEnabled(state)
+
+    # ____Macro tab functions____
+
+    def general_check(self, code):
+        flag = 1
+        self.textEdit_macro.clear()
+        for line in code.splitlines():
+            words = line.split(' ')
+            if words[0] and words[0].upper() not in Arch_Settings.Macro_command_list:
+                self.textEdit_macro.appendHtml(f"<span style='background-color: red;'>{line}</p>")
+                flag = 0
+                #break
+            else:
+                self.textEdit_macro.appendHtml(f"<span style='background-color: white;'>{line}</p>")
+        return flag
+
+    def clear_color(self, event):
+        text = self.textEdit_macro.toPlainText()
+        self.textEdit_macro.clear()
+        for line in text.splitlines():
+            self.textEdit_macro.appendHtml(f"<span style='background-color: white;'>{line}</p>")
 
 
 app = QtWidgets.QApplication(sys.argv)

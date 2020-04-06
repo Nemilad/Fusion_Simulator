@@ -1,3 +1,5 @@
+Macro_command_list = ('ADD', 'SUB', 'INC', 'DEC')
+
 Template_settings = {
     'Macro_Pairs': {
         'ADD': {
