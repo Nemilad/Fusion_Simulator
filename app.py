@@ -1,21 +1,21 @@
 import copy
 import sys
 
-import Arch_Settings
+import arch_settings
 from PyQt5 import QtWidgets
 from PyQt5 import uic
 
-User_settings = copy.deepcopy(Arch_Settings.Template_settings)
+User_settings = copy.deepcopy(arch_settings.Template_settings)
 
 Arch_Dict = {
-    'Pentium M': Arch_Settings.Pentium_M_settings,
-    'Core 2': Arch_Settings.Core_2_settings,
-    'Nehalem': Arch_Settings.Nehalem_settings,
-    'Sandy Bridge': Arch_Settings.Sandy_Bridge_settings,
-    'Ivy Bridge': Arch_Settings.Ivy_Bridge_settings,
-    'Haswell': Arch_Settings.Haswell_settings,
-    'Broadwell': Arch_Settings.Broadwell_settings,
-    'Skylake': Arch_Settings.Skylake_settings
+    'Pentium M': arch_settings.Pentium_M_settings,
+    'Core 2': arch_settings.Core_2_settings,
+    'Nehalem': arch_settings.Nehalem_settings,
+    'Sandy Bridge': arch_settings.Sandy_Bridge_settings,
+    'Ivy Bridge': arch_settings.Ivy_Bridge_settings,
+    'Haswell': arch_settings.Haswell_settings,
+    'Broadwell': arch_settings.Broadwell_settings,
+    'Skylake': arch_settings.Skylake_settings
 }
 
 
@@ -172,7 +172,7 @@ class Ui(QtWidgets.QMainWindow):
         self.textEdit_macro.clear()
         for line in code.splitlines():
             words = line.split(' ')
-            if words[0] and words[0].upper() not in Arch_Settings.Macro_command_list:
+            if words[0] and words[0].upper() not in arch_settings.Macro_command_list:
                 self.textEdit_macro.appendHtml(f"<span style='background-color: red;'>{line}</p>")
                 flag = 0
                 #break
