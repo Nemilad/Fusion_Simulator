@@ -1,21 +1,23 @@
 import copy
 import sys
 
-import arch_settings
+from PyQt5.uic.uiparser import QtWidgets
+
+import app_settings
 from PyQt5 import QtWidgets
 from PyQt5 import uic
 
-User_settings = copy.deepcopy(arch_settings.Template_settings)
+User_settings = copy.deepcopy(app_settings.Template_settings)
 
 Arch_Dict = {
-    'Pentium M': arch_settings.Pentium_M_settings,
-    'Core 2': arch_settings.Core_2_settings,
-    'Nehalem': arch_settings.Nehalem_settings,
-    'Sandy Bridge': arch_settings.Sandy_Bridge_settings,
-    'Ivy Bridge': arch_settings.Ivy_Bridge_settings,
-    'Haswell': arch_settings.Haswell_settings,
-    'Broadwell': arch_settings.Broadwell_settings,
-    'Skylake': arch_settings.Skylake_settings
+    'Pentium M': app_settings.Pentium_M_settings,
+    'Core 2': app_settings.Core_2_settings,
+    'Nehalem': app_settings.Nehalem_settings,
+    'Sandy Bridge': app_settings.Sandy_Bridge_settings,
+    'Ivy Bridge': app_settings.Ivy_Bridge_settings,
+    'Haswell': app_settings.Haswell_settings,
+    'Broadwell': app_settings.Broadwell_settings,
+    'Skylake': app_settings.Skylake_settings
 }
 
 
@@ -55,6 +57,7 @@ class Ui(QtWidgets.QMainWindow):
             print(current_settings)
         else:
             return 0
+        self.fill_macro_table()
 
     # ____Settings tab functions____
 
@@ -172,10 +175,9 @@ class Ui(QtWidgets.QMainWindow):
         self.textEdit_macro.clear()
         for line in code.splitlines():
             words = line.split(' ')
-            if words[0] and words[0].upper() not in arch_settings.Macro_command_list:
+            if words[0] and words[0].upper() not in app_settings.Macro_command_list:
                 self.textEdit_macro.appendHtml(f"<span style='background-color: red;'>{line}</p>")
                 flag = 0
-                #break
             else:
                 self.textEdit_macro.appendHtml(f"<span style='background-color: white;'>{line}</p>")
         return flag
@@ -185,6 +187,11 @@ class Ui(QtWidgets.QMainWindow):
         self.textEdit_macro.clear()
         for line in text.splitlines():
             self.textEdit_macro.appendHtml(f"<span style='background-color: white;'>{line}</p>")
+
+    def fill_macro_table(self):
+        self.tableWidget_macro.setColumnCount(3)
+        self.tableWidget_macro.setRowCount(3)
+        self.tableWidget_macro.setItem(0, 0, QtWidgets.QTableWidgetItem('test'))
 
 
 app = QtWidgets.QApplication(sys.argv)

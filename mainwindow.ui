@@ -29,7 +29,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="settings">
        <attribute name="title">
@@ -310,7 +310,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>0</y>
+                 <y>-141</y>
                  <width>282</width>
                  <height>402</height>
                 </rect>
@@ -1328,7 +1328,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QTableView" name="tableView_macro"/>
+           <widget class="QTableWidget" name="tableWidget_macro"/>
           </item>
          </layout>
         </item>
@@ -1410,7 +1410,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
-         <widget class="QTableView" name="tableView_micro"/>
+         <widget class="QTableWidget" name="tableWidget_micro"/>
         </item>
        </layout>
       </widget>
