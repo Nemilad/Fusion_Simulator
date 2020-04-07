@@ -58,7 +58,6 @@ class Ui(QtWidgets.QMainWindow):
         else:
             current_settings = Arch_Dict[self.comboBox_arch.currentText()]
         if self.code_check(self.textEdit_macro.toPlainText()):
-            print(current_settings)
             self.fill_macro_table(current_settings)
         else:
             return 0
@@ -216,34 +215,29 @@ class Ui(QtWidgets.QMainWindow):
                     self.tableWidget_macro.setItem(row_count, 2, QtWidgets.QTableWidgetItem('-'))
                 self.tableWidget_macro.setItem(
                     row_count, 3, QtWidgets.QTableWidgetItem(str(tact + (self.tableWidget_macro.rowCount() - 1) // 4)))
-                if row_count != 0:
-                    current_op = [self.tableWidget_macro.item(row_count, 0),
-                                  self.tableWidget_macro.item(row_count, 1),
-                                  self.tableWidget_macro.item(row_count, 2),
-                                  self.tableWidget_macro.item(row_count, 3),
-                                  row_count]
-                    self.perform_macro_fusion(settings, previous_op, current_op)
-                    previous_op = current_op
-                else:
-                    previous_op = [self.tableWidget_macro.item(row_count, 0),
-                                   self.tableWidget_macro.item(row_count, 1),
-                                   self.tableWidget_macro.item(row_count, 2),
-                                   self.tableWidget_macro.item(row_count, 3),
-                                   row_count]
+                if self.checkBox_arch_macro.isEnabled():
+                    if row_count != 0:
+                        current_op = [self.tableWidget_macro.item(row_count, 0),
+                                      self.tableWidget_macro.item(row_count, 1),
+                                      self.tableWidget_macro.item(row_count, 2),
+                                      self.tableWidget_macro.item(row_count, 3),
+                                      row_count]
+                        self.perform_macro_fusion(settings, previous_op, current_op)
+                        previous_op = current_op
+                    else:
+                        previous_op = [self.tableWidget_macro.item(row_count, 0),
+                                       self.tableWidget_macro.item(row_count, 1),
+                                       self.tableWidget_macro.item(row_count, 2),
+                                       self.tableWidget_macro.item(row_count, 3),
+                                       row_count]
 
     def perform_macro_fusion(self, fusion_settings, first_op, second_op):
         if first_op[0].text() in fusion_settings['Macro_Pairs'] and second_op[0].text() in \
                 fusion_settings['Macro_Pairs'][first_op[0].text()] and \
                 fusion_settings['Macro_Pairs'][first_op[0].text()][second_op[0].text()] == 1:
-            self.tableWidget_macro.item(first_op[4], 0).setBackground(QtGui.QColor(255, 255, 0))
-            self.tableWidget_macro.item(first_op[4], 1).setBackground(QtGui.QColor(255, 255, 0))
-            self.tableWidget_macro.item(first_op[4], 2).setBackground(QtGui.QColor(255, 255, 0))
-            self.tableWidget_macro.item(first_op[4], 3).setBackground(QtGui.QColor(255, 255, 0))
-            self.tableWidget_macro.item(second_op[4], 0).setBackground(QtGui.QColor(255, 255, 0))
-            self.tableWidget_macro.item(second_op[4], 1).setBackground(QtGui.QColor(255, 255, 0))
-            self.tableWidget_macro.item(second_op[4], 2).setBackground(QtGui.QColor(255, 255, 0))
-            self.tableWidget_macro.item(second_op[4], 3).setBackground(QtGui.QColor(255, 255, 0))
-        print(second_op[0].text() in fusion_settings['Macro_Pairs'][first_op[0].text()])
+            for i in range(4):
+                self.tableWidget_macro.item(first_op[4], i).setBackground(QtGui.QColor(255, 255, 0))
+                self.tableWidget_macro.item(second_op[4], i).setBackground(QtGui.QColor(255, 255, 0))
         # TODO
 
 
