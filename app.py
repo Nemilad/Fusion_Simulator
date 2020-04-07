@@ -45,6 +45,9 @@ class Ui(QtWidgets.QMainWindow):
         self.pushButton_simulate.clicked.connect(self.simulate)
         self.textEdit_macro.mousePressEvent = self.clear_color
         self.set_enabled_second_pair(0)
+        self.tableWidget_macro.setColumnCount(4)
+        self.tableWidget_macro.setHorizontalHeaderLabels(('Макро-операция', 'Операнд 1', ' Операнд 2', 'Такт'))
+        self.tableWidget_macro.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.show()
 
     # Main button to start simulation
@@ -53,7 +56,7 @@ class Ui(QtWidgets.QMainWindow):
             current_settings = User_settings
         else:
             current_settings = Arch_Dict[self.comboBox_arch.currentText()]
-        if self.general_check(self.textEdit_macro.toPlainText()):
+        if self.code_check(self.textEdit_macro.toPlainText()):
             print(current_settings)
         else:
             return 0
@@ -170,7 +173,7 @@ class Ui(QtWidgets.QMainWindow):
 
     # ____Macro tab functions____
 
-    def general_check(self, code):
+    def code_check(self, code):
         flag = 1
         self.textEdit_macro.clear()
         for line in code.splitlines():
@@ -189,9 +192,22 @@ class Ui(QtWidgets.QMainWindow):
             self.textEdit_macro.appendHtml(f"<span style='background-color: white;'>{line}</p>")
 
     def fill_macro_table(self):
-        self.tableWidget_macro.setColumnCount(3)
-        self.tableWidget_macro.setRowCount(3)
-        self.tableWidget_macro.setItem(0, 0, QtWidgets.QTableWidgetItem('test'))
+        code_lines = self.textEdit_macro.toPlainText().splitlines()
+        self.tableWidget_macro.setRowCount(len(code_lines))
+        tact = 1
+        for number, command in enumerate(code_lines):
+            self.tableWidget_macro.setItem(number, 0, QtWidgets.QTableWidgetItem(command.split(' ')[0].upper()))
+            try:
+                self.tableWidget_macro.setItem(number, 1, QtWidgets.QTableWidgetItem(command.split(' ', 1)[1].split(',')[0].upper()))
+                #if command.split(' ')[1][-1] == ',':
+                 #   self.tableWidget_macro.setItem(number, 1, QtWidgets.QTableWidgetItem(command.split(' ')[1][:-1].upper()))
+            except IndexError:
+                self.tableWidget_macro.setItem(number, 1, QtWidgets.QTableWidgetItem('-'))
+            try:
+                self.tableWidget_macro.setItem(number, 2, QtWidgets.QTableWidgetItem(command.split(',')[1].upper()))
+            except IndexError:
+                self.tableWidget_macro.setItem(number, 2, QtWidgets.QTableWidgetItem('-'))
+            self.tableWidget_macro.setItem(number, 3, QtWidgets.QTableWidgetItem(str(tact + number // 4)))
 
 
 app = QtWidgets.QApplication(sys.argv)

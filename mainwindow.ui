@@ -310,7 +310,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>-141</y>
+                 <y>0</y>
                  <width>282</width>
                  <height>402</height>
                 </rect>
@@ -1325,10 +1325,35 @@
             <property name="enabled">
              <bool>true</bool>
             </property>
+            <property name="mouseTracking">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
           <item>
-           <widget class="QTableWidget" name="tableWidget_macro"/>
+           <widget class="QTableWidget" name="tableWidget_macro">
+            <property name="editTriggers">
+             <set>QAbstractItemView::NoEditTriggers</set>
+            </property>
+            <property name="alternatingRowColors">
+             <bool>false</bool>
+            </property>
+            <property name="columnCount">
+             <number>0</number>
+            </property>
+            <attribute name="horizontalHeaderCascadingSectionResizes">
+             <bool>true</bool>
+            </attribute>
+            <attribute name="horizontalHeaderMinimumSectionSize">
+             <number>25</number>
+            </attribute>
+            <attribute name="horizontalHeaderDefaultSectionSize">
+             <number>120</number>
+            </attribute>
+            <attribute name="horizontalHeaderStretchLastSection">
+             <bool>false</bool>
+            </attribute>
+           </widget>
           </item>
          </layout>
         </item>
