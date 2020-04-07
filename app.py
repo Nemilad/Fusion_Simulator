@@ -4,7 +4,7 @@ import sys
 from PyQt5.uic.uiparser import QtWidgets
 
 import app_settings
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 from PyQt5 import uic
 
 User_settings = copy.deepcopy(app_settings.Template_settings)
@@ -23,6 +23,7 @@ Arch_Dict = {
 
 class Ui(QtWidgets.QMainWindow):
     current_radio = 'none'
+    error_flag = 0
 
     def __init__(self):
         super(Ui, self).__init__()
@@ -43,7 +44,7 @@ class Ui(QtWidgets.QMainWindow):
         for box in self.scrollArea_micro_conditions.findChildren(QtWidgets.QCheckBox):
             box.stateChanged.connect(self.micro_conditions_change_state)
         self.pushButton_simulate.clicked.connect(self.simulate)
-        self.textEdit_macro.mousePressEvent = self.clear_color
+        self.textEdit_macro.mouseReleaseEvent = self.clear_color
         self.set_enabled_second_pair(0)
         self.tableWidget_macro.setColumnCount(4)
         self.tableWidget_macro.setHorizontalHeaderLabels(('Макро-операция', 'Операнд 1', ' Операнд 2', 'Такт'))
@@ -58,9 +59,9 @@ class Ui(QtWidgets.QMainWindow):
             current_settings = Arch_Dict[self.comboBox_arch.currentText()]
         if self.code_check(self.textEdit_macro.toPlainText()):
             print(current_settings)
+            self.fill_macro_table(current_settings)
         else:
             return 0
-        self.fill_macro_table()
 
     # ____Settings tab functions____
 
@@ -174,40 +175,76 @@ class Ui(QtWidgets.QMainWindow):
     # ____Macro tab functions____
 
     def code_check(self, code):
-        flag = 1
         self.textEdit_macro.clear()
         for line in code.splitlines():
             words = line.split(' ')
-            if words[0] and words[0].upper() not in app_settings.Macro_command_list:
+            if (words[0] and words[0].upper() not in app_settings.Macro_command_list) and \
+                    not (words[0][0] == '.' and words[0][-1] == ':'):
                 self.textEdit_macro.appendHtml(f"<span style='background-color: red;'>{line}</p>")
-                flag = 0
+                self.error_flag = 1
             else:
                 self.textEdit_macro.appendHtml(f"<span style='background-color: white;'>{line}</p>")
-        return flag
+        return not self.error_flag
 
     def clear_color(self, event):
-        text = self.textEdit_macro.toPlainText()
-        self.textEdit_macro.clear()
-        for line in text.splitlines():
-            self.textEdit_macro.appendHtml(f"<span style='background-color: white;'>{line}</p>")
+        if self.error_flag:
+            text = self.textEdit_macro.toPlainText()
+            self.textEdit_macro.clear()
+            for line in text.splitlines():
+                self.textEdit_macro.appendHtml(f"<span style='background-color: white;'>{line}</p>")
+            self.error_flag = 0
 
-    def fill_macro_table(self):
+    def fill_macro_table(self, settings):
+        self.tableWidget_macro.clearContents()
+        self.tableWidget_macro.setRowCount(0)
         code_lines = self.textEdit_macro.toPlainText().splitlines()
-        self.tableWidget_macro.setRowCount(len(code_lines))
         tact = 1
         for number, command in enumerate(code_lines):
-            self.tableWidget_macro.setItem(number, 0, QtWidgets.QTableWidgetItem(command.split(' ')[0].upper()))
-            try:
-                self.tableWidget_macro.setItem(number, 1, QtWidgets.QTableWidgetItem(command.split(' ', 1)[1].split(',')[0].upper()))
-                #if command.split(' ')[1][-1] == ',':
-                 #   self.tableWidget_macro.setItem(number, 1, QtWidgets.QTableWidgetItem(command.split(' ')[1][:-1].upper()))
-            except IndexError:
-                self.tableWidget_macro.setItem(number, 1, QtWidgets.QTableWidgetItem('-'))
-            try:
-                self.tableWidget_macro.setItem(number, 2, QtWidgets.QTableWidgetItem(command.split(',')[1].upper()))
-            except IndexError:
-                self.tableWidget_macro.setItem(number, 2, QtWidgets.QTableWidgetItem('-'))
-            self.tableWidget_macro.setItem(number, 3, QtWidgets.QTableWidgetItem(str(tact + number // 4)))
+            if command.split(' ')[0][0] != '.':
+                row_count = self.tableWidget_macro.rowCount()
+                self.tableWidget_macro.insertRow(row_count)
+                self.tableWidget_macro.setItem(row_count, 0, QtWidgets.QTableWidgetItem(command.split(' ')[0].upper()))
+                try:
+                    self.tableWidget_macro.setItem(
+                        row_count, 1, QtWidgets.QTableWidgetItem(command.split(' ', 1)[1].split(',')[0].upper()))
+                except IndexError:
+                    self.tableWidget_macro.setItem(row_count, 1, QtWidgets.QTableWidgetItem('-'))
+                try:
+                    self.tableWidget_macro.setItem(row_count, 2,
+                                                   QtWidgets.QTableWidgetItem(command.split(',')[1].upper()))
+                except IndexError:
+                    self.tableWidget_macro.setItem(row_count, 2, QtWidgets.QTableWidgetItem('-'))
+                self.tableWidget_macro.setItem(
+                    row_count, 3, QtWidgets.QTableWidgetItem(str(tact + (self.tableWidget_macro.rowCount() - 1) // 4)))
+                if row_count != 0:
+                    current_op = [self.tableWidget_macro.item(row_count, 0),
+                                  self.tableWidget_macro.item(row_count, 1),
+                                  self.tableWidget_macro.item(row_count, 2),
+                                  self.tableWidget_macro.item(row_count, 3),
+                                  row_count]
+                    self.perform_macro_fusion(settings, previous_op, current_op)
+                    previous_op = current_op
+                else:
+                    previous_op = [self.tableWidget_macro.item(row_count, 0),
+                                   self.tableWidget_macro.item(row_count, 1),
+                                   self.tableWidget_macro.item(row_count, 2),
+                                   self.tableWidget_macro.item(row_count, 3),
+                                   row_count]
+
+    def perform_macro_fusion(self, fusion_settings, first_op, second_op):
+        if first_op[0].text() in fusion_settings['Macro_Pairs'] and second_op[0].text() in \
+                fusion_settings['Macro_Pairs'][first_op[0].text()] and \
+                fusion_settings['Macro_Pairs'][first_op[0].text()][second_op[0].text()] == 1:
+            self.tableWidget_macro.item(first_op[4], 0).setBackground(QtGui.QColor(255, 255, 0))
+            self.tableWidget_macro.item(first_op[4], 1).setBackground(QtGui.QColor(255, 255, 0))
+            self.tableWidget_macro.item(first_op[4], 2).setBackground(QtGui.QColor(255, 255, 0))
+            self.tableWidget_macro.item(first_op[4], 3).setBackground(QtGui.QColor(255, 255, 0))
+            self.tableWidget_macro.item(second_op[4], 0).setBackground(QtGui.QColor(255, 255, 0))
+            self.tableWidget_macro.item(second_op[4], 1).setBackground(QtGui.QColor(255, 255, 0))
+            self.tableWidget_macro.item(second_op[4], 2).setBackground(QtGui.QColor(255, 255, 0))
+            self.tableWidget_macro.item(second_op[4], 3).setBackground(QtGui.QColor(255, 255, 0))
+        print(second_op[0].text() in fusion_settings['Macro_Pairs'][first_op[0].text()])
+        # TODO
 
 
 app = QtWidgets.QApplication(sys.argv)
