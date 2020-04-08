@@ -578,6 +578,7 @@ Template_settings = {
         '16_Bit_Border_Start': 0,
         '16_Bit_Border_Cross': 0,
         'Two_Pairs': 0,
+        'Transfer': 0,
         '16_Bit_Mode': 0,
         '32_Bit_Mode': 0,
         '64_Bit_Mode': 0
@@ -1159,6 +1160,7 @@ Pentium_M_settings = {
         '16_Bit_Border_Start': 0,
         '16_Bit_Border_Cross': 0,
         'Two_Pairs': 0,
+        'Transfer': 0,
         '16_Bit_Mode': 0,
         '32_Bit_Mode': 0,
         '64_Bit_Mode': 0
@@ -1740,6 +1742,7 @@ Core_2_settings = {
         '16_Bit_Border_Start': 0,
         '16_Bit_Border_Cross': 0,
         'Two_Pairs': 0,
+        'Transfer': 1,
         '16_Bit_Mode': 1,
         '32_Bit_Mode': 1,
         '64_Bit_Mode': 0
@@ -2321,6 +2324,7 @@ Nehalem_settings = {
         '16_Bit_Border_Start': 0,
         '16_Bit_Border_Cross': 0,
         'Two_Pairs': 0,
+        'Transfer': 1,
         '16_Bit_Mode': 1,
         '32_Bit_Mode': 1,
         '64_Bit_Mode': 1
@@ -2901,6 +2905,7 @@ Sandy_Bridge_settings = {
         '16_Bit_Border_Start': 0,
         '16_Bit_Border_Cross': 0,
         'Two_Pairs': 0,
+        'Transfer': 1,
         '16_Bit_Mode': 1,
         '32_Bit_Mode': 1,
         '64_Bit_Mode': 1
@@ -3481,6 +3486,7 @@ Ivy_Bridge_settings = {
         '16_Bit_Border_Start': 0,
         '16_Bit_Border_Cross': 1,
         'Two_Pairs': 0,
+        'Transfer': 1,
         '16_Bit_Mode': 1,
         '32_Bit_Mode': 1,
         '64_Bit_Mode': 1
@@ -4061,6 +4067,7 @@ Haswell_settings = {
         '16_Bit_Border_Start': 0,
         '16_Bit_Border_Cross': 1,
         'Two_Pairs': 1,
+        'Transfer': 1,
         '16_Bit_Mode': 1,
         '32_Bit_Mode': 1,
         '64_Bit_Mode': 1
@@ -4641,6 +4648,7 @@ Broadwell_settings = {
         '16_Bit_Border_Start': 0,
         '16_Bit_Border_Cross': 1,
         'Two_Pairs': 1,
+        'Transfer': 1,
         '16_Bit_Mode': 1,
         '32_Bit_Mode': 1,
         '64_Bit_Mode': 1
@@ -5221,6 +5229,7 @@ Skylake_settings = {
         '16_Bit_Border_Start': 0,
         '16_Bit_Border_Cross': 1,
         'Two_Pairs': 1,
+        'Transfer': 1,
         '16_Bit_Mode': 1,
         '32_Bit_Mode': 1,
         '64_Bit_Mode': 1

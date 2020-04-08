@@ -29,7 +29,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="settings">
        <attribute name="title">
@@ -310,7 +310,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>0</y>
+                 <y>-141</y>
                  <width>282</width>
                  <height>402</height>
                 </rect>
@@ -945,7 +945,7 @@
                <x>0</x>
                <y>0</y>
                <width>590</width>
-               <height>196</height>
+               <height>222</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -972,6 +972,13 @@
                <widget class="QCheckBox" name="checkBox_Two_Pairs">
                 <property name="text">
                  <string>Две пары в такт</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBox_Transfer">
+                <property name="text">
+                 <string>Перенос первой инструкции на следующий такт при попадании на последний декодер</string>
                 </property>
                </widget>
               </item>
