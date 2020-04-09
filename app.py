@@ -24,11 +24,13 @@ Arch_Dict = {
 class Ui(QtWidgets.QMainWindow):
     current_radio = 'none'
     error_flag = 0
+    fused_macro_op = 0
 
     def __init__(self):
         super(Ui, self).__init__()
         uic.loadUi("mainwindow.ui", self)
-        self.comboBox_arch.currentTextChanged.connect(self.arch_change)
+        # ____Settings_tab_init____
+        self.comboBox_arch.currentTextChanged.connect(self.arch_changed)
         for radio in self.scrollArea_macro_first_pair.findChildren(QtWidgets.QRadioButton):
             radio.toggled.connect(self.show_second_operators)
         for box in self.scrollArea_macro_second_pair.findChildren(QtWidgets.QCheckBox):
@@ -43,12 +45,16 @@ class Ui(QtWidgets.QMainWindow):
             box.stateChanged.connect(self.micro_pairs_change_state)
         for box in self.scrollArea_micro_conditions.findChildren(QtWidgets.QCheckBox):
             box.stateChanged.connect(self.micro_conditions_change_state)
+        # ____Macro_tab_init____
+        for template in app_settings.Code_Templates.keys():
+            self.comboBox_macro_template.addItem(template)
         self.pushButton_simulate.clicked.connect(self.simulate)
         self.textEdit_macro.mouseReleaseEvent = self.clear_color
         self.set_enabled_second_pair(0)
         self.tableWidget_macro.setColumnCount(4)
         self.tableWidget_macro.setHorizontalHeaderLabels(('Макро-операция', 'Операнд 1', ' Операнд 2', 'Такт'))
         self.tableWidget_macro.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        self.comboBox_macro_template.currentTextChanged.connect(self.template_changed)
         self.show()
 
     # Main button to start simulation
@@ -64,7 +70,7 @@ class Ui(QtWidgets.QMainWindow):
 
     # ____Settings tab functions____
 
-    def arch_change(self):
+    def arch_changed(self):
         sender = self.sender()
         last_item = sender.property('last_item')
         if sender.currentText() != 'Своя':
@@ -173,6 +179,15 @@ class Ui(QtWidgets.QMainWindow):
 
     # ____Macro tab functions____
 
+    def template_changed(self):
+        sender = self.sender()
+        if sender.currentText() != '':
+            self.textEdit_macro.setReadOnly(1)
+            self.textEdit_macro.clear()
+            self.textEdit_macro.setPlainText(app_settings.Code_Templates[sender.currentText()])
+        else:
+            self.textEdit_macro.setReadOnly(0)
+
     def code_check(self, code):
         self.textEdit_macro.clear()
         for line in code.splitlines():
@@ -194,6 +209,7 @@ class Ui(QtWidgets.QMainWindow):
             self.error_flag = 0
 
     def fill_macro_table(self, settings):
+        self.fused_macro_op = 0
         self.tableWidget_macro.clearContents()
         self.tableWidget_macro.setRowCount(0)
         code_lines = self.textEdit_macro.toPlainText().splitlines()
@@ -209,11 +225,12 @@ class Ui(QtWidgets.QMainWindow):
                     self.tableWidget_macro.setItem(row_count, 1, QtWidgets.QTableWidgetItem('-'))
                 try:
                     self.tableWidget_macro.setItem(row_count, 2,
-                                                   QtWidgets.QTableWidgetItem(command.split(',')[1].upper()))
+                                                   QtWidgets.QTableWidgetItem(command.split(', ')[1].upper()))
                 except IndexError:
                     self.tableWidget_macro.setItem(row_count, 2, QtWidgets.QTableWidgetItem('-'))
                 self.tableWidget_macro.setItem(
-                    row_count, 3, QtWidgets.QTableWidgetItem(str(1 + (self.tableWidget_macro.rowCount() - 1) // 4)))
+                    row_count, 3, QtWidgets.QTableWidgetItem
+                    (str(1 + (self.tableWidget_macro.rowCount() - self.fused_macro_op - 1) // 4)))
                 if self.checkBox_arch_macro.isChecked():
                     if row_count != 0:
                         current_op = [self.tableWidget_macro.item(row_count, 0),
@@ -232,13 +249,43 @@ class Ui(QtWidgets.QMainWindow):
 
     def perform_macro_fusion(self, fusion_settings, first_op, second_op):
         if (first_op[0].text() in fusion_settings['Macro_Pairs'] and
-                second_op[0].text() in fusion_settings['Macro_Pairs'][first_op[0].text()] and
-                fusion_settings['Macro_Pairs'][first_op[0].text()][second_op[0].text()] == 1) and \
-                (fusion_settings['Macro_Conditions']['Transfer'] == 0 or first_op[3].text() == second_op[3].text()):
+            second_op[0].text() in fusion_settings['Macro_Pairs'][first_op[0].text()] and
+            fusion_settings['Macro_Pairs'][first_op[0].text()][second_op[0].text()] == 1) and \
+            (fusion_settings['Macro_Conditions']['Transfer'] == 0 or first_op[3].text() == second_op[3].text()) and \
+            (self.get_operands_type(first_op[1].text(), first_op[2].text()) in fusion_settings['Macro_Operands'] and
+             fusion_settings['Macro_Operands'][self.get_operands_type(first_op[1].text(), first_op[2].text())] == 1):
+            self.fused_macro_op += 1
             for i in range(4):
                 self.tableWidget_macro.item(first_op[4], i).setBackground(QtGui.QColor(255, 255, 0))
                 self.tableWidget_macro.item(second_op[4], i).setBackground(QtGui.QColor(255, 255, 0))
         # TODO
+
+    @staticmethod
+    def get_operands_type(op1, op2):
+        result = ''
+        if (op1 in app_settings.Register_dict['64_bit'] or op1 in app_settings.Register_dict['32_bit']
+                or op1 in app_settings.Register_dict['16_bit'] or op1 in app_settings.Register_dict['8_bit']):
+            result += 'Reg'
+        elif op1.isdigit():
+            result += 'Imm'
+        elif '[' in op1:
+            result += 'Mem'
+        elif 'RIP' in op1:
+            result += 'Rip'
+        else:
+            return 'none'
+        if (op2 in app_settings.Register_dict['64_bit'] or op2 in app_settings.Register_dict['32_bit']
+                or op2 in app_settings.Register_dict['16_bit'] or op2 in app_settings.Register_dict['8_bit']):
+            result += '_Reg'
+        elif op2.isdigit():
+            result += '_Imm'
+        elif '[' in op2:
+            result += '_Mem'
+        elif 'RIP' in op2:
+            result += '_Rip'
+        else:
+            return result
+        return result
 
 
 app = QtWidgets.QApplication(sys.argv)

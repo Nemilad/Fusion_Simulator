@@ -310,7 +310,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>-141</y>
+                 <y>0</y>
                  <width>282</width>
                  <height>402</height>
                 </rect>
@@ -896,7 +896,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>300</width>
-                 <height>101</height>
+                 <height>93</height>
                 </rect>
                </property>
               </widget>
@@ -1379,12 +1379,7 @@
              <widget class="QComboBox" name="comboBox_macro_template">
               <item>
                <property name="text">
-                <string>Вариант 1</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Вариант 2</string>
+                <string/>
                </property>
               </item>
              </widget>

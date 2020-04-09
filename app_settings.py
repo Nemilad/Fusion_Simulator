@@ -3,7 +3,7 @@ Macro_command_list = ('ADD', 'SUB', 'INC', 'DEC', 'ADC', 'SBB', 'CMP', 'TEST', '
                       'JNBE', 'JC', 'JNC', 'JE', 'JNE', 'JG', 'JNG', 'JGE', 'JNGE', 'JL', 'JNL', 'JLE', 'JNLE', 'JS',
                       'JNS', 'JO', 'JNO', 'JP', 'JNP', 'JPO', 'JPE', 'JZ', 'JNZ', 'JCXZ', 'JECXZ', 'JRCXZ', 'LOOP')
 
-Micro_command_list = {
+Micro_command_dict = {
     1: 'READ',
     2: 'ADDRESS',
     3: 'WRITE',
@@ -14,12 +14,31 @@ Macro_micro_list = {
     'ADD': (4, 3)
 }
 
-Register_list = {
+Register_dict = {
     '64_bit': ('RAX', 'RCX', 'RDX', 'RBX', 'RSP', 'RBP', 'RSI', 'RDI'),
     '32_bit': ('EAX', 'ECX', 'EDX', 'EBX', 'ESP', 'EBP', 'ESI', 'EDI'),
     '16_bit': ('AX', 'CX', 'DX', 'BX', 'SP', 'BP', 'SI', 'DI'),
     '8_bit': ('AH', 'AL', 'CH', 'CL', 'DH', 'DL', 'BH', 'BL', 'SPL', 'BPL', 'SIL', 'DIL')
 }
+
+Code_Templates = {
+    'Вариант 1': '.loop:\nadd eax, ebx\ninc edx\njz .loop',
+    'Вариант 2': '',
+    'Вариант 3': '',
+    'Вариант 4': '',
+    'Вариант 5': '',
+    'Вариант 6': '',
+    'Вариант 7': '',
+    'Вариант 8': '',
+    'Вариант 9': '',
+    'Вариант 10': '',
+    'Вариант 11': '',
+    'Вариант 12': '',
+    'Вариант 13': '',
+    'Вариант 14': '',
+    'Вариант 15': ''
+}
+
 Template_settings = {
     'Macro_Pairs': {
         'ADD': {
