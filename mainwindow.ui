@@ -756,14 +756,7 @@
                <string>Допустимые операнды первой операции</string>
               </property>
               <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string/>
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -787,7 +780,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>282</width>
+                 <width>588</width>
                  <height>220</height>
                 </rect>
                </property>
@@ -870,38 +863,6 @@
               </widget>
              </widget>
             </item>
-            <item>
-             <widget class="QScrollArea" name="scrollArea">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="frameShape">
-               <enum>QFrame::NoFrame</enum>
-              </property>
-              <property name="frameShadow">
-               <enum>QFrame::Plain</enum>
-              </property>
-              <property name="lineWidth">
-               <number>0</number>
-              </property>
-              <property name="widgetResizable">
-               <bool>true</bool>
-              </property>
-              <widget class="QWidget" name="scrollAreaWidgetContents_6">
-               <property name="geometry">
-                <rect>
-                 <x>0</x>
-                 <y>0</y>
-                 <width>300</width>
-                 <height>93</height>
-                </rect>
-               </property>
-              </widget>
-             </widget>
-            </item>
            </layout>
           </item>
           <item>
@@ -943,7 +904,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>0</y>
+               <y>-90</y>
                <width>590</width>
                <height>222</height>
               </rect>
@@ -952,7 +913,7 @@
               <item>
                <widget class="QCheckBox" name="checkBox_16_Bit_Border_Start">
                 <property name="text">
-                 <string>Начало на границе в 16 бит разрешено</string>
+                 <string>Начало условного перехода на границе в 16 бит разрешено</string>
                 </property>
                </widget>
               </item>
@@ -964,7 +925,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Пересечение границы в 16 бит разрешено</string>
+                 <string>Пересечение условным переходом границы в 16 бит разрешено</string>
                 </property>
                </widget>
               </item>

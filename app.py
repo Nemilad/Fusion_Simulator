@@ -248,12 +248,29 @@ class Ui(QtWidgets.QMainWindow):
                                        row_count]
 
     def perform_macro_fusion(self, fusion_settings, first_op, second_op):
+        if fusion_settings['Macro_Conditions']['Transfer'] == 1 and \
+                first_op[0].text() in fusion_settings['Macro_Pairs'] and \
+                first_op[3].text() != second_op[3].text():
+            first_op[3] = QtWidgets.QTableWidgetItem(second_op[3].text())
+            self.tableWidget_macro.setItem(first_op[4], 3, QtWidgets.QTableWidgetItem(second_op[3].text()))
+        op_types = self.get_operands_type(first_op[1].text(), first_op[2].text())
         if (first_op[0].text() in fusion_settings['Macro_Pairs'] and
             second_op[0].text() in fusion_settings['Macro_Pairs'][first_op[0].text()] and
             fusion_settings['Macro_Pairs'][first_op[0].text()][second_op[0].text()] == 1) and \
-            (fusion_settings['Macro_Conditions']['Transfer'] == 0 or first_op[3].text() == second_op[3].text()) and \
-            (self.get_operands_type(first_op[1].text(), first_op[2].text()) in fusion_settings['Macro_Operands'] and
-             fusion_settings['Macro_Operands'][self.get_operands_type(first_op[1].text(), first_op[2].text())] == 1):
+                (op_types in fusion_settings['Macro_Operands'] and
+                 fusion_settings['Macro_Operands'][op_types] == 1) and \
+                (fusion_settings['Macro_Conditions']['64_Bit_Mode'] == 1 or
+                 (first_op[1].text() not in app_settings.Register_dict['64_bit']
+                  and first_op[2].text() not in app_settings.Register_dict['64_bit'])) and \
+                (fusion_settings['Macro_Conditions']['32_Bit_Mode'] == 1 or
+                 (first_op[1].text() not in app_settings.Register_dict['32_bit']
+                  and first_op[2].text() not in app_settings.Register_dict['32_bit'])) and \
+                (fusion_settings['Macro_Conditions']['16_Bit_Mode'] == 1 or
+                 (first_op[1].text() not in app_settings.Register_dict['16_bit']
+                  and first_op[2].text() not in app_settings.Register_dict['16_bit'])):
+            if fusion_settings['Macro_Conditions']['Transfer'] == 0 and first_op[3].text() != second_op[3].text():
+                second_op[3] = QtWidgets.QTableWidgetItem(first_op[3].text())
+                self.tableWidget_macro.setItem(second_op[4], 3, QtWidgets.QTableWidgetItem(first_op[3].text()))
             self.fused_macro_op += 1
             for i in range(4):
                 self.tableWidget_macro.item(first_op[4], i).setBackground(QtGui.QColor(255, 255, 0))
