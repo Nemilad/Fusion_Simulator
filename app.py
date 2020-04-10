@@ -268,13 +268,21 @@ class Ui(QtWidgets.QMainWindow):
                 (fusion_settings['Macro_Conditions']['16_Bit_Mode'] == 1 or
                  (first_op[1].text() not in app_settings.Register_dict['16_bit']
                   and first_op[2].text() not in app_settings.Register_dict['16_bit'])):
-            if fusion_settings['Macro_Conditions']['Transfer'] == 0 and first_op[3].text() != second_op[3].text():
-                second_op[3] = QtWidgets.QTableWidgetItem(first_op[3].text())
-                self.tableWidget_macro.setItem(second_op[4], 3, QtWidgets.QTableWidgetItem(first_op[3].text()))
-            self.fused_macro_op += 1
-            for i in range(4):
-                self.tableWidget_macro.item(first_op[4], i).setBackground(QtGui.QColor(255, 255, 0))
-                self.tableWidget_macro.item(second_op[4], i).setBackground(QtGui.QColor(255, 255, 0))
+            tact_fusions, current_tact, current_row = 0, int(first_op[3].text()), first_op[4]
+            while tact_fusions != 2 and current_tact == int(first_op[3].text()) and current_row > 0:
+                current_row -= 1
+                current_tact = int(self.tableWidget_macro.item(current_row, 3).text())
+                if self.tableWidget_macro.item(current_row, 3).background() == QtGui.QColor(255, 255, 0):
+                    tact_fusions += 0.5
+            if (fusion_settings['Macro_Conditions']['Two_Pairs'] == 0 and tact_fusions == 0) or \
+                (fusion_settings['Macro_Conditions']['Two_Pairs'] == 1 and tact_fusions < 2):
+                if fusion_settings['Macro_Conditions']['Transfer'] == 0 and first_op[3].text() != second_op[3].text():
+                    second_op[3] = QtWidgets.QTableWidgetItem(first_op[3].text())
+                    self.tableWidget_macro.setItem(second_op[4], 3, QtWidgets.QTableWidgetItem(first_op[3].text()))
+                self.fused_macro_op += 1
+                for i in range(4):
+                    self.tableWidget_macro.item(first_op[4], i).setBackground(QtGui.QColor(255, 255, 0))
+                    self.tableWidget_macro.item(second_op[4], i).setBackground(QtGui.QColor(255, 255, 0))
         # TODO
 
     @staticmethod
