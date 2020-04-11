@@ -24,7 +24,7 @@ Arch_Dict = {
 class Ui(QtWidgets.QMainWindow):
     current_radio = 'none'
     error_flag = 0
-    fused_macro_op = 0
+    macro_tact_shift = 0
 
     def __init__(self):
         super(Ui, self).__init__()
@@ -55,6 +55,7 @@ class Ui(QtWidgets.QMainWindow):
         self.tableWidget_macro.setHorizontalHeaderLabels(('Макро-операция', 'Операнд 1', ' Операнд 2', 'Такт'))
         self.tableWidget_macro.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.comboBox_macro_template.currentTextChanged.connect(self.template_changed)
+
         self.show()
 
     # Main button to start simulation
@@ -209,7 +210,7 @@ class Ui(QtWidgets.QMainWindow):
             self.error_flag = 0
 
     def fill_macro_table(self, settings):
-        self.fused_macro_op = 0
+        self.macro_tact_shift = 0
         self.tableWidget_macro.clearContents()
         self.tableWidget_macro.setRowCount(0)
         code_lines = self.textEdit_macro.toPlainText().splitlines()
@@ -230,7 +231,7 @@ class Ui(QtWidgets.QMainWindow):
                     self.tableWidget_macro.setItem(row_count, 2, QtWidgets.QTableWidgetItem('-'))
                 self.tableWidget_macro.setItem(
                     row_count, 3, QtWidgets.QTableWidgetItem
-                    (str(1 + (self.tableWidget_macro.rowCount() - self.fused_macro_op - 1) // 4)))
+                    (str(1 + (self.tableWidget_macro.rowCount() - self.macro_tact_shift - 1) // 4)))
                 if self.checkBox_arch_macro.isChecked():
                     if row_count != 0:
                         current_op = [self.tableWidget_macro.item(row_count, 0),
@@ -251,8 +252,9 @@ class Ui(QtWidgets.QMainWindow):
         if fusion_settings['Macro_Conditions']['Transfer'] == 1 and \
                 first_op[0].text() in fusion_settings['Macro_Pairs'] and \
                 first_op[3].text() != second_op[3].text():
-            first_op[3] = QtWidgets.QTableWidgetItem(second_op[3].text())
-            self.tableWidget_macro.setItem(first_op[4], 3, QtWidgets.QTableWidgetItem(second_op[3].text()))
+            first_op[3] = QtWidgets.QTableWidgetItem(str(second_op[3].text()))
+            self.tableWidget_macro.item(first_op[4], 3).setText(second_op[3].text())
+            self.macro_tact_shift -= 1
         op_types = self.get_operands_type(first_op[1].text(), first_op[2].text())
         if (first_op[0].text() in fusion_settings['Macro_Pairs'] and
             second_op[0].text() in fusion_settings['Macro_Pairs'][first_op[0].text()] and
@@ -270,16 +272,17 @@ class Ui(QtWidgets.QMainWindow):
                   and first_op[2].text() not in app_settings.Register_dict['16_bit'])):
             tact_fusions, current_tact, current_row = 0, int(first_op[3].text()), first_op[4]
             while tact_fusions != 2 and current_tact == int(first_op[3].text()) and current_row > 0:
+                if self.tableWidget_macro.item(current_row, 3).background() != QtGui.QColor(0, 0, 0):
+                    tact_fusions += 0.5
+                    #print('HEY')
                 current_row -= 1
                 current_tact = int(self.tableWidget_macro.item(current_row, 3).text())
-                if self.tableWidget_macro.item(current_row, 3).background() == QtGui.QColor(255, 255, 0):
-                    tact_fusions += 0.5
             if (fusion_settings['Macro_Conditions']['Two_Pairs'] == 0 and tact_fusions == 0) or \
                 (fusion_settings['Macro_Conditions']['Two_Pairs'] == 1 and tact_fusions < 2):
                 if fusion_settings['Macro_Conditions']['Transfer'] == 0 and first_op[3].text() != second_op[3].text():
                     second_op[3] = QtWidgets.QTableWidgetItem(first_op[3].text())
                     self.tableWidget_macro.setItem(second_op[4], 3, QtWidgets.QTableWidgetItem(first_op[3].text()))
-                self.fused_macro_op += 1
+                self.macro_tact_shift += 1
                 for i in range(4):
                     self.tableWidget_macro.item(first_op[4], i).setBackground(QtGui.QColor(255, 255, 0))
                     self.tableWidget_macro.item(second_op[4], i).setBackground(QtGui.QColor(255, 255, 0))

@@ -904,7 +904,7 @@
              <property name="geometry">
               <rect>
                <x>0</x>
-               <y>-90</y>
+               <y>0</y>
                <width>590</width>
                <height>222</height>
               </rect>
@@ -1348,25 +1348,7 @@
            </layout>
           </item>
           <item>
-           <layout class="QVBoxLayout" name="verticalLayout_5">
-            <item>
-             <widget class="QLabel" name="label_macro_seed">
-              <property name="text">
-               <string>Ключ генерации</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEdit_macro_seed"/>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_macro_generate_code">
-            <property name="text">
-             <string>Сгенерировать код</string>
-            </property>
-           </widget>
+           <layout class="QVBoxLayout" name="verticalLayout_5"/>
           </item>
           <item>
            <spacer name="horizontalSpacer_3">

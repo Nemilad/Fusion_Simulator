@@ -3,6 +3,10 @@ Macro_command_list = ('ADD', 'SUB', 'INC', 'DEC', 'ADC', 'SBB', 'CMP', 'TEST', '
                       'JNBE', 'JC', 'JNC', 'JE', 'JNE', 'JG', 'JNG', 'JGE', 'JNGE', 'JL', 'JNL', 'JLE', 'JNLE', 'JS',
                       'JNS', 'JO', 'JNO', 'JP', 'JNP', 'JPO', 'JPE', 'JZ', 'JNZ', 'JCXZ', 'JECXZ', 'JRCXZ', 'LOOP')
 
+Macro_command_dict = {
+    'Logic': ('', '')
+}
+
 Micro_command_dict = {
     1: 'READ',
     2: 'ADDRESS',
@@ -36,7 +40,10 @@ Code_Templates = {
     'Вариант 12': '',
     'Вариант 13': '',
     'Вариант 14': '',
-    'Вариант 15': ''
+    'Вариант 15': 'inc eax\ninc eax\ninc eax\ninc eax\n'
+                  'inc eax\ninc eax\ninc eax\ninc eax\n'
+                  'inc eax\ninc eax\ninc eax\ninc eax\n'
+                  'inc eax\ninc eax\ninc eax\ninc eax'
 }
 
 Template_settings = {
