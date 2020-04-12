@@ -55,6 +55,12 @@ class Ui(QtWidgets.QMainWindow):
         self.tableWidget_macro.setHorizontalHeaderLabels(('Макро-операция', 'Операнд 1', ' Операнд 2', 'Такт'))
         self.tableWidget_macro.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.comboBox_macro_template.currentTextChanged.connect(self.template_changed)
+        # ____Micro_tab_init____
+        self.tableWidget_micro.setColumnCount(9)
+        self.tableWidget_micro.setHorizontalHeaderLabels(('Макро-операция', 'Операнд 1', ' Операнд 2',
+                                                          'READ', 'MODIFY', 'ADDRESS', 'WRITE',
+                                                          'Unfused domain', 'Fused domain'))
+        self.tableWidget_micro.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
         self.show()
 
@@ -66,6 +72,7 @@ class Ui(QtWidgets.QMainWindow):
             current_settings = Arch_Dict[self.comboBox_arch.currentText()]
         if self.code_check(self.textEdit_macro.toPlainText()):
             self.fill_macro_table(current_settings)
+            self.fill_micro_table(current_settings)
         else:
             return 0
 
@@ -255,7 +262,7 @@ class Ui(QtWidgets.QMainWindow):
             first_op[3] = QtWidgets.QTableWidgetItem(str(second_op[3].text()))
             self.tableWidget_macro.item(first_op[4], 3).setText(second_op[3].text())
             self.macro_tact_shift -= 1
-        op_types = self.get_operands_type(first_op[1].text(), first_op[2].text())
+        op_types = self.get_operands_type_macro(first_op[1].text(), first_op[2].text())
         if (first_op[0].text() in fusion_settings['Macro_Pairs'] and
             second_op[0].text() in fusion_settings['Macro_Pairs'][first_op[0].text()] and
             fusion_settings['Macro_Pairs'][first_op[0].text()][second_op[0].text()] == 1) and \
@@ -274,7 +281,6 @@ class Ui(QtWidgets.QMainWindow):
             while tact_fusions != 2 and current_tact == int(first_op[3].text()) and current_row > 0:
                 if self.tableWidget_macro.item(current_row, 3).background() != QtGui.QColor(0, 0, 0):
                     tact_fusions += 0.5
-                    #print('HEY')
                 current_row -= 1
                 current_tact = int(self.tableWidget_macro.item(current_row, 3).text())
             if (fusion_settings['Macro_Conditions']['Two_Pairs'] == 0 and tact_fusions == 0) or \
@@ -286,13 +292,15 @@ class Ui(QtWidgets.QMainWindow):
                 for i in range(4):
                     self.tableWidget_macro.item(first_op[4], i).setBackground(QtGui.QColor(255, 255, 0))
                     self.tableWidget_macro.item(second_op[4], i).setBackground(QtGui.QColor(255, 255, 0))
-        # TODO
 
     @staticmethod
-    def get_operands_type(op1, op2):
+    def get_operands_type_macro(op1, op2):
         result = ''
-        if (op1 in app_settings.Register_dict['64_bit'] or op1 in app_settings.Register_dict['32_bit']
-                or op1 in app_settings.Register_dict['16_bit'] or op1 in app_settings.Register_dict['8_bit']):
+        if (op1 in app_settings.Register_dict['64_bit']
+                or op1 in app_settings.Register_dict['32_bit']
+                or op1 in app_settings.Register_dict['16_bit']
+                or op1 in app_settings.Register_dict['8_bit_h']
+                or op1 in app_settings.Register_dict['8_bit_l']):
             result += 'Reg'
         elif op1.isdigit():
             result += 'Imm'
@@ -302,8 +310,11 @@ class Ui(QtWidgets.QMainWindow):
             result += 'Rip'
         else:
             return 'none'
-        if (op2 in app_settings.Register_dict['64_bit'] or op2 in app_settings.Register_dict['32_bit']
-                or op2 in app_settings.Register_dict['16_bit'] or op2 in app_settings.Register_dict['8_bit']):
+        if (op2 in app_settings.Register_dict['64_bit']
+                or op2 in app_settings.Register_dict['32_bit']
+                or op2 in app_settings.Register_dict['16_bit']
+                or op2 in app_settings.Register_dict['8_bit_h']
+                or op2 in app_settings.Register_dict['8_bit_l']):
             result += '_Reg'
         elif op2.isdigit():
             result += '_Imm'
@@ -313,6 +324,61 @@ class Ui(QtWidgets.QMainWindow):
             result += '_Rip'
         else:
             return result
+        return result
+    
+    # ____Micro tab functions____
+    
+    def fill_micro_table(self, settings):
+        self.tableWidget_micro.clearContents()
+        self.tableWidget_micro.setRowCount(0)
+        code_lines = self.textEdit_macro.toPlainText().splitlines()
+        for number, command in enumerate(code_lines):
+            if command.split(' ')[0][0] != '.':
+                row_count = self.tableWidget_micro.rowCount()
+                self.tableWidget_micro.insertRow(row_count)
+                self.tableWidget_micro.setItem(row_count, 0, QtWidgets.QTableWidgetItem(command.split(' ')[0].upper()))
+                try:
+                    self.tableWidget_micro.setItem(
+                        row_count, 1, QtWidgets.QTableWidgetItem(self.get_operand_type_micro
+                                                                 (command.split(' ', 1)[1].split(',')[0].upper())))
+                except IndexError:
+                    self.tableWidget_micro.setItem(row_count, 1, QtWidgets.QTableWidgetItem('-'))
+                try:
+                    self.tableWidget_micro.setItem(row_count, 2,
+                                                   QtWidgets.QTableWidgetItem(self.get_operand_type_micro
+                                                                              (command.split(', ')[1].upper())))
+                except IndexError:
+                    self.tableWidget_micro.setItem(row_count, 2, QtWidgets.QTableWidgetItem('-'))
+                if self.checkBox_arch_micro.isChecked():
+                    current_op = []
+                    self.perform_micro_fusion(settings, current_op)
+
+    def perform_micro_fusion(self, fusion_settings, current_op):
+        return 0
+
+    @staticmethod
+    def get_operand_type_micro(op):
+        result = ''
+        if (op in app_settings.Register_dict['64_bit']
+                or op in app_settings.Register_dict['32_bit']
+                or op in app_settings.Register_dict['16_bit']
+                or op in app_settings.Register_dict['8_bit_h']
+                or op in app_settings.Register_dict['8_bit_l']):
+            result += 'Register'
+        elif op.isdigit():
+            result += 'Immediate data'
+        elif '[' in op:
+            result += 'Memory'
+        elif 'RIP' in op:
+            result += 'RIP'
+        elif 'XMM' in op:
+            result += 'XMM'
+        elif 'MM' in op:
+            result += 'MMX'
+        elif op[0] == '.':
+            result += op
+        else:
+            return '-'
         return result
 
 

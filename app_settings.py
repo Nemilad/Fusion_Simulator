@@ -1,28 +1,34 @@
-Macro_command_list = ('ADD', 'SUB', 'INC', 'DEC', 'ADC', 'SBB', 'CMP', 'TEST', 'AND', 'OR', 'XOR', 'NOT', 'NEG',
-                      'SHIFT', 'ROTATE', 'JMP', 'MOVE', 'MUL', 'DIV', 'JA', 'JNA', 'JAE', 'JNAE', 'JB', 'JNB', 'JBE',
+Macro_command_list = ('ADD', 'SUB', 'INC', 'DEC', 'ADC', 'SBB', 'CMP', 'CALL', 'TEST', 'AND', 'OR', 'XOR', 'NOT', 'NEG',
+                      'SHIFT', 'ROTATE', 'JMP', 'MOV', 'MUL', 'DIV', 'JA', 'JNA', 'JAE', 'JNAE', 'JB', 'JNB', 'JBE',
                       'JNBE', 'JC', 'JNC', 'JE', 'JNE', 'JG', 'JNG', 'JGE', 'JNGE', 'JL', 'JNL', 'JLE', 'JNLE', 'JS',
                       'JNS', 'JO', 'JNO', 'JP', 'JNP', 'JPO', 'JPE', 'JZ', 'JNZ', 'JCXZ', 'JECXZ', 'JRCXZ', 'LOOP')
 
-Macro_command_dict = {
-    'Logic': ('', '')
-}
+Macro_micro_dict = {
+    'ADD': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'SUB': {
 
-Micro_command_dict = {
-    1: 'READ',
-    2: 'ADDRESS',
-    3: 'WRITE',
-    4: 'MODIFY'
-}
-
-Macro_micro_list = {
-    'ADD': (4, 3)
+    }
 }
 
 Register_dict = {
     '64_bit': ('RAX', 'RCX', 'RDX', 'RBX', 'RSP', 'RBP', 'RSI', 'RDI'),
     '32_bit': ('EAX', 'ECX', 'EDX', 'EBX', 'ESP', 'EBP', 'ESI', 'EDI'),
     '16_bit': ('AX', 'CX', 'DX', 'BX', 'SP', 'BP', 'SI', 'DI'),
-    '8_bit': ('AH', 'AL', 'CH', 'CL', 'DH', 'DL', 'BH', 'BL', 'SPL', 'BPL', 'SIL', 'DIL')
+    '8_bit_h': ('AH', 'BH', 'CH', 'DH'),
+    '8_bit_l': ('AL', 'BL', 'CL', 'DL', 'SPL', 'BPL', 'SIL', 'DIL')
 }
 
 Code_Templates = {
@@ -611,10 +617,10 @@ Template_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 0,
-        'Read_Modify': 0
+        'Read_Modify': 0,
+        'Read_Modify_Write': 0
     },
     'Micro_Conditions': {
-        'Read_Modify_Write': 0,
         'Registers': 0,
         'Float_Registers': 0,
         'MMX': 0,
@@ -1193,10 +1199,10 @@ Pentium_M_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1
+        'Read_Modify': 1,
+        'Read_Modify_Write': 0
     },
     'Micro_Conditions': {
-        'Read_Modify_Write': 0,
         'Registers': 1,
         'Float_Registers': 1,
         'MMX': 1,
@@ -1775,10 +1781,10 @@ Core_2_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1
+        'Read_Modify': 1,
+        'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Read_Modify_Write': 1,
         'Registers': 1,
         'Float_Registers': 1,
         'MMX': 1,
@@ -2357,10 +2363,10 @@ Nehalem_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1
+        'Read_Modify': 1,
+        'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Read_Modify_Write': 1,
         'Registers': 1,
         'Float_Registers': 1,
         'MMX': 1,
@@ -2938,10 +2944,10 @@ Sandy_Bridge_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1
+        'Read_Modify': 1,
+        'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Read_Modify_Write': 1,
         'Registers': 1,
         'Float_Registers': 1,
         'MMX': 1,
@@ -3519,10 +3525,10 @@ Ivy_Bridge_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1
+        'Read_Modify': 1,
+        'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Read_Modify_Write': 1,
         'Registers': 1,
         'Float_Registers': 1,
         'MMX': 1,
@@ -4100,10 +4106,10 @@ Haswell_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1
+        'Read_Modify': 1,
+        'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Read_Modify_Write': 1,
         'Registers': 1,
         'Float_Registers': 1,
         'MMX': 1,
@@ -4681,10 +4687,10 @@ Broadwell_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1
+        'Read_Modify': 1,
+        'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Read_Modify_Write': 1,
         'Registers': 1,
         'Float_Registers': 1,
         'MMX': 1,
@@ -5262,10 +5268,10 @@ Skylake_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1
+        'Read_Modify': 1,
+        'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Read_Modify_Write': 1,
         'Registers': 1,
         'Float_Registers': 1,
         'MMX': 1,

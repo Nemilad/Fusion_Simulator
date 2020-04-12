@@ -1088,7 +1088,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Вычисление адреса + запись в память</string>
+                 <string>Вычисление адреса + Запись данных</string>
                 </property>
                </widget>
               </item>
@@ -1100,7 +1100,19 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Чтение + изменение</string>
+                 <string>Чтение данных + Изменение данных</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBox_Read_Modify_Write">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Чтение данных + Изменение данных + Запись данных</string>
                 </property>
                </widget>
               </item>
@@ -1147,18 +1159,6 @@
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_10">
-              <item>
-               <widget class="QCheckBox" name="checkBox_micro_Read_Modify_Write">
-                <property name="font">
-                 <font>
-                  <pointsize>10</pointsize>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Слияние операций чтение-изменение-запись</string>
-                </property>
-               </widget>
-              </item>
               <item>
                <widget class="QLabel" name="label_micro_operated_registers">
                 <property name="font">
