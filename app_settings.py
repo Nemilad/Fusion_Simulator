@@ -1,5 +1,5 @@
-Macro_command_list = ('ADD', 'SUB', 'INC', 'DEC', 'ADC', 'SBB', 'CMP', 'CALL', 'TEST', 'AND', 'OR', 'XOR', 'NOT', 'NEG',
-                      'SHIFT', 'ROTATE', 'JMP', 'MOV', 'MUL', 'DIV', 'JA', 'JNA', 'JAE', 'JNAE', 'JB', 'JNB', 'JBE',
+Macro_command_list = ('ADD', 'SUB', 'INC', 'DEC', 'ADC', 'SBB', 'CMP', 'TEST', 'AND', 'OR', 'XOR', 'NOT', 'NEG',
+                      'ROTATE', 'JMP', 'MOV', 'MUL', 'DIV', 'JA', 'JNA', 'JAE', 'JNAE', 'JB', 'JNB', 'JBE',
                       'JNBE', 'JC', 'JNC', 'JE', 'JNE', 'JG', 'JNG', 'JGE', 'JNGE', 'JL', 'JNL', 'JLE', 'JNLE', 'JS',
                       'JNS', 'JO', 'JNO', 'JP', 'JNP', 'JPO', 'JPE', 'JZ', 'JNZ', 'JCXZ', 'JECXZ', 'JRCXZ', 'LOOP')
 
@@ -7,19 +7,688 @@ Macro_micro_dict = {
     'ADD': {
         'Reg_Reg': {
             'READ': 0,
-            'MODIFY': 0,
+            'MODIFY': 1,
             'ADDRESS': 0,
             'WRITE': 0
         },
         'Reg_Imm': {
             'READ': 0,
-            'MODIFY': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'SUB': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'INC': {
+        'Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'DEC': {
+        'Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'ADC': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'SBB': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'TEST': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'AND': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'OR': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'XOR': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'NOT': {
+        'Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'NEG': {
+        'Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'JMP': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
             'ADDRESS': 0,
             'WRITE': 0
         }
     },
-    'SUB': {
-
+    'MOV': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 0,
+            'MODIFY': 0,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 0,
+            'MODIFY': 0,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'MUL': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'DIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 5,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 0,
+            'MODIFY': 5,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'JA': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNA': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JAE': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNAE': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JB': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNB': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JBE': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNBE': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JC': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNC': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JE': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNE': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JG': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNG': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JGE': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNGE': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JL': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNL': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JLE': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNLE': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JS': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNS': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JO': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNO': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JP': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNP': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JPO': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JPE': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JZ': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JNZ': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JCXZ': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'JECXZ': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    },
+    'LOOP': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 11,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
     }
 }
 
