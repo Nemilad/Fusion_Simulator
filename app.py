@@ -258,6 +258,7 @@ class Ui(QtWidgets.QMainWindow):
     def perform_macro_fusion(self, fusion_settings, first_op, second_op):
         if fusion_settings['Macro_Conditions']['Transfer'] == 1 and \
                 first_op[0].text() in fusion_settings['Macro_Pairs'] and \
+                1 in fusion_settings['Macro_Pairs'][first_op[0].text()].values() and \
                 first_op[3].text() != second_op[3].text():
             first_op[3] = QtWidgets.QTableWidgetItem(str(second_op[3].text()))
             self.tableWidget_macro.item(first_op[4], 3).setText(second_op[3].text())
@@ -350,10 +351,22 @@ class Ui(QtWidgets.QMainWindow):
                 except IndexError:
                     self.tableWidget_micro.setItem(row_count, 2, QtWidgets.QTableWidgetItem('-'))
                 if self.checkBox_arch_micro.isChecked():
-                    current_op = []
+                    current_op = [self.tableWidget_micro.item(row_count, 0),
+                                  self.tableWidget_micro.item(row_count, 1),
+                                  self.tableWidget_micro.item(row_count, 2),
+                                  row_count]
                     self.perform_micro_fusion(settings, current_op)
 
     def perform_micro_fusion(self, fusion_settings, current_op):
+        op1 = current_op[1].text()
+        op2 = current_op[2].text()
+        if op1[0] == '.':
+            op = 'Mrk'
+        elif op1 != '-' and op2 != '-':
+            op = (op1 + '_' + op2, op1[:3] + '_' + op2[:3], op1 + '_' + op2[:3], op1[:3] + '_' + op2,
+                  op1[:-1] + '_' + op2, op1 + '_' + op2[:-1], op1[:-1] + '_' + op2[:-1])
+        elif op1 != '-' and op2 == '-':
+            op = (op1, op1[:3], op1[:-1])
         return 0
 
     @staticmethod
@@ -364,17 +377,39 @@ class Ui(QtWidgets.QMainWindow):
                 or op in app_settings.Register_dict['16_bit']
                 or op in app_settings.Register_dict['8_bit_h']
                 or op in app_settings.Register_dict['8_bit_l']):
-            result += 'Register'
+            if op in app_settings.Register_dict['64_bit']:
+                result += 'Reg64'
+            elif op in app_settings.Register_dict['32_bit']:
+                result += 'Reg32'
+            elif op in app_settings.Register_dict['16_bit']:
+                result += 'Reg16'
+            elif op in app_settings.Register_dict['8_bit_h']:
+                result += 'Reg8h'
+            elif op in app_settings.Register_dict['8_bit_l']:
+                result += 'Reg8l'
+            else:
+                result += 'Reg'
         elif op.isdigit():
-            result += 'Immediate data'
+            result += 'Imm'
         elif '[' in op:
-            result += 'Memory'
+            if 'BYTE' in op:
+                result += 'Mem8'
+            elif 'WORD' in op:
+                result += 'Mem16'
+            elif 'DWORD' in op:
+                result += 'Mem32'
+            elif 'QWORD' in op:
+                result += 'Mem64'
+            elif '*' in op:
+                result += 'Mem128'
+            else:
+                result += 'Mem'
         elif 'RIP' in op:
-            result += 'RIP'
+            result += 'Rip'
         elif 'XMM' in op:
-            result += 'XMM'
+            result += 'Xmm'
         elif 'MM' in op:
-            result += 'MMX'
+            result += 'Mmx'
         elif op[0] == '.':
             result += op
         else:
