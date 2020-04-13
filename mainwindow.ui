@@ -395,7 +395,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>269</width>
-                 <height>402</height>
+                 <height>350</height>
                 </rect>
                </property>
                <property name="sizePolicy">
@@ -530,20 +530,6 @@
                   </property>
                  </widget>
                 </item>
-                <item>
-                 <widget class="QRadioButton" name="radioButton_SHIFT">
-                  <property name="text">
-                   <string>SHIFT</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QRadioButton" name="radioButton_ROTATE">
-                  <property name="text">
-                   <string>ROTATE</string>
-                  </property>
-                 </widget>
-                </item>
                </layout>
               </widget>
              </widget>
@@ -566,7 +552,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>0</y>
+                 <y>-644</y>
                  <width>269</width>
                  <height>896</height>
                 </rect>
