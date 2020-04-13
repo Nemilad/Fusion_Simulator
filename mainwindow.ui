@@ -52,6 +52,19 @@
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
            <widget class="QLabel" name="label_arch_settings">
             <property name="font">
              <font>
@@ -70,19 +83,6 @@
              <set>Qt::AlignCenter</set>
             </property>
            </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
           </item>
           <item>
            <widget class="QLabel" name="label_arch_processor">
@@ -188,6 +188,89 @@
           </item>
           <item>
            <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_user_arch">
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+              <underline>true</underline>
+             </font>
+            </property>
+            <property name="text">
+             <string>Настройки своей архитектуры</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_user_micro">
+            <property name="text">
+             <string>Микро-операции из архитектуры</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="comboBox_arch_micro">
+            <item>
+             <property name="text">
+              <string>Pentium M</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Core 2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nehalem</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Sandy Bridge</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Ivy Bridge</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Haswell</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Broadwell</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Skylake</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_5">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
@@ -311,7 +394,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>282</width>
+                 <width>269</width>
                  <height>402</height>
                 </rect>
                </property>
@@ -484,7 +567,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>281</width>
+                 <width>269</width>
                  <height>896</height>
                 </rect>
                </property>
@@ -780,7 +863,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>588</width>
+                 <width>563</width>
                  <height>220</height>
                 </rect>
                </property>
@@ -905,7 +988,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>590</width>
+               <width>565</width>
                <height>222</height>
               </rect>
              </property>
@@ -1075,7 +1158,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>607</width>
+               <width>582</width>
                <height>268</height>
               </rect>
              </property>
@@ -1154,7 +1237,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>607</width>
+               <width>582</width>
                <height>267</height>
               </rect>
              </property>

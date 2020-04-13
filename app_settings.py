@@ -1651,7 +1651,7 @@ Macro_micro_dict_Ivy_Bridge = {
             'WRITE': 0
         },
     },
-        'JA': {
+    'JA': {
 
     },
     'JNA': {
