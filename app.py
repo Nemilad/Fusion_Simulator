@@ -463,7 +463,7 @@ class Ui(QtWidgets.QMainWindow):
                         self.tableWidget_micro.setItem(row_count, 8, QtWidgets.QTableWidgetItem('-'))
                         self.tableWidget_micro.setItem(row_count, 9, QtWidgets.QTableWidgetItem('-'))
                 else:
-                    if current_op[0].text()[0] == 'J':
+                    if self.tableWidget_macro.item(current_op[3], 1).text()[0] == '.':
                         for x in range(3, 10):
                             if x == 4:
                                 self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('1'))
