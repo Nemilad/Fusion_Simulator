@@ -1,7 +1,7 @@
 Macro_command_list = ('ADD', 'SUB', 'INC', 'DEC', 'ADC', 'SBB', 'CMP', 'TEST', 'AND', 'OR', 'XOR', 'NOT', 'NEG',
-                      'ROTATE', 'JMP', 'MOV', 'MUL', 'DIV', 'JA', 'JNA', 'JAE', 'JNAE', 'JB', 'JNB', 'JBE',
-                      'JNBE', 'JC', 'JNC', 'JE', 'JNE', 'JG', 'JNG', 'JGE', 'JNGE', 'JL', 'JNL', 'JLE', 'JNLE', 'JS',
-                      'JNS', 'JO', 'JNO', 'JP', 'JNP', 'JPO', 'JPE', 'JZ', 'JNZ', 'JCXZ', 'JECXZ', 'JRCXZ', 'LOOP')
+                      'JMP', 'MOV', 'MUL', 'DIV', 'JA', 'JNA', 'JAE', 'JNAE', 'JB', 'JNB', 'JBE', 'JNBE', 'JC', 'JNC',
+                      'JE', 'JNE', 'JG', 'JNG', 'JGE', 'JNGE', 'JL', 'JNL', 'JLE', 'JNLE', 'JS', 'JNS', 'JO', 'JNO',
+                      'JP', 'JNP', 'JPO', 'JPE', 'JZ', 'JNZ', 'JCXZ', 'JECXZ', 'JRCXZ', 'LOOP')
 
 Macro_micro_dict = {
     'ADD': {
@@ -702,7 +702,7 @@ Register_dict = {
 
 Code_Templates = {
     'Вариант 1': '.loop:\nadd eax, ebx\ninc edx\njz .loop',
-    'Вариант 2': '',
+    'Вариант 2': '.loop:\nadd cx, dword [ax]\ninc ax\njz .loop',
     'Вариант 3': '',
     'Вариант 4': '',
     'Вариант 5': '',
@@ -1290,12 +1290,12 @@ Template_settings = {
         'Read_Modify_Write': 0
     },
     'Micro_Conditions': {
-        'Registers': 0,
-        'Float_Registers': 0,
-        'MMX': 0,
-        'XMM': 0,
-        'RIP': 0,
-        'Immediate_Data': 0
+        'Rip_Imm': 0,
+        'Reg': 0,
+        'Mmx': 0,
+        'Xmm': 0,
+        'Rip': 0,
+        'Imm': 0
     },
     'Macro_Micro': {
         'Macro': 0,
@@ -1872,12 +1872,13 @@ Pentium_M_settings = {
         'Read_Modify_Write': 0
     },
     'Micro_Conditions': {
-        'Registers': 1,
-        'Float_Registers': 1,
-        'MMX': 1,
-        'XMM': 0,
-        'RIP': 0,
-        'Immediate_Data': 0
+        'Rip_Imm': 0,
+        'Reg': 1,
+        'Mem': 1,
+        'Mmx': 1,
+        'Xmm': 0,
+        'Rip': 0,
+        'Imm': 0
     },
     'Macro_Micro': {
         'Macro': 0,
@@ -2454,12 +2455,13 @@ Core_2_settings = {
         'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Registers': 1,
-        'Float_Registers': 1,
-        'MMX': 1,
-        'XMM': 1,
-        'RIP': 0,
-        'Immediate_Data': 0
+        'Rip_Imm': 0,
+        'Reg': 1,
+        'Mem': 1,
+        'Mmx': 1,
+        'Xmm': 1,
+        'Rip': 1,
+        'Imm': 1
     },
     'Macro_Micro': {
         'Macro': 1,
@@ -3036,12 +3038,13 @@ Nehalem_settings = {
         'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Registers': 1,
-        'Float_Registers': 1,
-        'MMX': 1,
-        'XMM': 1,
-        'RIP': 0,
-        'Immediate_Data': 0
+        'Rip_Imm': 0,
+        'Reg': 1,
+        'Mem': 1,
+        'Mmx': 1,
+        'Xmm': 1,
+        'Rip': 1,
+        'Imm': 1
     },
     'Macro_Micro': {
         'Macro': 1,
@@ -3617,12 +3620,13 @@ Sandy_Bridge_settings = {
         'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Registers': 1,
-        'Float_Registers': 1,
-        'MMX': 1,
-        'XMM': 1,
-        'RIP': 0,
-        'Immediate_Data': 0
+        'Rip_Imm': 0,
+        'Reg': 1,
+        'Mem': 1,
+        'Mmx': 1,
+        'Xmm': 1,
+        'Rip': 0,
+        'Imm': 0
     },
     'Macro_Micro': {
         'Macro': 1,
@@ -4198,12 +4202,13 @@ Ivy_Bridge_settings = {
         'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Registers': 1,
-        'Float_Registers': 1,
-        'MMX': 1,
-        'XMM': 1,
-        'RIP': 0,
-        'Immediate_Data': 0
+        'Rip_Imm': 0,
+        'Reg': 1,
+        'Mem': 1,
+        'Mmx': 1,
+        'Xmm': 1,
+        'Rip': 1,
+        'Imm': 1
     },
     'Macro_Micro': {
         'Macro': 1,
@@ -4779,12 +4784,13 @@ Haswell_settings = {
         'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Registers': 1,
-        'Float_Registers': 1,
-        'MMX': 1,
-        'XMM': 1,
-        'RIP': 0,
-        'Immediate_Data': 0
+        'Rip_Imm': 0,
+        'Reg': 1,
+        'Mem': 1,
+        'Mmx': 1,
+        'Xmm': 1,
+        'Rip': 1,
+        'Imm': 1
     },
     'Macro_Micro': {
         'Macro': 1,
@@ -5360,12 +5366,13 @@ Broadwell_settings = {
         'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Registers': 1,
-        'Float_Registers': 1,
-        'MMX': 1,
-        'XMM': 1,
-        'RIP': 0,
-        'Immediate_Data': 0
+        'Rip_Imm': 0,
+        'Reg': 1,
+        'Mem': 1,
+        'Mmx': 1,
+        'Xmm': 1,
+        'Rip': 1,
+        'Imm': 1
     },
     'Macro_Micro': {
         'Macro': 1,
@@ -5941,12 +5948,13 @@ Skylake_settings = {
         'Read_Modify_Write': 1
     },
     'Micro_Conditions': {
-        'Registers': 1,
-        'Float_Registers': 1,
-        'MMX': 1,
-        'XMM': 1,
-        'RIP': 0,
-        'Immediate_Data': 0
+        'Rip_Imm': 0,
+        'Reg': 1,
+        'Mem': 1,
+        'Mmx': 1,
+        'Xmm': 1,
+        'Rip': 1,
+        'Imm': 1
     },
     'Macro_Micro': {
         'Macro': 1,

@@ -56,10 +56,10 @@ class Ui(QtWidgets.QMainWindow):
         self.tableWidget_macro.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
         self.comboBox_macro_template.currentTextChanged.connect(self.template_changed)
         # ____Micro_tab_init____
-        self.tableWidget_micro.setColumnCount(9)
+        self.tableWidget_micro.setColumnCount(10)
         self.tableWidget_micro.setHorizontalHeaderLabels(('Макро-операция', 'Операнд 1', ' Операнд 2',
                                                           'READ', 'MODIFY', 'ADDRESS', 'WRITE',
-                                                          'Unfused domain', 'Fused domain'))
+                                                          'Unfused domain', 'Fused domain', 'Тип'))
         self.tableWidget_micro.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
 
         self.show()
@@ -73,8 +73,6 @@ class Ui(QtWidgets.QMainWindow):
         if self.code_check(self.textEdit_macro.toPlainText()):
             self.fill_macro_table(current_settings)
             self.fill_micro_table(current_settings)
-        else:
-            return 0
 
     # ____Settings tab functions____
 
@@ -280,12 +278,12 @@ class Ui(QtWidgets.QMainWindow):
                   and first_op[2].text() not in app_settings.Register_dict['16_bit'])):
             tact_fusions, current_tact, current_row = 0, int(first_op[3].text()), first_op[4]
             while tact_fusions != 2 and current_tact == int(first_op[3].text()) and current_row > 0:
-                if self.tableWidget_macro.item(current_row, 3).background() != QtGui.QColor(0, 0, 0):
+                if self.tableWidget_macro.item(current_row, 3).background() != QtGui.QColor(255, 255, 0):
                     tact_fusions += 0.5
                 current_row -= 1
                 current_tact = int(self.tableWidget_macro.item(current_row, 3).text())
             if (fusion_settings['Macro_Conditions']['Two_Pairs'] == 0 and tact_fusions == 0) or \
-                (fusion_settings['Macro_Conditions']['Two_Pairs'] == 1 and tact_fusions < 2):
+                    (fusion_settings['Macro_Conditions']['Two_Pairs'] == 1 and tact_fusions < 2):
                 if fusion_settings['Macro_Conditions']['Transfer'] == 0 and first_op[3].text() != second_op[3].text():
                     second_op[3] = QtWidgets.QTableWidgetItem(first_op[3].text())
                     self.tableWidget_macro.setItem(second_op[4], 3, QtWidgets.QTableWidgetItem(first_op[3].text()))
@@ -326,9 +324,9 @@ class Ui(QtWidgets.QMainWindow):
         else:
             return result
         return result
-    
+
     # ____Micro tab functions____
-    
+
     def fill_micro_table(self, settings):
         self.tableWidget_micro.clearContents()
         self.tableWidget_micro.setRowCount(0)
@@ -350,94 +348,145 @@ class Ui(QtWidgets.QMainWindow):
                                                                               (command.split(', ')[1].upper())))
                 except IndexError:
                     self.tableWidget_micro.setItem(row_count, 2, QtWidgets.QTableWidgetItem('-'))
-                if self.checkBox_arch_micro.isChecked():
-                    current_op = [self.tableWidget_micro.item(row_count, 0),
-                                  self.tableWidget_micro.item(row_count, 1),
-                                  self.tableWidget_micro.item(row_count, 2),
-                                  row_count]
-                    self.perform_micro_fusion(settings, current_op)
+                current_op = [self.tableWidget_micro.item(row_count, 0),
+                              self.tableWidget_micro.item(row_count, 1),
+                              self.tableWidget_micro.item(row_count, 2),
+                              row_count]
+                op1 = current_op[1].text()
+                op2 = current_op[2].text()
+                if self.tableWidget_macro.item(current_op[3], 3).background() != QtGui.QColor(255, 255, 0):
+                    if op1[0] == '.':
+                        op = 'Mrk'
+                        if op in app_settings.Macro_micro_dict[current_op[0].text()]:
+                            self.tableWidget_micro.setItem(row_count, 3, QtWidgets.QTableWidgetItem(
+                                str(app_settings.Macro_micro_dict[current_op[0].text()][op]['READ'])))
+                            self.tableWidget_micro.setItem(row_count, 4, QtWidgets.QTableWidgetItem(
+                                str(app_settings.Macro_micro_dict[current_op[0].text()][op]['MODIFY'])))
+                            self.tableWidget_micro.setItem(row_count, 5, QtWidgets.QTableWidgetItem(
+                                str(app_settings.Macro_micro_dict[current_op[0].text()][op]['ADDRESS'])))
+                            self.tableWidget_micro.setItem(row_count, 6, QtWidgets.QTableWidgetItem(
+                                str(app_settings.Macro_micro_dict[current_op[0].text()][op]['WRITE'])))
+                            self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem(str(
+                                int(self.tableWidget_micro.item(row_count, 3).text()) +
+                                int(self.tableWidget_micro.item(row_count, 4).text()) +
+                                int(self.tableWidget_micro.item(row_count, 5).text()) +
+                                int(self.tableWidget_micro.item(row_count, 6).text()))))
+                        else:
+                            for x in range(3, 10):
+                                self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
+                    elif op1 != '-' and op2 != '-':
+                        op = (op1 + '_' + op2,
+                              op1 + '_' + op2[:-1],
+                              op1[:-1] + '_' + op2[:-1],
+                              op1 + '_' + op2[:3],
+                              op1[:3] + '_' + op2,
+                              op1[:3] + '_' + op2[:3],
+                              op1[:-1] + '_' + op2)
+                        op = list(set(app_settings.Macro_micro_dict[current_op[0].text()]) & set(op))
+                        if op:
+                            op = op[0]
+                            self.tableWidget_micro.setItem(row_count, 3, QtWidgets.QTableWidgetItem(
+                                str(app_settings.Macro_micro_dict[current_op[0].text()][op]['READ'])))
+                            self.tableWidget_micro.setItem(row_count, 4, QtWidgets.QTableWidgetItem(
+                                str(app_settings.Macro_micro_dict[current_op[0].text()][op]['MODIFY'])))
+                            self.tableWidget_micro.setItem(row_count, 5, QtWidgets.QTableWidgetItem(
+                                str(app_settings.Macro_micro_dict[current_op[0].text()][op]['ADDRESS'])))
+                            self.tableWidget_micro.setItem(row_count, 6, QtWidgets.QTableWidgetItem(
+                                str(app_settings.Macro_micro_dict[current_op[0].text()][op]['WRITE'])))
+                            self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem(str(
+                                int(self.tableWidget_micro.item(row_count, 3).text()) +
+                                int(self.tableWidget_micro.item(row_count, 4).text()) +
+                                int(self.tableWidget_micro.item(row_count, 5).text()) +
+                                int(self.tableWidget_micro.item(row_count, 6).text()))))
+                        else:
+                            for x in range(3, 10):
+                                self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
+                    elif op1 != '-' and op2 == '-':
+                        op = (op1, op1[:-1], op1[:3])
+                        op = list(set(app_settings.Macro_micro_dict[current_op[0].text()]) & set(op))
+                        if op:
+                            op = op[0]
+                            self.tableWidget_micro.setItem(row_count, 3, QtWidgets.QTableWidgetItem(
+                                str(app_settings.Macro_micro_dict[current_op[0].text()][op]['READ'])))
+                            self.tableWidget_micro.setItem(row_count, 4, QtWidgets.QTableWidgetItem(
+                                str(app_settings.Macro_micro_dict[current_op[0].text()][op]['MODIFY'])))
+                            self.tableWidget_micro.setItem(row_count, 5, QtWidgets.QTableWidgetItem(
+                                str(app_settings.Macro_micro_dict[current_op[0].text()][op]['ADDRESS'])))
+                            self.tableWidget_micro.setItem(row_count, 6, QtWidgets.QTableWidgetItem(
+                                str(app_settings.Macro_micro_dict[current_op[0].text()][op]['WRITE'])))
+                            self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem(str(
+                                int(self.tableWidget_micro.item(row_count, 3).text()) +
+                                int(self.tableWidget_micro.item(row_count, 4).text()) +
+                                int(self.tableWidget_micro.item(row_count, 5).text()) +
+                                int(self.tableWidget_micro.item(row_count, 6).text()))))
+                        else:
+                            for x in range(3, 10):
+                                self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
+                    else:
+                        for x in range(3, 10):
+                            self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
+
+                    if self.checkBox_arch_micro.isChecked():
+                        if self.tableWidget_micro.item(row_count, 7).text() == '1':
+                            self.tableWidget_micro.setItem(row_count, 8, QtWidgets.QTableWidgetItem('1'))
+                            self.tableWidget_micro.setItem(row_count, 9, QtWidgets.QTableWidgetItem('-'))
+                        else:
+                            self.perform_micro_fusion(settings, current_op)
+                    else:
+                        self.tableWidget_micro.setItem(row_count, 8, QtWidgets.QTableWidgetItem('-'))
+                else:
+                    if current_op[0].text()[0] == 'J':
+                        for x in range(3, 10):
+                            if x == 4:
+                                self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('1'))
+                            elif x == 9:
+                                self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('Macro fusion'))
+                            else:
+                                self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
+                        for x in range(0, 10):
+                            self.tableWidget_micro.item(row_count, x).setBackground(QtGui.QColor(255, 255, 0))
+                    else:
+                        for x in range(3, 10):
+                            self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
+                        for x in range(0, 10):
+                            self.tableWidget_micro.item(row_count, x).setBackground(QtGui.QColor(255, 255, 0))
 
     def perform_micro_fusion(self, fusion_settings, current_op):
-        op1 = current_op[1].text()
-        op2 = current_op[2].text()
-        if op1[0] == '.':
-            op = 'Mrk'
-            if op in app_settings.Macro_micro_dict[current_op[0].text()]:
-                self.tableWidget_micro.setItem(current_op[3], 3, QtWidgets.QTableWidgetItem(
-                    str(app_settings.Macro_micro_dict[current_op[0].text()][op]['READ'])))
-                self.tableWidget_micro.setItem(current_op[3], 4, QtWidgets.QTableWidgetItem(
-                    str(app_settings.Macro_micro_dict[current_op[0].text()][op]['MODIFY'])))
-                self.tableWidget_micro.setItem(current_op[3], 5, QtWidgets.QTableWidgetItem(
-                    str(app_settings.Macro_micro_dict[current_op[0].text()][op]['ADDRESS'])))
-                self.tableWidget_micro.setItem(current_op[3], 6, QtWidgets.QTableWidgetItem(
-                    str(app_settings.Macro_micro_dict[current_op[0].text()][op]['WRITE'])))
-                self.tableWidget_micro.setItem(current_op[3], 7, QtWidgets.QTableWidgetItem(str(
-                    int(self.tableWidget_micro.item(current_op[3], 3).text()) +
-                    int(self.tableWidget_micro.item(current_op[3], 4).text()) +
-                    int(self.tableWidget_micro.item(current_op[3], 5).text()) +
-                    int(self.tableWidget_micro.item(current_op[3], 6).text()))))
+        if current_op[1].text()[0] != '.' and \
+                fusion_settings['Micro_Conditions']['Rip_Imm'] != 1 and \
+                ((current_op[1].text()[:3] != 'RIP' and current_op[2].text()[:3] != 'Imm') or
+                 (current_op[2].text()[:3] != 'RIP' and current_op[1].text()[:3] != 'Imm')) and \
+                (current_op[1].text()[:3] == '-' or fusion_settings['Micro_Conditions'][current_op[1].text()[:3]]) and \
+                (current_op[2].text()[:3] == '-' or fusion_settings['Micro_Conditions'][current_op[2].text()[:3]]):
+            if fusion_settings['Micro_Pairs']['Read_Modify_Write'] and \
+                    int(self.tableWidget_micro.item(current_op[3], 3).text()) > 0 and \
+                    int(self.tableWidget_micro.item(current_op[3], 4).text()) > 0 and \
+                    int(self.tableWidget_micro.item(current_op[3], 6).text()) > 0:
+                self.tableWidget_micro.setItem(
+                    current_op[3], 8,
+                    QtWidgets.QTableWidgetItem(str(int(self.tableWidget_micro.item(current_op[3], 7).text()) - 2)))
+                self.tableWidget_micro.setItem(current_op[3], 9,
+                                               QtWidgets.QTableWidgetItem('Read Modify Address Write'))
+            elif fusion_settings['Micro_Pairs']['Address_Write'] and \
+                    int(self.tableWidget_micro.item(current_op[3], 5).text()) > 0 and \
+                    int(self.tableWidget_micro.item(current_op[3], 6).text()) > 0:
+                self.tableWidget_micro.setItem(
+                    current_op[3], 8,
+                    QtWidgets.QTableWidgetItem(str(int(self.tableWidget_micro.item(current_op[3], 7).text()) - 1)))
+                self.tableWidget_micro.setItem(current_op[3], 9, QtWidgets.QTableWidgetItem('Address Write'))
+            elif fusion_settings['Micro_Pairs']['Read_Modify'] and \
+                    int(self.tableWidget_micro.item(current_op[3], 3).text()) > 0 and \
+                    int(self.tableWidget_micro.item(current_op[3], 4).text()) > 0:
+                self.tableWidget_micro.setItem(
+                    current_op[3], 8,
+                    QtWidgets.QTableWidgetItem(str(int(self.tableWidget_micro.item(current_op[3], 7).text()) - 1)))
+                self.tableWidget_micro.setItem(current_op[3], 9, QtWidgets.QTableWidgetItem('Read Modify'))
             else:
-                self.tableWidget_micro.setItem(current_op[3], 3, QtWidgets.QTableWidgetItem('-'))
-                self.tableWidget_micro.setItem(current_op[3], 4, QtWidgets.QTableWidgetItem('-'))
-                self.tableWidget_micro.setItem(current_op[3], 5, QtWidgets.QTableWidgetItem('-'))
-                self.tableWidget_micro.setItem(current_op[3], 6, QtWidgets.QTableWidgetItem('-'))
-                self.tableWidget_micro.setItem(current_op[3], 7, QtWidgets.QTableWidgetItem('-'))
-        elif op1 != '-' and op2 != '-':
-            op = (op1 + '_' + op2, op1[:3] + '_' + op2[:3], op1 + '_' + op2[:3], op1[:3] + '_' + op2,
-                  op1[:-1] + '_' + op2, op1 + '_' + op2[:-1], op1[:-1] + '_' + op2[:-1])
-            op = list(set(app_settings.Macro_micro_dict[current_op[0].text()]) & set(op))
-            if op:
-                op = op[0]
-                self.tableWidget_micro.setItem(current_op[3], 3, QtWidgets.QTableWidgetItem(
-                    str(app_settings.Macro_micro_dict[current_op[0].text()][op]['READ'])))
-                self.tableWidget_micro.setItem(current_op[3], 4, QtWidgets.QTableWidgetItem(
-                    str(app_settings.Macro_micro_dict[current_op[0].text()][op]['MODIFY'])))
-                self.tableWidget_micro.setItem(current_op[3], 5, QtWidgets.QTableWidgetItem(
-                    str(app_settings.Macro_micro_dict[current_op[0].text()][op]['ADDRESS'])))
-                self.tableWidget_micro.setItem(current_op[3], 6, QtWidgets.QTableWidgetItem(
-                    str(app_settings.Macro_micro_dict[current_op[0].text()][op]['WRITE'])))
-                self.tableWidget_micro.setItem(current_op[3], 7, QtWidgets.QTableWidgetItem(str(
-                    int(self.tableWidget_micro.item(current_op[3], 3).text()) +
-                    int(self.tableWidget_micro.item(current_op[3], 4).text()) +
-                    int(self.tableWidget_micro.item(current_op[3], 5).text()) +
-                    int(self.tableWidget_micro.item(current_op[3], 6).text()))))
-            else:
-                self.tableWidget_micro.setItem(current_op[3], 3, QtWidgets.QTableWidgetItem('-'))
-                self.tableWidget_micro.setItem(current_op[3], 4, QtWidgets.QTableWidgetItem('-'))
-                self.tableWidget_micro.setItem(current_op[3], 5, QtWidgets.QTableWidgetItem('-'))
-                self.tableWidget_micro.setItem(current_op[3], 6, QtWidgets.QTableWidgetItem('-'))
-                self.tableWidget_micro.setItem(current_op[3], 7, QtWidgets.QTableWidgetItem('-'))
-        elif op1 != '-' and op2 == '-':
-            op = (op1, op1[:3], op1[:-1])
-            op = list(set(app_settings.Macro_micro_dict[current_op[0].text()]) & set(op))
-            if op:
-                op = op[0]
-                self.tableWidget_micro.setItem(current_op[3], 3, QtWidgets.QTableWidgetItem(
-                    str(app_settings.Macro_micro_dict[current_op[0].text()][op]['READ'])))
-                self.tableWidget_micro.setItem(current_op[3], 4, QtWidgets.QTableWidgetItem(
-                    str(app_settings.Macro_micro_dict[current_op[0].text()][op]['MODIFY'])))
-                self.tableWidget_micro.setItem(current_op[3], 5, QtWidgets.QTableWidgetItem(
-                    str(app_settings.Macro_micro_dict[current_op[0].text()][op]['ADDRESS'])))
-                self.tableWidget_micro.setItem(current_op[3], 6, QtWidgets.QTableWidgetItem(
-                    str(app_settings.Macro_micro_dict[current_op[0].text()][op]['WRITE'])))
-                self.tableWidget_micro.setItem(current_op[3], 7, QtWidgets.QTableWidgetItem(str(
-                    int(self.tableWidget_micro.item(current_op[3], 3).text()) +
-                    int(self.tableWidget_micro.item(current_op[3], 4).text()) +
-                    int(self.tableWidget_micro.item(current_op[3], 5).text()) +
-                    int(self.tableWidget_micro.item(current_op[3], 6).text()))))
-            else:
-                self.tableWidget_micro.setItem(current_op[3], 3, QtWidgets.QTableWidgetItem('-'))
-                self.tableWidget_micro.setItem(current_op[3], 4, QtWidgets.QTableWidgetItem('-'))
-                self.tableWidget_micro.setItem(current_op[3], 5, QtWidgets.QTableWidgetItem('-'))
-                self.tableWidget_micro.setItem(current_op[3], 6, QtWidgets.QTableWidgetItem('-'))
-                self.tableWidget_micro.setItem(current_op[3], 7, QtWidgets.QTableWidgetItem('-'))
+                self.tableWidget_micro.setItem(current_op[3], 8, self.tableWidget_micro.item(current_op[3], 7))
+                self.tableWidget_micro.setItem(current_op[3], 9, QtWidgets.QTableWidgetItem('-'))
         else:
-            self.tableWidget_micro.setItem(current_op[3], 3, QtWidgets.QTableWidgetItem('-'))
-            self.tableWidget_micro.setItem(current_op[3], 4, QtWidgets.QTableWidgetItem('-'))
-            self.tableWidget_micro.setItem(current_op[3], 5, QtWidgets.QTableWidgetItem('-'))
-            self.tableWidget_micro.setItem(current_op[3], 6, QtWidgets.QTableWidgetItem('-'))
-            self.tableWidget_micro.setItem(current_op[3], 7, QtWidgets.QTableWidgetItem('-'))
-        return 0
+            self.tableWidget_micro.setItem(current_op[3], 8, self.tableWidget_micro.item(current_op[3], 7))
+            self.tableWidget_micro.setItem(current_op[3], 9, QtWidgets.QTableWidgetItem('-'))
 
     @staticmethod
     def get_operand_type_micro(op):

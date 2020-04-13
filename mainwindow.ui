@@ -1160,6 +1160,13 @@
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_10">
               <item>
+               <widget class="QCheckBox" name="checkBox_micro_Rip_Imm">
+                <property name="text">
+                 <string>RIP и непосредственный операнд в одной иструкции</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QLabel" name="label_micro_operated_registers">
                 <property name="font">
                  <font>
@@ -1173,31 +1180,26 @@
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="checkBox_micro_Registers">
+               <widget class="QCheckBox" name="checkBox_micro_Reg">
                 <property name="font">
                  <font>
                   <pointsize>10</pointsize>
                  </font>
                 </property>
                 <property name="text">
-                 <string>Общего назначения</string>
+                 <string>Регистры</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="checkBox_micro_Float_Registers">
-                <property name="font">
-                 <font>
-                  <pointsize>10</pointsize>
-                 </font>
-                </property>
+               <widget class="QCheckBox" name="checkBox_micro_Mem">
                 <property name="text">
-                 <string>С плавающей точкой</string>
+                 <string>Память</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="checkBox_micro_MMX">
+               <widget class="QCheckBox" name="checkBox_micro_Mmx">
                 <property name="font">
                  <font>
                   <pointsize>10</pointsize>
@@ -1209,7 +1211,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="checkBox_micro_XMM">
+               <widget class="QCheckBox" name="checkBox_micro_Xmm">
                 <property name="font">
                  <font>
                   <pointsize>10</pointsize>
@@ -1221,7 +1223,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="checkBox_micro_RIP">
+               <widget class="QCheckBox" name="checkBox_micro_Rip">
                 <property name="font">
                  <font>
                   <pointsize>10</pointsize>
@@ -1233,7 +1235,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QCheckBox" name="checkBox_micro_Immediate_Data">
+               <widget class="QCheckBox" name="checkBox_micro_Imm">
                 <property name="font">
                  <font>
                   <pointsize>10</pointsize>
