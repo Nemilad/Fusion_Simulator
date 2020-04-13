@@ -1,8 +1,7 @@
 import copy
 import sys
-
 from PyQt5.uic.uiparser import QtWidgets
-
+from mainwindow import Ui_MainWindow
 import app_settings
 from PyQt5 import QtWidgets, QtGui
 from PyQt5 import uic
@@ -32,14 +31,14 @@ Micro_Dict = {
 }
 
 
-class Ui(QtWidgets.QMainWindow):
+class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
     current_radio = 'none'
     error_flag = 0
     macro_tact_shift = 0
 
     def __init__(self):
-        super(Ui, self).__init__()
-        uic.loadUi("mainwindow.ui", self)
+        QtWidgets.QWidget.__init__(self)
+        self.setupUi(self)  # This is necessary to setup the ui when using this method
         # ____Settings_tab_init____
         self.comboBox_arch.currentTextChanged.connect(self.arch_changed)
         for radio in self.scrollArea_macro_first_pair.findChildren(QtWidgets.QRadioButton):
