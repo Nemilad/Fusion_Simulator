@@ -189,6 +189,7 @@ class Ui(QtWidgets.QMainWindow):
             box.setEnabled(state)
         self.checkBox_arch_macro.setEnabled(state)
         self.checkBox_arch_micro.setEnabled(state)
+        self.comboBox_arch_micro.setEnabled(state)
 
     def set_enabled_second_pair(self, state):
         for box in self.scrollArea_macro_second_pair.findChildren(QtWidgets.QCheckBox):
