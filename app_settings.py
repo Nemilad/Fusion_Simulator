@@ -2816,20 +2816,64 @@ Register_dict = {
 }
 
 Code_Templates = {
-    'Вариант 1': '.loop:\nadd eax, ebx\ninc edx\njz .loop',
-    'Вариант 2': '.loop:\nadd cx, dword [ax]\ninc ax\njz .loop',
-    'Вариант 3': '',
-    'Вариант 4': '',
-    'Вариант 5': '',
-    'Вариант 6': '',
-    'Вариант 7': '',
-    'Вариант 8': '',
-    'Вариант 9': '',
-    'Вариант 10': '',
-    'Вариант 11': '',
-    'Вариант 12': '',
-    'Вариант 13': '',
-    'Вариант 14': '',
+    'Вариант 1': '.loop:\nadd eax, ebx\ninc edx\njz .loop\n'
+                 '.loop2:\ninc edx\nadd eax, ebx\njz .loop2',
+    'Вариант 2': '.loop:\nadd cx, dword [ax]\ninc ax\njz .loop\n'
+                 '.loop2:\ninc ax\nadd cx, dword [ax]\njz .loop2',
+    'Вариант 3': '.loop:\nadd rsi, 4\ncmp dword [rsi], edi\njnz .loop\n'
+                 '.loop2:\ncmp dword [rsi], edi\nadd rsi, 4\njnz .loop2',
+    'Вариант 4': '.L1:\ndec ecx\njnz .L1\n'
+                 '.L2:\ncmp dword [esi], 0\nje .L2\n'
+                 '.L3:\ndec dword [esi]\njnz .L3\n'
+                 '.L4:\nadd eax, ebx\njno .L4\n'
+                 '.L5:\ncmp word [mem], eax\njge .L5',
+    'Вариант 5': '.R1:\ndec ecx\njnz .R1\n'
+                 '.R2:\ncmp dword [esi], 0\nje .R2\n'
+                 '.R3:\ndec dword [esi]\njne .R3\n'
+                 '.R4:\nadd ax, bx\njg .R4\n'
+                 '.R5:\ncmp word [mem], eax\nje .R5',
+    'Вариант 6': '.N1:\nnot ecx\njnz .N1\n'
+                 '.N2:\ninc word [si]\nja .N2\n'
+                 '.N3:\ninc word [si]\njna .N3\n'
+                 '.N4:\nand ax, ax\njgn .N4\n'
+                 '.N5:\ntest word [mem], eax\njnz .N5',
+    'Вариант 7': '.L1:\ndec ecx\n dec eax\njnz .L1\n'
+                 '.L2:\nsub ecx, eax\ncmp dword [esi], 0\nje .L2\n'
+                 '.L3:\ndec dword [esi]\n dec dword [esi]\njnz .L3\n'
+                 '.L4:\nadd eax, ebx\njno .L4\n'
+                 '.L5:\nsub word [mem], eax\njge .L5',
+    'Вариант 8': '.P1:\ndec ecx\n dec eax\njnp .P1\n'
+                 '.P2:\nadd ecx, eax\ncmp word [si], 0\njnae .P2\n'
+                 '.P3:\ndec dword [esi]\n dec dword [esi]\njnbe .P3\n'
+                 '.P4:\nadd eax, ebx\njp .P4\n'
+                 '.P5:\ncmp word [mem], eax\njns .P5',
+    'Вариант 9': '.J1:\ninc ecx\njz .J1\n'
+                 '.J2:\ninc word [si]\njna .J2\n'
+                 '.J3:\ntest word [si], eax\njnae .J3\n'
+                 '.J4:\nsub ax, bx\njnle .J4\n'
+                 '.J5:\ntest word [mem], eax\njnz .J5',
+    'Вариант 10': '.P1:\ndec ecx\n dec eax\njnb .P1\n'
+                  '.P2:\nadd ecx, eax\ncmp word [si], 0\njne .P2\n'
+                  '.P3:\nxor eax, eax\nje .P3\n'
+                  '.P4:\nnot eax\njbe .P4\n',
+    'Вариант 11': '.J1:\ninc rcx\njz .J1\n'
+                  '.J2:\ninc dword [esi]\njz .J2\n'
+                  '.J3:\nadd rcx, rax\njz .J3\n'
+                  '.J4:\nsub cx, ax\njz .J4\n'
+                  '.J5:\nor eax, eax\njz .J5',
+    'Вариант 12': '.J1:\ninc rcx\njz .J1\n'
+                  '.J2:\ninc rcx\njz .J2\n'
+                  '.J3:\ninc rcx\njz .J3\n'
+                  '.J4:\ninc rcx\njz .J4\n'
+                  '.J5:\ninc rcx\njz .J5',
+    'Вариант 13': '.loop:\ninc dx\ninc dx\ninc dx\ninc dx\njz .loop\n'
+                  '.loop2:\nadd ax, dx\nadd ax, dx\nadd ax, dx\nadd ax, dx\njnz .loop2\n'
+                  '.loop3:\ninc bx\ninc bx\ninc bx\ninc bx\nja .loop3\n'
+                  '.loop4:\nsub ax, bx\nsub ax, bx\nsub ax, bx\nsub ax, bx\njna .loop4',
+    'Вариант 14': '.loop:\ninc dx\ninc dx\ninc dx\ninc dx\njz .loop\n'
+                  '.loop2:\ninc ax\ninc ax\ninc ax\ninc ax\njnz .loop2\n'
+                  '.loop3:\ninc bx\ninc bx\ninc bx\ninc bx\nja .loop3\n'
+                  '.loop4:\ninc cx\ninc cx\ninc cx\ninc cx\njna .loop4',
     'Вариант 15': 'inc eax\ninc eax\ninc eax\ninc eax\n'
                   'inc eax\ninc eax\ninc eax\ninc eax\n'
                   'inc eax\ninc eax\ninc eax\ninc eax\n'
@@ -3313,6 +3357,7 @@ Template_settings = {
         'Reg_Imm': 0,
         'Reg_Mem': 0,
         'Mem_Imm': 0,
+        'Mem_Reg': 0,
         'Reg': 0,
         'Mem': 0,
         'RIP': 0,
@@ -3335,6 +3380,7 @@ Template_settings = {
     'Micro_Conditions': {
         'Rip_Imm': 0,
         'Reg': 0,
+        'Mem': 0,
         'Mmx': 0,
         'Xmm': 0,
         'Rip': 0,
@@ -3823,6 +3869,7 @@ Pentium_M_settings = {
         'Reg_Imm': 0,
         'Reg_Mem': 0,
         'Mem_Imm': 0,
+        'Mem_Reg': 0,
         'Reg': 0,
         'Mem': 0,
         'RIP': 0,
@@ -4334,6 +4381,7 @@ Core_2_settings = {
         'Reg_Imm': 1,
         'Reg_Mem': 1,
         'Mem_Imm': 0,
+        'Mem_Reg': 1,
         'Reg': 0,
         'Mem': 0,
         'RIP': 0,
@@ -4845,6 +4893,7 @@ Nehalem_settings = {
         'Reg_Imm': 1,
         'Reg_Mem': 1,
         'Mem_Imm': 0,
+        'Mem_Reg': 1,
         'Reg': 0,
         'Mem': 0,
         'RIP': 0,
@@ -5355,6 +5404,7 @@ Sandy_Bridge_settings = {
         'Reg_Imm': 1,
         'Reg_Mem': 1,
         'Mem_Imm': 0,
+        'Mem_Reg': 1,
         'Reg': 1,
         'Mem': 0,
         'RIP': 0,
@@ -5865,6 +5915,7 @@ Ivy_Bridge_settings = {
         'Reg_Imm': 1,
         'Reg_Mem': 1,
         'Mem_Imm': 0,
+        'Mem_Reg': 1,
         'Reg': 1,
         'Mem': 0,
         'RIP': 0,
@@ -6375,6 +6426,7 @@ Haswell_settings = {
         'Reg_Imm': 1,
         'Reg_Mem': 1,
         'Mem_Imm': 0,
+        'Mem_Reg': 1,
         'Reg': 1,
         'Mem': 0,
         'RIP': 0,
@@ -6885,6 +6937,7 @@ Broadwell_settings = {
         'Reg_Imm': 1,
         'Reg_Mem': 1,
         'Mem_Imm': 0,
+        'Mem_Reg': 1,
         'Reg': 1,
         'Mem': 0,
         'RIP': 0,
@@ -7395,6 +7448,7 @@ Skylake_settings = {
         'Reg_Imm': 1,
         'Reg_Mem': 1,
         'Mem_Imm': 0,
+        'Mem_Reg': 1,
         'Reg': 1,
         'Mem': 0,
         'RIP': 0,

@@ -288,11 +288,13 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                  (first_op[1].text() not in app_settings.Register_dict['16_bit']
                   and first_op[2].text() not in app_settings.Register_dict['16_bit'])):
             tact_fusions, current_tact, current_row = 0, int(first_op[3].text()), first_op[4]
-            while tact_fusions != 2 and current_tact == int(first_op[3].text()) and current_row > 0:
-                if self.tableWidget_macro.item(current_row, 3).background() != QtGui.QColor(255, 255, 0):
+            while tact_fusions != 2 and current_tact == int(first_op[3].text()) and current_row >= 0:
+                if self.tableWidget_macro.item(current_row, 3).background() == QtGui.QColor(255, 255, 0):
                     tact_fusions += 0.5
                 current_row -= 1
-                current_tact = int(self.tableWidget_macro.item(current_row, 3).text())
+                if current_row >= 0:
+                    current_tact = int(self.tableWidget_macro.item(current_row, 3).text())
+            print('current_row', first_op[4],'tact_fusions', tact_fusions)
             if (fusion_settings['Macro_Conditions']['Two_Pairs'] == 0 and tact_fusions == 0) or \
                     (fusion_settings['Macro_Conditions']['Two_Pairs'] == 1 and tact_fusions < 2):
                 if fusion_settings['Macro_Conditions']['Transfer'] == 0 and first_op[3].text() != second_op[3].text():
@@ -464,7 +466,7 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                 else:
                     if self.tableWidget_macro.item(current_op[3], 1).text()[0] == '.':
                         for x in range(3, 10):
-                            if x == 4:
+                            if x == 4 or x == 7 or x == 8:
                                 self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('1'))
                             elif x == 9:
                                 self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('Macro fusion'))
@@ -477,6 +479,16 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                             self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
                         for x in range(0, 10):
                             self.tableWidget_micro.item(row_count, x).setBackground(QtGui.QColor(255, 255, 0))
+        row_count = self.tableWidget_micro.rowCount()
+        self.tableWidget_micro.insertRow(row_count)
+        fused_domain_sum, unfused_domain_sum = 0, 0
+        for x in range(row_count):
+            if self.tableWidget_micro.item(x, 7).text() != '-':
+                unfused_domain_sum += int(self.tableWidget_micro.item(x, 7).text())
+            if self.tableWidget_micro.item(x, 8).text() != '-':
+                fused_domain_sum += int(self.tableWidget_micro.item(x, 8).text())
+        self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem(str(unfused_domain_sum)))
+        self.tableWidget_micro.setItem(row_count, 8, QtWidgets.QTableWidgetItem(str(fused_domain_sum)))
 
     def perform_micro_fusion(self, fusion_settings, current_op):
         if current_op[1].text()[0] != '.' and \
