@@ -408,7 +408,7 @@ Macro_micro_dict = {
             'WRITE': 0
         },
         'Mem8': {
-            'READ': 0,
+            'READ': 1,
             'MODIFY': 5,
             'ADDRESS': 0,
             'WRITE': 0
@@ -686,6 +686,2073 @@ Macro_micro_dict = {
         'Mrk': {
             'READ': 0,
             'MODIFY': 11,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    }
+}
+
+Macro_micro_dict_Core_2 = {
+    'ADD': {
+
+    },
+    'SUB': {
+
+    },
+    'INC': {
+
+    },
+    'DEC': {
+
+    },
+    'ADC': {
+
+    },
+    'SBB': {
+
+    },
+    'TEST': {
+
+    },
+    'AND': {
+
+    },
+    'OR': {
+
+    },
+    'XOR': {
+
+    },
+    'NOT': {
+
+    },
+    'NEG': {
+
+    },
+    'JMP': {
+
+    },
+    'MOV': {
+
+    },
+    'MUL': {
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'DIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 7,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 7,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 32,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 7,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32': {
+            'READ': 1,
+            'MODIFY': 6,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 31,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'JA': {
+
+    },
+    'JNA': {
+
+    },
+    'JAE': {
+
+    },
+    'JNAE': {
+
+    },
+    'JB': {
+
+    },
+    'JNB': {
+
+    },
+    'JBE': {
+
+    },
+    'JNBE': {
+
+    },
+    'JC': {
+
+    },
+    'JNC': {
+
+    },
+    'JE': {
+
+    },
+    'JNE': {
+
+    },
+    'JG': {
+
+    },
+    'JNG': {
+
+    },
+    'JGE': {
+
+    },
+    'JNGE': {
+
+    },
+    'JL': {
+
+    },
+    'JNL': {
+
+    },
+    'JLE': {
+
+    },
+    'JNLE': {
+
+    },
+    'JS': {
+
+    },
+    'JNS': {
+
+    },
+    'JO': {
+
+    },
+    'JNO': {
+
+    },
+    'JP': {
+
+    },
+    'JNP': {
+
+    },
+    'JPO': {
+
+    },
+    'JPE': {
+
+    },
+    'JZ': {
+
+    },
+    'JNZ': {
+
+    },
+    'JCXZ': {
+
+    },
+    'JECXZ': {
+
+    },
+    'JRCXZ': {
+
+    },
+    'LOOP': {
+
+    }
+}
+
+Macro_micro_dict_Nehalem = {
+    'ADD': {
+
+    },
+    'SUB': {
+
+    },
+    'INC': {
+
+    },
+    'DEC': {
+
+    },
+    'ADC': {
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'SBB': {
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'TEST': {
+
+    },
+    'AND': {
+
+    },
+    'OR': {
+
+    },
+    'XOR': {
+
+    },
+    'NOT': {
+
+    },
+    'NEG': {
+
+    },
+    'JMP': {
+
+    },
+    'MOV': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 0,
+            'MODIFY': 0,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 0,
+            'MODIFY': 0,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'MUL': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'DIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 5,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 0,
+            'MODIFY': 5,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'JA': {
+
+    },
+    'JNA': {
+
+    },
+    'JAE': {
+
+    },
+    'JNAE': {
+
+    },
+    'JB': {
+
+    },
+    'JNB': {
+
+    },
+    'JBE': {
+
+    },
+    'JNBE': {
+
+    },
+    'JC': {
+
+    },
+    'JNC': {
+
+    },
+    'JE': {
+
+    },
+    'JNE': {
+
+    },
+    'JG': {
+
+    },
+    'JNG': {
+
+    },
+    'JGE': {
+
+    },
+    'JNGE': {
+
+    },
+    'JL': {
+
+    },
+    'JNL': {
+
+    },
+    'JLE': {
+
+    },
+    'JNLE': {
+
+    },
+    'JS': {
+
+    },
+    'JNS': {
+
+    },
+    'JO': {
+
+    },
+    'JNO': {
+
+    },
+    'JP': {
+
+    },
+    'JNP': {
+
+    },
+    'JPO': {
+
+    },
+    'JPE': {
+
+    },
+    'JZ': {
+
+    },
+    'JNZ': {
+
+    },
+    'JCXZ': {
+
+    },
+    'JECXZ': {
+
+    },
+    'JRCXZ': {
+
+    },
+    'LOOP': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 6,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    }
+}
+
+Macro_micro_dict_Sandy_Bridge = {
+    'ADD': {
+
+    },
+    'SUB': {
+
+    },
+    'INC': {
+
+    },
+    'DEC': {
+
+    },
+    'ADC': {
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'SBB': {
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'TEST': {
+
+    },
+    'AND': {
+
+    },
+    'OR': {
+
+    },
+    'XOR': {
+
+    },
+    'NOT': {
+
+    },
+    'NEG': {
+
+    },
+    'JMP': {
+
+    },
+    'MOV': {
+
+    },
+    'MUL': {
+
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'DIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 11,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 34,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'JA': {
+
+    },
+    'JNA': {
+
+    },
+    'JAE': {
+
+    },
+    'JNAE': {
+
+    },
+    'JB': {
+
+    },
+    'JNB': {
+
+    },
+    'JBE': {
+
+    },
+    'JNBE': {
+
+    },
+    'JC': {
+
+    },
+    'JNC': {
+
+    },
+    'JE': {
+
+    },
+    'JNE': {
+
+    },
+    'JG': {
+
+    },
+    'JNG': {
+
+    },
+    'JGE': {
+
+    },
+    'JNGE': {
+
+    },
+    'JL': {
+
+    },
+    'JNL': {
+
+    },
+    'JLE': {
+
+    },
+    'JNLE': {
+
+    },
+    'JS': {
+
+    },
+    'JNS': {
+
+    },
+    'JO': {
+
+    },
+    'JNO': {
+
+    },
+    'JP': {
+
+    },
+    'JNP': {
+
+    },
+    'JPO': {
+
+    },
+    'JPE': {
+
+    },
+    'JZ': {
+
+    },
+    'JNZ': {
+
+    },
+    'JCXZ': {
+
+    },
+    'JECXZ': {
+
+    },
+    'JRCXZ': {
+
+    },
+    'LOOP': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 7,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    }
+}
+
+Macro_micro_dict_Ivy_Bridge = {
+    'ADD': {
+
+    },
+    'SUB': {
+
+    },
+    'INC': {
+
+    },
+    'DEC': {
+
+    },
+    'ADC': {
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'SBB': {
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'TEST': {
+
+    },
+    'AND': {
+
+    },
+    'OR': {
+
+    },
+    'XOR': {
+
+    },
+    'NOT': {
+
+    },
+    'NEG': {
+
+    },
+    'JMP': {
+
+    },
+    'MOV': {
+        'Reg8_Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg8_Reg16': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Reg16': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Reg32': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Reg64': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Reg32': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Reg64': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg8_Mem8': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg8_Mem16': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Mem8': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Mem16': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Mem32': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Mem64': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Mem32': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Mem64': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'MUL': {
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'DIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 11,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 11,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 35,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+        'JA': {
+
+    },
+    'JNA': {
+
+    },
+    'JAE': {
+
+    },
+    'JNAE': {
+
+    },
+    'JB': {
+
+    },
+    'JNB': {
+
+    },
+    'JBE': {
+
+    },
+    'JNBE': {
+
+    },
+    'JC': {
+
+    },
+    'JNC': {
+
+    },
+    'JE': {
+
+    },
+    'JNE': {
+
+    },
+    'JG': {
+
+    },
+    'JNG': {
+
+    },
+    'JGE': {
+
+    },
+    'JNGE': {
+
+    },
+    'JL': {
+
+    },
+    'JNL': {
+
+    },
+    'JLE': {
+
+    },
+    'JNLE': {
+
+    },
+    'JS': {
+
+    },
+    'JNS': {
+
+    },
+    'JO': {
+
+    },
+    'JNO': {
+
+    },
+    'JP': {
+
+    },
+    'JNP': {
+
+    },
+    'JPO': {
+
+    },
+    'JPE': {
+
+    },
+    'JZ': {
+
+    },
+    'JNZ': {
+
+    },
+    'JCXZ': {
+
+    },
+    'JECXZ': {
+
+    },
+    'JRCXZ': {
+
+    },
+    'LOOP': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 7,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    }
+}
+
+Macro_micro_dict_Haswell = {
+    'ADD': {
+
+    },
+    'SUB': {
+
+    },
+    'INC': {
+
+    },
+    'DEC': {
+
+    },
+    'ADC': {
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'SBB': {
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'TEST': {
+
+    },
+    'AND': {
+
+    },
+    'OR': {
+
+    },
+    'XOR': {
+
+    },
+    'NOT': {
+
+    },
+    'NEG': {
+
+    },
+    'JMP': {
+
+    },
+    'MOV': {
+        'Reg8_Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg8_Reg16': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Reg16': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Reg32': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Reg64': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Reg32': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Reg64': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg8l_Mem8': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg8h_Mem8': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Mem': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Mem': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'MUL': {
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'DIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 9,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 11,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 36,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'JA': {
+
+    },
+    'JNA': {
+
+    },
+    'JAE': {
+
+    },
+    'JNAE': {
+
+    },
+    'JB': {
+
+    },
+    'JNB': {
+
+    },
+    'JBE': {
+
+    },
+    'JNBE': {
+
+    },
+    'JC': {
+
+    },
+    'JNC': {
+
+    },
+    'JE': {
+
+    },
+    'JNE': {
+
+    },
+    'JG': {
+
+    },
+    'JNG': {
+
+    },
+    'JGE': {
+
+    },
+    'JNGE': {
+
+    },
+    'JL': {
+
+    },
+    'JNL': {
+
+    },
+    'JLE': {
+
+    },
+    'JNLE': {
+
+    },
+    'JS': {
+
+    },
+    'JNS': {
+
+    },
+    'JO': {
+
+    },
+    'JNO': {
+
+    },
+    'JP': {
+
+    },
+    'JNP': {
+
+    },
+    'JPO': {
+
+    },
+    'JPE': {
+
+    },
+    'JZ': {
+
+    },
+    'JNZ': {
+
+    },
+    'JCXZ': {
+
+    },
+    'JECXZ': {
+
+    },
+    'JRCXZ': {
+
+    },
+    'LOOP': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 7,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    }
+}
+
+Macro_micro_dict_Broadwell = {
+    'ADD': {
+
+    },
+    'SUB': {
+
+    },
+    'INC': {
+
+    },
+    'DEC': {
+
+    },
+    'ADC': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'SBB': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'TEST': {
+
+    },
+    'AND': {
+
+    },
+    'OR': {
+
+    },
+    'XOR': {
+
+    },
+    'NOT': {
+
+    },
+    'NEG': {
+
+    },
+    'JMP': {
+
+    },
+    'MOV': {
+        'Reg8_Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg8_Reg16': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Reg16': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Reg32': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Reg64': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Reg32': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Reg64': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg8l_Mem8': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg8h_Mem8': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Mem': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Mem': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'MUL': {
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'DIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 9,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 11,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 36,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'JA': {
+
+    },
+    'JNA': {
+
+    },
+    'JAE': {
+
+    },
+    'JNAE': {
+
+    },
+    'JB': {
+
+    },
+    'JNB': {
+
+    },
+    'JBE': {
+
+    },
+    'JNBE': {
+
+    },
+    'JC': {
+
+    },
+    'JNC': {
+
+    },
+    'JE': {
+
+    },
+    'JNE': {
+
+    },
+    'JG': {
+
+    },
+    'JNG': {
+
+    },
+    'JGE': {
+
+    },
+    'JNGE': {
+
+    },
+    'JL': {
+
+    },
+    'JNL': {
+
+    },
+    'JLE': {
+
+    },
+    'JNLE': {
+
+    },
+    'JS': {
+
+    },
+    'JNS': {
+
+    },
+    'JO': {
+
+    },
+    'JNO': {
+
+    },
+    'JP': {
+
+    },
+    'JNP': {
+
+    },
+    'JPO': {
+
+    },
+    'JPE': {
+
+    },
+    'JZ': {
+
+    },
+    'JNZ': {
+
+    },
+    'JCXZ': {
+
+    },
+    'JECXZ': {
+
+    },
+    'JRCXZ': {
+
+    },
+    'LOOP': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 7,
+            'ADDRESS': 0,
+            'WRITE': 0
+        }
+    }
+}
+
+Macro_micro_dict_Skylake = {
+    'ADD': {
+
+    },
+    'SUB': {
+
+    },
+    'INC': {
+
+    },
+    'DEC': {
+
+    },
+    'ADC': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'SBB': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'TEST': {
+
+    },
+    'AND': {
+
+    },
+    'OR': {
+
+    },
+    'XOR': {
+
+    },
+    'NOT': {
+
+    },
+    'NEG': {
+
+    },
+    'JMP': {
+
+    },
+    'MOV': {
+        'Reg8_Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg8_Reg16': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Reg16': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Reg32': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Reg64': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Reg32': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Reg64': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg8l_Mem8': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg8h_Mem8': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Mem': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Mem': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'MUL': {
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'DIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 36,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'JA': {
+
+    },
+    'JNA': {
+
+    },
+    'JAE': {
+
+    },
+    'JNAE': {
+
+    },
+    'JB': {
+
+    },
+    'JNB': {
+
+    },
+    'JBE': {
+
+    },
+    'JNBE': {
+
+    },
+    'JC': {
+
+    },
+    'JNC': {
+
+    },
+    'JE': {
+
+    },
+    'JNE': {
+
+    },
+    'JG': {
+
+    },
+    'JNG': {
+
+    },
+    'JGE': {
+
+    },
+    'JNGE': {
+
+    },
+    'JL': {
+
+    },
+    'JNL': {
+
+    },
+    'JLE': {
+
+    },
+    'JNLE': {
+
+    },
+    'JS': {
+
+    },
+    'JNS': {
+
+    },
+    'JO': {
+
+    },
+    'JNO': {
+
+    },
+    'JP': {
+
+    },
+    'JNP': {
+
+    },
+    'JPO': {
+
+    },
+    'JPE': {
+
+    },
+    'JZ': {
+
+    },
+    'JNZ': {
+
+    },
+    'JCXZ': {
+
+    },
+    'JECXZ': {
+
+    },
+    'JRCXZ': {
+
+    },
+    'LOOP': {
+        'Mrk': {
+            'READ': 0,
+            'MODIFY': 7,
             'ADDRESS': 0,
             'WRITE': 0
         }
