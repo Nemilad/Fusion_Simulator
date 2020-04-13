@@ -160,6 +160,32 @@ Macro_micro_dict = {
             'WRITE': 1
         },
     },
+    'CMP': {
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Imm': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Reg': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem_Imm': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
     'TEST': {
         'Reg_Reg': {
             'READ': 0,
@@ -711,9 +737,13 @@ Macro_micro_dict_Core_2 = {
     'SBB': {
 
     },
+    'CMP': {
+
+    },
     'TEST': {
 
     },
+
     'AND': {
 
     },
@@ -943,6 +973,9 @@ Macro_micro_dict_Nehalem = {
             'ADDRESS': 1,
             'WRITE': 1
         },
+    },
+    'CMP': {
+
     },
     'TEST': {
 
@@ -1223,6 +1256,9 @@ Macro_micro_dict_Sandy_Bridge = {
             'WRITE': 1
         },
     },
+    'CMP': {
+
+    },
     'TEST': {
 
     },
@@ -1461,6 +1497,9 @@ Macro_micro_dict_Ivy_Bridge = {
             'ADDRESS': 1,
             'WRITE': 1
         },
+    },
+    'CMP': {
+
     },
     'TEST': {
 
@@ -1800,6 +1839,9 @@ Macro_micro_dict_Haswell = {
             'ADDRESS': 1,
             'WRITE': 1
         },
+    },
+    'CMP': {
+
     },
     'TEST': {
 
@@ -2146,6 +2188,9 @@ Macro_micro_dict_Broadwell = {
             'WRITE': 1
         },
     },
+    'CMP': {
+
+    },
     'TEST': {
 
     },
@@ -2490,6 +2535,9 @@ Macro_micro_dict_Skylake = {
             'ADDRESS': 1,
             'WRITE': 1
         },
+    },
+    'CMP': {
+
     },
     'TEST': {
 
