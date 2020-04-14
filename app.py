@@ -294,7 +294,6 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                 current_row -= 1
                 if current_row >= 0:
                     current_tact = int(self.tableWidget_macro.item(current_row, 3).text())
-            print('current_row', first_op[4],'tact_fusions', tact_fusions)
             if (fusion_settings['Macro_Conditions']['Two_Pairs'] == 0 and tact_fusions == 0) or \
                     (fusion_settings['Macro_Conditions']['Two_Pairs'] == 1 and tact_fusions < 2):
                 if fusion_settings['Macro_Conditions']['Transfer'] == 0 and first_op[3].text() != second_op[3].text():
