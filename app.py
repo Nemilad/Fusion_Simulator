@@ -471,7 +471,8 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                         else:
                             self.perform_micro_fusion(settings, current_op)
                     else:
-                        self.tableWidget_micro.setItem(row_count, 8, QtWidgets.QTableWidgetItem('-'))
+                        self.tableWidget_micro.setItem(row_count, 8,  QtWidgets.QTableWidgetItem(
+                            self.tableWidget_micro.item(row_count, 7).text()))
                         self.tableWidget_micro.setItem(row_count, 9, QtWidgets.QTableWidgetItem('-'))
                 else:
                     if self.tableWidget_macro.item(current_op[3], 1).text()[0] == '.':
