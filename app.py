@@ -4,7 +4,6 @@ from PyQt5.uic.uiparser import QtWidgets
 from mainwindow import Ui_MainWindow
 import app_settings
 from PyQt5 import QtWidgets, QtGui
-from PyQt5 import uic
 
 User_settings = copy.deepcopy(app_settings.Template_settings)
 
@@ -38,7 +37,7 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
-        self.setupUi(self)  # This is necessary to setup the ui when using this method
+        self.setupUi(self)
         # ____Settings_tab_init____
         self.comboBox_arch.currentTextChanged.connect(self.arch_changed)
         for radio in self.scrollArea_macro_first_pair.findChildren(QtWidgets.QRadioButton):
@@ -207,12 +206,20 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def code_check(self, code):
         self.textEdit_macro.clear()
+        code_marks = []
         for line in code.splitlines():
             words = line.split(' ')
+            local_error_flag = 0
             if (words[0] and words[0].upper() not in app_settings.Macro_command_list) and \
-                    not (words[0][0] == '.' and words[0][-1] == ':'):
+                    (words[0][0] != '.' and words[0][-1] != ':'):
+                self.error_flag, local_error_flag = 1, 1
+            elif words[0][0] == '.' and words[0][-1] == ':':
+                if words[0][:-1] in code_marks:
+                    self.error_flag, local_error_flag = 1, 1
+                else:
+                    code_marks.append(words[0][:-1])
+            if local_error_flag:
                 self.textEdit_macro.appendHtml(f"<span style='background-color: red;'>{line}</p>")
-                self.error_flag = 1
             else:
                 self.textEdit_macro.appendHtml(f"<span style='background-color: white;'>{line}</p>")
         return not self.error_flag
@@ -242,7 +249,8 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                     self.tableWidget_macro.setItem(row_count, 1, QtWidgets.QTableWidgetItem('-'))
                 try:
                     self.tableWidget_macro.setItem(row_count, 2,
-                                                   QtWidgets.QTableWidgetItem(command.split(', ')[1].upper()))
+                                                   QtWidgets.QTableWidgetItem(command.split(', ')[1].
+                                                                              split(' ')[0].upper()))
                 except IndexError:
                     self.tableWidget_macro.setItem(row_count, 2, QtWidgets.QTableWidgetItem('-'))
                 self.tableWidget_macro.setItem(
@@ -358,7 +366,8 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                 try:
                     self.tableWidget_micro.setItem(row_count, 2,
                                                    QtWidgets.QTableWidgetItem(self.get_operand_type_micro
-                                                                              (command.split(', ')[1].upper())))
+                                                                              (command.split(', ')[1].
+                                                                               split(' ')[0].upper())))
                 except IndexError:
                     self.tableWidget_micro.setItem(row_count, 2, QtWidgets.QTableWidgetItem('-'))
                 current_op = [self.tableWidget_micro.item(row_count, 0),
@@ -479,15 +488,17 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                         for x in range(0, 10):
                             self.tableWidget_micro.item(row_count, x).setBackground(QtGui.QColor(255, 255, 0))
         row_count = self.tableWidget_micro.rowCount()
-        self.tableWidget_micro.insertRow(row_count)
+
         fused_domain_sum, unfused_domain_sum = 0, 0
         for x in range(row_count):
             if self.tableWidget_micro.item(x, 7).text() != '-':
                 unfused_domain_sum += int(self.tableWidget_micro.item(x, 7).text())
             if self.tableWidget_micro.item(x, 8).text() != '-':
                 fused_domain_sum += int(self.tableWidget_micro.item(x, 8).text())
-        self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem(str(unfused_domain_sum)))
-        self.tableWidget_micro.setItem(row_count, 8, QtWidgets.QTableWidgetItem(str(fused_domain_sum)))
+        if unfused_domain_sum != 0 and fused_domain_sum != 0:
+            self.tableWidget_micro.insertRow(row_count)
+            self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem(str(unfused_domain_sum)))
+            self.tableWidget_micro.setItem(row_count, 8, QtWidgets.QTableWidgetItem(str(fused_domain_sum)))
 
     def perform_micro_fusion(self, fusion_settings, current_op):
         if current_op[1].text()[0] != '.' and \

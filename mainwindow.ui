@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1462</width>
-    <height>721</height>
+    <width>1520</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Fusion Simulator</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon.ico</normaloff>icon.ico</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
@@ -394,7 +398,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>269</width>
+                 <width>284</width>
                  <height>350</height>
                 </rect>
                </property>
@@ -553,7 +557,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>269</width>
+                 <width>283</width>
                  <height>896</height>
                 </rect>
                </property>
@@ -849,7 +853,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>563</width>
+                 <width>592</width>
                  <height>246</height>
                 </rect>
                </property>
@@ -981,7 +985,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>565</width>
+               <width>594</width>
                <height>222</height>
               </rect>
              </property>
@@ -1151,8 +1155,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>582</width>
-               <height>268</height>
+               <width>611</width>
+               <height>267</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1230,7 +1234,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>582</width>
+               <width>611</width>
                <height>267</height>
               </rect>
              </property>
@@ -1475,7 +1479,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1462</width>
+     <width>1520</width>
      <height>22</height>
     </rect>
    </property>
