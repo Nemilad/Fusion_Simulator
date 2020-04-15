@@ -2835,7 +2835,7 @@ Code_Templates = {
     'Вариант 6': '.N1:\nnot ecx\njnz .N1\n'
                  '.N2:\ninc word [si]\nja .N2\n'
                  '.N3:\ninc word [si]\njna .N3\n'
-                 '.N4:\nand ax, ax\njgn .N4\n'
+                 '.N4:\nand ax, ax\njng .N4\n'
                  '.N5:\ntest word [mem], eax\njnz .N5',
     'Вариант 7': '.L1:\ndec ecx\ndec eax\njnz .L1\n'
                  '.L2:\nsub ecx, eax\ncmp dword [esi], 0\nje .L2\n'
