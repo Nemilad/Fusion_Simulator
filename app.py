@@ -210,7 +210,9 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
         for line in code.splitlines():
             words = line.split(' ')
             local_error_flag = 0
-            if (words[0] and words[0].upper() not in app_settings.Macro_command_list) and \
+            if words[0] == '':
+                self.error_flag, local_error_flag = 1, 1
+            elif (words[0] and words[0].upper() not in app_settings.Macro_command_list) and \
                     (words[0][0] != '.' and words[0][-1] != ':'):
                 self.error_flag, local_error_flag = 1, 1
             elif words[0][0] == '.' and words[0][-1] == ':':

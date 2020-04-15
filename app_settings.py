@@ -2837,14 +2837,14 @@ Code_Templates = {
                  '.N3:\ninc word [si]\njna .N3\n'
                  '.N4:\nand ax, ax\njgn .N4\n'
                  '.N5:\ntest word [mem], eax\njnz .N5',
-    'Вариант 7': '.L1:\ndec ecx\n dec eax\njnz .L1\n'
+    'Вариант 7': '.L1:\ndec ecx\ndec eax\njnz .L1\n'
                  '.L2:\nsub ecx, eax\ncmp dword [esi], 0\nje .L2\n'
-                 '.L3:\ndec dword [esi]\n dec dword [esi]\njnz .L3\n'
+                 '.L3:\ndec dword [esi]\ndec dword [esi]\njnz .L3\n'
                  '.L4:\nadd eax, ebx\njno .L4\n'
                  '.L5:\nsub word [mem], eax\njge .L5',
-    'Вариант 8': '.P1:\ndec ecx\n dec eax\njnp .P1\n'
+    'Вариант 8': '.P1:\ndec ecx\ndec eax\njnp .P1\n'
                  '.P2:\nadd ecx, eax\ncmp word [si], 0\njnae .P2\n'
-                 '.P3:\ndec dword [esi]\n dec dword [esi]\njnbe .P3\n'
+                 '.P3:\ndec dword [esi]\ndec dword [esi]\njnbe .P3\n'
                  '.P4:\nadd eax, ebx\njp .P4\n'
                  '.P5:\ncmp word [mem], eax\njns .P5',
     'Вариант 9': '.J1:\ninc ecx\njz .J1\n'
@@ -2852,7 +2852,7 @@ Code_Templates = {
                  '.J3:\ntest word [si], eax\njnae .J3\n'
                  '.J4:\nsub ax, bx\njnle .J4\n'
                  '.J5:\ntest word [mem], eax\njnz .J5',
-    'Вариант 10': '.P1:\ndec ecx\n dec eax\njnb .P1\n'
+    'Вариант 10': '.P1:\ndec ecx\ndec eax\njnb .P1\n'
                   '.P2:\nadd ecx, eax\ncmp word [si], 0\njne .P2\n'
                   '.P3:\nxor eax, eax\nje .P3\n'
                   '.P4:\nnot eax\njbe .P4\n',
