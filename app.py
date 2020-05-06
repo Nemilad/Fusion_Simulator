@@ -510,7 +510,7 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                  (current_op[2].text()[:3] != 'RIP' and current_op[1].text()[:3] != 'Imm')) and \
                 (current_op[1].text() == '-' or fusion_settings['Micro_Conditions'][current_op[1].text()[:3]]) and \
                 (current_op[2].text() == '-' or fusion_settings['Micro_Conditions'][current_op[2].text()[:3]]):
-            if fusion_settings['Micro_Pairs']['Read_Modify_Write'] and \
+            if fusion_settings['Micro_Conditions']['Combo'] and \
                     (self.tableWidget_micro.item(current_op[3], 3).text() != '-'
                      and int(self.tableWidget_micro.item(current_op[3], 3).text()) > 0) and \
                     (self.tableWidget_micro.item(current_op[3], 4).text() != '-'
@@ -597,6 +597,7 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
         return result
 
 
+# Launch
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()
 sys.exit(app.exec())

@@ -852,7 +852,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>0</y>
+                 <y>-128</y>
                  <width>592</width>
                  <height>246</height>
                 </rect>
@@ -900,7 +900,7 @@
                 <item>
                  <widget class="QCheckBox" name="checkBox_Reg_RIP">
                   <property name="text">
-                   <string>Регистр + RIP-Память</string>
+                   <string>Регистр + RIP Адрес</string>
                   </property>
                  </widget>
                 </item>
@@ -935,7 +935,7 @@
                 <item>
                  <widget class="QCheckBox" name="checkBox_RIP">
                   <property name="text">
-                   <string>RIP-Память</string>
+                   <string>RIP Адрес</string>
                   </property>
                  </widget>
                 </item>
@@ -1132,7 +1132,7 @@
              </font>
             </property>
             <property name="text">
-             <string>Сливамые пары операций</string>
+             <string>Сливаемые пары операций</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1184,18 +1184,6 @@
                 </property>
                </widget>
               </item>
-              <item>
-               <widget class="QCheckBox" name="checkBox_Read_Modify_Write">
-                <property name="font">
-                 <font>
-                  <pointsize>10</pointsize>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Чтение данных + Изменение данных + Запись данных</string>
-                </property>
-               </widget>
-              </item>
              </layout>
             </widget>
            </widget>
@@ -1239,6 +1227,18 @@
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_10">
+              <item>
+               <widget class="QCheckBox" name="checkBox_micro_Combo">
+                <property name="font">
+                 <font>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Слияние двух типов пар операций</string>
+                </property>
+               </widget>
+              </item>
               <item>
                <widget class="QCheckBox" name="checkBox_micro_Rip_Imm">
                 <property name="text">
@@ -1310,7 +1310,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>RIP</string>
+                 <string>RIP Адрес</string>
                 </property>
                </widget>
               </item>

@@ -3374,10 +3374,10 @@ Template_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 0,
-        'Read_Modify': 0,
-        'Read_Modify_Write': 0
+        'Read_Modify': 0
     },
     'Micro_Conditions': {
+        'Combo': 0,
         'Rip_Imm': 0,
         'Reg': 0,
         'Mem': 0,
@@ -3886,10 +3886,10 @@ Pentium_M_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1,
-        'Read_Modify_Write': 0
+        'Read_Modify': 1
     },
     'Micro_Conditions': {
+        'Combo': 0,
         'Rip_Imm': 0,
         'Reg': 1,
         'Mem': 1,
@@ -4398,10 +4398,10 @@ Core_2_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1,
-        'Read_Modify_Write': 1
+        'Read_Modify': 1
     },
     'Micro_Conditions': {
+        'Combo': 1,
         'Rip_Imm': 0,
         'Reg': 1,
         'Mem': 1,
@@ -4910,10 +4910,10 @@ Nehalem_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1,
-        'Read_Modify_Write': 1
+        'Read_Modify': 1
     },
     'Micro_Conditions': {
+        'Combo': 1,
         'Rip_Imm': 0,
         'Reg': 1,
         'Mem': 1,
@@ -5421,10 +5421,10 @@ Sandy_Bridge_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1,
-        'Read_Modify_Write': 1
+        'Read_Modify': 1
     },
     'Micro_Conditions': {
+        'Combo': 1,
         'Rip_Imm': 0,
         'Reg': 1,
         'Mem': 1,
@@ -5932,10 +5932,10 @@ Ivy_Bridge_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1,
-        'Read_Modify_Write': 1
+        'Read_Modify': 1
     },
     'Micro_Conditions': {
+        'Combo': 1,
         'Rip_Imm': 0,
         'Reg': 1,
         'Mem': 1,
@@ -6443,10 +6443,10 @@ Haswell_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1,
-        'Read_Modify_Write': 1
+        'Read_Modify': 1
     },
     'Micro_Conditions': {
+        'Combo': 1,
         'Rip_Imm': 0,
         'Reg': 1,
         'Mem': 1,
@@ -6954,10 +6954,10 @@ Broadwell_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1,
-        'Read_Modify_Write': 1
+        'Read_Modify': 1
     },
     'Micro_Conditions': {
+        'Combo': 1,
         'Rip_Imm': 0,
         'Reg': 1,
         'Mem': 1,
@@ -7465,10 +7465,10 @@ Skylake_settings = {
     },
     'Micro_Pairs': {
         'Address_Write': 1,
-        'Read_Modify': 1,
-        'Read_Modify_Write': 1
+        'Read_Modify': 1
     },
     'Micro_Conditions': {
+        'Combo': 1,
         'Rip_Imm': 0,
         'Reg': 1,
         'Mem': 1,
