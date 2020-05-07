@@ -220,6 +220,8 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                     self.error_flag, local_error_flag = 1, 1
                 else:
                     code_marks.append(words[0][:-1])
+            if (words[0][0] == 'j' or words[0][0] == 'J') and words[1] not in code_marks:
+                self.error_flag, local_error_flag = 1, 1
             if local_error_flag:
                 self.textEdit_macro.appendHtml(f"<span style='background-color: red;'>{line}</p>")
             else:
@@ -382,112 +384,109 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                     Current_Micro_dict = Micro_Dict[self.comboBox_arch.currentText()]
                 else:
                     Current_Micro_dict = Micro_Dict[self.comboBox_arch_micro.currentText()]
-                if self.tableWidget_macro.item(current_op[3], 3).background() != QtGui.QColor(255, 255, 0):
-                    if op1[0] == '.':
-                        op = 'Mrk'
-                        if op not in Current_Micro_dict[current_op[0].text()]:
-                            Current_Micro_dict = Default_Micro_Dict
-                        if op in Current_Micro_dict[current_op[0].text()]:
-                            self.tableWidget_micro.setItem(row_count, 3, QtWidgets.QTableWidgetItem(
-                                str(Current_Micro_dict[current_op[0].text()][op]['READ'])))
-                            self.tableWidget_micro.setItem(row_count, 4, QtWidgets.QTableWidgetItem(
-                                str(Current_Micro_dict[current_op[0].text()][op]['MODIFY'])))
-                            self.tableWidget_micro.setItem(row_count, 5, QtWidgets.QTableWidgetItem(
-                                str(Current_Micro_dict[current_op[0].text()][op]['ADDRESS'])))
-                            self.tableWidget_micro.setItem(row_count, 6, QtWidgets.QTableWidgetItem(
-                                str(Current_Micro_dict[current_op[0].text()][op]['WRITE'])))
-                            self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem(str(
-                                int(self.tableWidget_micro.item(row_count, 3).text()) +
-                                int(self.tableWidget_micro.item(row_count, 4).text()) +
-                                int(self.tableWidget_micro.item(row_count, 5).text()) +
-                                int(self.tableWidget_micro.item(row_count, 6).text()))))
-                        else:
-                            for x in range(3, 10):
-                                self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
-                    elif op1 != '-' and op2 != '-':
-                        op = (op1 + '_' + op2,
-                              op1 + '_' + op2[:-1],
-                              op1[:-1] + '_' + op2[:-1],
-                              op1 + '_' + op2[:3],
-                              op1[:3] + '_' + op2,
-                              op1[:3] + '_' + op2[:3],
-                              op1[:-1] + '_' + op2)
-                        if not list(set(Current_Micro_dict[current_op[0].text()]) & set(op)):
-                            Current_Micro_dict = Default_Micro_Dict
-                            op = list(set(Current_Micro_dict[current_op[0].text()]) & set(op))
-                        else:
-                            op = list(set(Current_Micro_dict[current_op[0].text()]) & set(op))
-                        if op:
-                            op = op[0]
-                            self.tableWidget_micro.setItem(row_count, 3, QtWidgets.QTableWidgetItem(
-                                str(Current_Micro_dict[current_op[0].text()][op]['READ'])))
-                            self.tableWidget_micro.setItem(row_count, 4, QtWidgets.QTableWidgetItem(
-                                str(Current_Micro_dict[current_op[0].text()][op]['MODIFY'])))
-                            self.tableWidget_micro.setItem(row_count, 5, QtWidgets.QTableWidgetItem(
-                                str(Current_Micro_dict[current_op[0].text()][op]['ADDRESS'])))
-                            self.tableWidget_micro.setItem(row_count, 6, QtWidgets.QTableWidgetItem(
-                                str(Current_Micro_dict[current_op[0].text()][op]['WRITE'])))
-                            self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem(str(
-                                int(self.tableWidget_micro.item(row_count, 3).text()) +
-                                int(self.tableWidget_micro.item(row_count, 4).text()) +
-                                int(self.tableWidget_micro.item(row_count, 5).text()) +
-                                int(self.tableWidget_micro.item(row_count, 6).text()))))
-                        else:
-                            for x in range(3, 10):
-                                self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
-                    elif op1 != '-' and op2 == '-':
-                        op = (op1, op1[:-1], op1[:3])
-                        if not list(set(Current_Micro_dict[current_op[0].text()]) & set(op)):
-                            Current_Micro_dict = Default_Micro_Dict
-                            op = list(set(Current_Micro_dict[current_op[0].text()]) & set(op))
-                        else:
-                            op = list(set(Current_Micro_dict[current_op[0].text()]) & set(op))
-                        if op:
-                            op = op[0]
-                            self.tableWidget_micro.setItem(row_count, 3, QtWidgets.QTableWidgetItem(
-                                str(Current_Micro_dict[current_op[0].text()][op]['READ'])))
-                            self.tableWidget_micro.setItem(row_count, 4, QtWidgets.QTableWidgetItem(
-                                str(Current_Micro_dict[current_op[0].text()][op]['MODIFY'])))
-                            self.tableWidget_micro.setItem(row_count, 5, QtWidgets.QTableWidgetItem(
-                                str(Current_Micro_dict[current_op[0].text()][op]['ADDRESS'])))
-                            self.tableWidget_micro.setItem(row_count, 6, QtWidgets.QTableWidgetItem(
-                                str(Current_Micro_dict[current_op[0].text()][op]['WRITE'])))
-                            self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem(str(
-                                int(self.tableWidget_micro.item(row_count, 3).text()) +
-                                int(self.tableWidget_micro.item(row_count, 4).text()) +
-                                int(self.tableWidget_micro.item(row_count, 5).text()) +
-                                int(self.tableWidget_micro.item(row_count, 6).text()))))
-                        else:
-                            for x in range(3, 10):
-                                self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
+                if op1[0] == '.':
+                    op = 'Mrk'
+                    if op not in Current_Micro_dict[current_op[0].text()]:
+                        Current_Micro_dict = Default_Micro_Dict
+                    if op in Current_Micro_dict[current_op[0].text()]:
+                        self.tableWidget_micro.setItem(row_count, 3, QtWidgets.QTableWidgetItem(
+                            str(Current_Micro_dict[current_op[0].text()][op]['READ'])))
+                        self.tableWidget_micro.setItem(row_count, 4, QtWidgets.QTableWidgetItem(
+                            str(Current_Micro_dict[current_op[0].text()][op]['MODIFY'])))
+                        self.tableWidget_micro.setItem(row_count, 5, QtWidgets.QTableWidgetItem(
+                            str(Current_Micro_dict[current_op[0].text()][op]['ADDRESS'])))
+                        self.tableWidget_micro.setItem(row_count, 6, QtWidgets.QTableWidgetItem(
+                            str(Current_Micro_dict[current_op[0].text()][op]['WRITE'])))
+                        self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem(str(
+                            int(self.tableWidget_micro.item(row_count, 3).text()) +
+                            int(self.tableWidget_micro.item(row_count, 4).text()) +
+                            int(self.tableWidget_micro.item(row_count, 5).text()) +
+                            int(self.tableWidget_micro.item(row_count, 6).text()))))
                     else:
                         for x in range(3, 10):
                             self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
-
-                    if self.checkBox_arch_micro.isChecked():
-                        if self.tableWidget_micro.item(row_count, 7).text() == '1':
-                            self.tableWidget_micro.setItem(row_count, 8, QtWidgets.QTableWidgetItem('1'))
-                            self.tableWidget_micro.setItem(row_count, 9, QtWidgets.QTableWidgetItem('-'))
-                        else:
-                            self.perform_micro_fusion(settings, current_op)
+                elif op1 != '-' and op2 != '-':
+                    op = (op1 + '_' + op2,
+                            op1 + '_' + op2[:-1],
+                            op1[:-1] + '_' + op2[:-1],
+                            op1 + '_' + op2[:3],
+                            op1[:3] + '_' + op2,
+                            op1[:3] + '_' + op2[:3],
+                            op1[:-1] + '_' + op2)
+                    if not list(set(Current_Micro_dict[current_op[0].text()]) & set(op)):
+                        Current_Micro_dict = Default_Micro_Dict
+                        op = list(set(Current_Micro_dict[current_op[0].text()]) & set(op))
                     else:
-                        self.tableWidget_micro.setItem(row_count, 8,  QtWidgets.QTableWidgetItem(
-                            self.tableWidget_micro.item(row_count, 7).text()))
-                        self.tableWidget_micro.setItem(row_count, 9, QtWidgets.QTableWidgetItem('-'))
-                else:
-                    if self.tableWidget_macro.item(current_op[3], 1).text()[0] == '.':
+                        op = list(set(Current_Micro_dict[current_op[0].text()]) & set(op))
+                    if op:
+                        op = op[0]
+                        self.tableWidget_micro.setItem(row_count, 3, QtWidgets.QTableWidgetItem(
+                            str(Current_Micro_dict[current_op[0].text()][op]['READ'])))
+                        self.tableWidget_micro.setItem(row_count, 4, QtWidgets.QTableWidgetItem(
+                            str(Current_Micro_dict[current_op[0].text()][op]['MODIFY'])))
+                        self.tableWidget_micro.setItem(row_count, 5, QtWidgets.QTableWidgetItem(
+                            str(Current_Micro_dict[current_op[0].text()][op]['ADDRESS'])))
+                        self.tableWidget_micro.setItem(row_count, 6, QtWidgets.QTableWidgetItem(
+                            str(Current_Micro_dict[current_op[0].text()][op]['WRITE'])))
+                        self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem(str(
+                            int(self.tableWidget_micro.item(row_count, 3).text()) +
+                            int(self.tableWidget_micro.item(row_count, 4).text()) +
+                            int(self.tableWidget_micro.item(row_count, 5).text()) +
+                            int(self.tableWidget_micro.item(row_count, 6).text()))))
+                    else:
                         for x in range(3, 10):
-                            if x == 4 or x == 7 or x == 8:
-                                self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('1'))
-                            elif x == 9:
-                                self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('Macro fusion'))
-                            else:
-                                self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
+                            self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
+                elif op1 != '-' and op2 == '-':
+                    op = (op1, op1[:-1], op1[:3])
+                    if not list(set(Current_Micro_dict[current_op[0].text()]) & set(op)):
+                        Current_Micro_dict = Default_Micro_Dict
+                        op = list(set(Current_Micro_dict[current_op[0].text()]) & set(op))
+                    else:
+                        op = list(set(Current_Micro_dict[current_op[0].text()]) & set(op))
+                    if op:
+                        op = op[0]
+                        self.tableWidget_micro.setItem(row_count, 3, QtWidgets.QTableWidgetItem(
+                            str(Current_Micro_dict[current_op[0].text()][op]['READ'])))
+                        self.tableWidget_micro.setItem(row_count, 4, QtWidgets.QTableWidgetItem(
+                            str(Current_Micro_dict[current_op[0].text()][op]['MODIFY'])))
+                        self.tableWidget_micro.setItem(row_count, 5, QtWidgets.QTableWidgetItem(
+                            str(Current_Micro_dict[current_op[0].text()][op]['ADDRESS'])))
+                        self.tableWidget_micro.setItem(row_count, 6, QtWidgets.QTableWidgetItem(
+                            str(Current_Micro_dict[current_op[0].text()][op]['WRITE'])))
+                        self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem(str(
+                            int(self.tableWidget_micro.item(row_count, 3).text()) +
+                            int(self.tableWidget_micro.item(row_count, 4).text()) +
+                            int(self.tableWidget_micro.item(row_count, 5).text()) +
+                            int(self.tableWidget_micro.item(row_count, 6).text()))))
+                    else:
+                        for x in range(3, 10):
+                            self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
+                else:
+                    for x in range(3, 10):
+                        self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
+
+                if self.checkBox_arch_micro.isChecked():
+                    if self.tableWidget_micro.item(row_count, 7).text() == '1':
+                        self.tableWidget_micro.setItem(row_count, 8, QtWidgets.QTableWidgetItem('1'))
+                        self.tableWidget_micro.setItem(row_count, 9, QtWidgets.QTableWidgetItem('-'))
+                    else:
+                        self.perform_micro_fusion(settings, current_op)
+                else:
+                    self.tableWidget_micro.setItem(row_count, 8,  QtWidgets.QTableWidgetItem(
+                        self.tableWidget_micro.item(row_count, 7).text()))
+                    self.tableWidget_micro.setItem(row_count, 9, QtWidgets.QTableWidgetItem('-'))
+
+                if self.tableWidget_macro.item(current_op[3], 3).background() == QtGui.QColor(255, 255, 0):
+                    if self.tableWidget_macro.item(current_op[3], 1).text()[0] == '.':
+                        self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem('1'))
+                        self.tableWidget_micro.setItem(row_count, 8, QtWidgets.QTableWidgetItem('1'))
+                        self.tableWidget_micro.setItem(row_count, 9, QtWidgets.QTableWidgetItem('Macro fusion'))
                         for x in range(0, 10):
                             self.tableWidget_micro.item(row_count, x).setBackground(QtGui.QColor(255, 255, 0))
                     else:
-                        for x in range(3, 10):
-                            self.tableWidget_micro.setItem(row_count, x, QtWidgets.QTableWidgetItem('-'))
+                        self.tableWidget_micro.setItem(row_count, 7, QtWidgets.QTableWidgetItem('-'))
+                        self.tableWidget_micro.setItem(row_count, 8, QtWidgets.QTableWidgetItem('-'))
+                        self.tableWidget_micro.setItem(row_count, 9, QtWidgets.QTableWidgetItem('-'))
                         for x in range(0, 10):
                             self.tableWidget_micro.item(row_count, x).setBackground(QtGui.QColor(255, 255, 0))
         row_count = self.tableWidget_micro.rowCount()
