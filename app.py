@@ -216,11 +216,26 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
             else:
                 if words[0] != '':
                     self.error_flag, local_error_flag = 1, 1
-            if len(words) < 2 and (words[1] == '' or ' ' in words[1] or
-                                   words[1].upper() not in app_settings.Macro_command_list):
+            print(len(words))
+            if len(words) < 3:
+                self.error_flag, local_error_flag = 1, 1
+            elif words[1] == '' or ' ' in words[1] or words[1].upper() not in app_settings.Macro_command_list:
                 self.error_flag, local_error_flag = 1, 1
             elif (words[1][0] == 'j' or words[1][0] == 'J') and words[2].upper() not in code_marks:
                 self.error_flag, local_error_flag = 1, 1
+            if not local_error_flag:
+                try:
+                    if ' ' in words[2].split(', ')[0].upper() or \
+                            self.get_operand_type_micro(words[2].split(', ')[0].upper()) == '-':
+                        self.error_flag, local_error_flag = 1, 1
+                except IndexError:
+                    self.error_flag, local_error_flag = 1, 1
+                try:
+                    if ' ' in words[2].split(', ')[1].upper() or \
+                            self.get_operand_type_micro(words[2].split(', ')[1].upper()) == '-':
+                        self.error_flag, local_error_flag = 1, 1
+                except IndexError:
+                    self.error_flag, local_error_flag = self.error_flag, local_error_flag
             if local_error_flag:
                 self.textEdit_macro.setTextBackgroundColor(QtGui.QColor("red"))
                 self.textEdit_macro.append(line)
