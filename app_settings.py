@@ -423,6 +423,56 @@ Macro_micro_dict = {
             'WRITE': 0
         },
     },
+    'IMUL':{
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Reg': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg_Mem': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
     'DIV': {
         'Reg8': {
             'READ': 0,
@@ -459,6 +509,78 @@ Macro_micro_dict = {
             'MODIFY': 4,
             'ADDRESS': 0,
             'WRITE': 0
+        },
+    },
+    'IDIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 5,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 1,
+            'MODIFY': 5,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'PUSH': {
+        'Reg': {
+            'READ': 0,
+            'MODIFY': 0,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Imm':{
+            'READ': 0,
+            'MODIFY': 0,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+        'Mem': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 1,
+            'WRITE': 1
+        },
+    },
+    'POP': {
+        'Reg': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem': {
+            'READ': 1,
+            'MODIFY': 0,
+            'ADDRESS': 1,
+            'WRITE': 1
         },
     },
     'JA': {
@@ -788,6 +910,56 @@ Macro_micro_dict_Core_2 = {
             'WRITE': 0
         },
     },
+    'IMUL': {
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Reg16': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Reg32': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Reg64': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16_Mem16': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32_Mem32': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64_Mem64': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
     'DIV': {
         'Reg8': {
             'READ': 0,
@@ -837,6 +1009,62 @@ Macro_micro_dict_Core_2 = {
             'ADDRESS': 0,
             'WRITE': 0
         },
+    },
+    'IDIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 7,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 7,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 56,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 1,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 7,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32': {
+            'READ': 1,
+            'MODIFY': 6,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 55,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'PUSH': {
+
+    },
+    'POP': {
+
     },
     'JA': {
 
@@ -1080,40 +1308,60 @@ Macro_micro_dict_Nehalem = {
     'DIV': {
         'Reg8': {
             'READ': 0,
-            'MODIFY': 5,
+            'MODIFY': 4,
             'ADDRESS': 0,
             'WRITE': 0
         },
         'Reg16': {
             'READ': 0,
-            'MODIFY': 4,
+            'MODIFY': 6,
             'ADDRESS': 0,
             'WRITE': 0
         },
         'Reg32': {
             'READ': 0,
-            'MODIFY': 4,
+            'MODIFY': 6,
             'ADDRESS': 0,
             'WRITE': 0
         },
-        'Mem8': {
+        'Reg64': {
             'READ': 0,
-            'MODIFY': 5,
+            'MODIFY': 40,
             'ADDRESS': 0,
             'WRITE': 0
         },
-        'Mem16': {
-            'READ': 1,
+    },
+    'IDIV': {
+        'Reg8': {
+            'READ': 0,
             'MODIFY': 4,
             'ADDRESS': 0,
             'WRITE': 0
         },
-        'Mem32': {
-            'READ': 1,
-            'MODIFY': 4,
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 8,
             'ADDRESS': 0,
             'WRITE': 0
         },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 7,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 60,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'PUSH': {
+
+    },
+    'POP': {
+
     },
     'JA': {
 
@@ -1293,7 +1541,56 @@ Macro_micro_dict_Sandy_Bridge = {
 
     },
     'MUL': {
-
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem8': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'IMUL': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
         'Reg16': {
             'READ': 0,
             'MODIFY': 4,
@@ -1356,6 +1653,38 @@ Macro_micro_dict_Sandy_Bridge = {
             'ADDRESS': 0,
             'WRITE': 0
         },
+    },
+    'IDIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 9,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 59,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'PUSH': {
+
+    },
+    'POP': {
+
     },
     'JA': {
 
@@ -1642,21 +1971,35 @@ Macro_micro_dict_Ivy_Bridge = {
             'ADDRESS': 0,
             'WRITE': 0
         },
-        'Reg32': {
-            'READ': 0,
-            'MODIFY': 3,
-            'ADDRESS': 0,
-            'WRITE': 0
-        },
         'Reg64': {
             'READ': 0,
             'MODIFY': 2,
             'ADDRESS': 0,
             'WRITE': 0
         },
-        'Mem8': {
+        'Mem32': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
             'READ': 1,
             'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'IMUL': {
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 2,
             'ADDRESS': 0,
             'WRITE': 0
         },
@@ -1698,6 +2041,38 @@ Macro_micro_dict_Ivy_Bridge = {
             'ADDRESS': 0,
             'WRITE': 0
         },
+    },
+    'IDIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 11,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 11,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 9,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 59,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'PUSH': {
+
+    },
+    'POP': {
+
     },
     'JA': {
 
@@ -1985,6 +2360,32 @@ Macro_micro_dict_Haswell = {
             'WRITE': 0
         },
     },
+    'IMUL': {
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
     'DIV': {
         'Reg8': {
             'READ': 0,
@@ -2010,6 +2411,38 @@ Macro_micro_dict_Haswell = {
             'ADDRESS': 0,
             'WRITE': 0
         },
+    },
+    'IDIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 9,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 9,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 59,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'PUSH': {
+
+    },
+    'POP': {
+
     },
     'JA': {
 
@@ -2333,6 +2766,32 @@ Macro_micro_dict_Broadwell = {
             'WRITE': 0
         },
     },
+    'IMUL': {
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
     'DIV': {
         'Reg8': {
             'READ': 0,
@@ -2358,6 +2817,38 @@ Macro_micro_dict_Broadwell = {
             'ADDRESS': 0,
             'WRITE': 0
         },
+    },
+    'IDIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 9,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 9,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 59,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'PUSH': {
+
+    },
+    'POP': {
+
     },
     'JA': {
 
@@ -2681,6 +3172,32 @@ Macro_micro_dict_Skylake = {
             'WRITE': 0
         },
     },
+    'IMUL': {
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16': {
+            'READ': 1,
+            'MODIFY': 4,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
     'DIV': {
         'Reg8': {
             'READ': 0,
@@ -2706,6 +3223,38 @@ Macro_micro_dict_Skylake = {
             'ADDRESS': 0,
             'WRITE': 0
         },
+    },
+    'IDIV': {
+        'Reg8': {
+            'READ': 0,
+            'MODIFY': 11,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32': {
+            'READ': 0,
+            'MODIFY': 10,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 57,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
+    'PUSH': {
+
+    },
+    'POP': {
+
     },
     'JA': {
 
