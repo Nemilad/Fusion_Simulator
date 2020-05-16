@@ -590,14 +590,14 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
         elif '[' in op:
             if 'BYTE' in op:
                 result += 'Mem8'
+            elif '*' in op:
+                result += 'Mem128'
             elif 'QWORD' in op:
                 result += 'Mem64'
             elif 'DWORD' in op:
                 result += 'Mem32'
             elif 'WORD' in op:
                 result += 'Mem16'
-            elif '*' in op:
-                result += 'Mem128'
             else:
                 result += 'Mem'
         elif 'RIP' in op:
