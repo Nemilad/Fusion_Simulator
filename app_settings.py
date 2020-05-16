@@ -1,5 +1,5 @@
-Macro_command_list = ('ADD', 'SUB', 'INC', 'DEC', 'ADC', 'SBB', 'CMP', 'TEST', 'AND', 'OR', 'XOR', 'NOT', 'NEG',
-                      'JMP', 'MOV', 'MUL', 'DIV', 'JA', 'JNA', 'JAE', 'JNAE', 'JB', 'JNB', 'JBE', 'JNBE', 'JC', 'JNC',
+Macro_command_list = ('ADD', 'SUB', 'INC', 'DEC', 'ADC', 'SBB', 'CMP', 'CALL', 'TEST', 'AND', 'OR', 'XOR', 'NOT', 'NEG',
+                      'JMP', 'MOV', 'MUL', 'IMUL', 'DIV', 'IDIV', 'PUSH', 'POP', 'JA', 'JNA', 'JAE', 'JNAE', 'JB', 'JNB', 'JBE', 'JNBE', 'JC', 'JNC',
                       'JE', 'JNE', 'JG', 'JNG', 'JGE', 'JNGE', 'JL', 'JNL', 'JLE', 'JNLE', 'JS', 'JNS', 'JO', 'JNO',
                       'JP', 'JNP', 'JPO', 'JPE', 'JZ', 'JNZ', 'JCXZ', 'JECXZ', 'JRCXZ', 'LOOP')
 
