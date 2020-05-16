@@ -216,7 +216,6 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
             else:
                 if words[0] != '':
                     self.error_flag, local_error_flag = 1, 1
-            print(len(words))
             if len(words) < 3 and not(len(words) == 1 and words[0] != '' and words[0][-1] == ':'):
                 self.error_flag, local_error_flag = 1, 1
             if len(words) > 2 and not local_error_flag:
@@ -225,7 +224,7 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                     self.error_flag, local_error_flag = 1, 1
                 elif (words[1][0] == 'j' or words[1][0] == 'J') and words[2].upper() not in code_marks:
                     self.error_flag, local_error_flag = 1, 1
-            if len(words) > 2 and not local_error_flag:
+            if len(words) > 2 and words[1][0] != 'j' and words[1][0] != 'J' and not local_error_flag:
                 try:
                     if ' ' in words[2].split(', ')[0].upper() or ',' in words[2].split(', ')[0].upper() or \
                             self.get_operand_type_micro(words[2].split(', ')[0].upper()) == '-':
@@ -591,12 +590,12 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
         elif '[' in op:
             if 'BYTE' in op:
                 result += 'Mem8'
-            elif 'WORD' in op:
-                result += 'Mem16'
-            elif 'DWORD' in op:
-                result += 'Mem32'
             elif 'QWORD' in op:
                 result += 'Mem64'
+            elif 'DWORD' in op:
+                result += 'Mem32'
+            elif 'WORD' in op:
+                result += 'Mem16'
             elif '*' in op:
                 result += 'Mem128'
             else:
