@@ -1,15 +1,15 @@
-Macro_command_list = ('ADD', 'SUB', 'INC', 'DEC', 'ADC', 'SBB', 'CMP', 'CALL', 'TEST', 'AND', 'OR', 'XOR', 'NOT', 'NEG',
-                      'JMP', 'MOV', 'MUL', 'IMUL', 'DIV', 'IDIV', 'PUSH', 'POP', 'JA', 'JNA', 'JAE', 'JNAE', 'JB', 'JNB', 'JBE', 'JNBE', 'JC', 'JNC',
-                      'JE', 'JNE', 'JG', 'JNG', 'JGE', 'JNGE', 'JL', 'JNL', 'JLE', 'JNLE', 'JS', 'JNS', 'JO', 'JNO',
-                      'JP', 'JNP', 'JPO', 'JPE', 'JZ', 'JNZ', 'JCXZ', 'JECXZ', 'JRCXZ', 'LOOP')
+Macro_command_list = ('ADD', 'SUB', 'INC', 'DEC', 'ADC', 'SBB', 'CMP', 'TEST', 'AND', 'OR', 'XOR', 'NOT', 'NEG',
+                      'JMP', 'MOV', 'MUL', 'IMUL', 'DIV', 'IDIV', 'PUSH', 'POP', 'JA', 'JNA', 'JAE', 'JNAE', 'JB',
+                      'JNB', 'JBE', 'JNBE', 'JC', 'JNC', 'JE', 'JNE', 'JG', 'JNG', 'JGE', 'JNGE', 'JL', 'JNL', 'JLE',
+                      'JNLE', 'JS', 'JNS', 'JO', 'JNO', 'JP', 'JNP', 'JPO', 'JPE', 'JZ', 'JNZ', 'JCXZ', 'JECXZ',
+                      'JRCXZ', 'LOOP')
 
-Code_Templates = {
-    'Вариант 1': '\txor\trcx, rcx\n'
-                 '\txor\teax, eax\n'
-                 'loop:\tadd\teax, qword[rdx+4*rcx]\n'
-                 '\tadd\trcx, 1\n'
-                 '\tjnz\tloop',
-    'Вариант 15': ''
+Register_dict = {
+    '64_bit': ('RAX', 'RCX', 'RDX', 'RBX', 'RSP', 'RBP', 'RSI', 'RDI'),
+    '32_bit': ('EAX', 'ECX', 'EDX', 'EBX', 'ESP', 'EBP', 'ESI', 'EDI'),
+    '16_bit': ('AX', 'CX', 'DX', 'BX', 'SP', 'BP', 'SI', 'DI'),
+    '8_bit_h': ('AH', 'BH', 'CH', 'DH'),
+    '8_bit_l': ('AL', 'BL', 'CL', 'DL', 'SPL', 'BPL', 'SIL', 'DIL')
 }
 
 Macro_micro_dict = {
@@ -3363,14 +3363,6 @@ Macro_micro_dict_Skylake = {
             'WRITE': 0
         }
     }
-}
-
-Register_dict = {
-    '64_bit': ('RAX', 'RCX', 'RDX', 'RBX', 'RSP', 'RBP', 'RSI', 'RDI'),
-    '32_bit': ('EAX', 'ECX', 'EDX', 'EBX', 'ESP', 'EBP', 'ESI', 'EDI'),
-    '16_bit': ('AX', 'CX', 'DX', 'BX', 'SP', 'BP', 'SI', 'DI'),
-    '8_bit_h': ('AH', 'BH', 'CH', 'DH'),
-    '8_bit_l': ('AL', 'BL', 'CL', 'DL', 'SPL', 'BPL', 'SIL', 'DIL')
 }
 
 Template_settings = {

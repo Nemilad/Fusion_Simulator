@@ -1,0 +1,372 @@
+a1:	add	rax, qword[mem1]
+	mov	rbx, qword[mem2]
+	push	rax
+	cmp	rax, rbx
+	je	a2
+	or	ax, cx
+	ja	a1
+a2:	pop	rax
+	xor	dword[mem3], ebx
+	adc	eax, dword[mem3]
+	jc	a3
+	neg	cx
+a3:	imul	rbx, qword[mem2]
+	sub	ax, 3
+	jz	a3
+	mov	ah, byte[mem6]
+	and	dx, ax
+	sbb	qword[mem1], rcx
+	test	ax, 1
+	jc	a4
+	cmp	dx, 2
+	jg	a1
+a4:	mov	dword[mem4], eax
+	pop	dword[mem4]
+
+	mov	eax, edx
+	mov	ebx, dword[mem3]
+	div	ebx
+	test	ebx, dword[mem3]
+	jp	b1
+b1:	sub	ax, 5
+	jc	b2
+	push	dword[mem2]
+b2:	xor	bx, word[mem1]
+	idiv	edx
+	inc	rax	
+	jl	b4
+b3:	add	rdx, rax
+	dec	qword[mem4]
+	adc	qword[mem4], rdx
+	js	b3
+	or	qword[mem4], rax
+	neg	dx
+	dec	ebx
+	jnz	b4
+	sub	ebx, 16
+	jnb	b4
+b4:	not	ax
+	mov	ax, dx
+
+	xor	ebx, 64
+c1:	add	rax, qword[mem1]
+	not	rax
+c2:	add	rcx, qword[mem1]
+	jae	c2
+	sbb	rcx, rax
+	adc	ecx, dword[mem2]
+	jo	c1
+	or	ecx, dword[mem2]
+	mul	ecx
+	cmp	ax, dx
+	jnbe	c3
+	not	dx
+c3:	sub	ax, 5
+	js	c2
+	and	ecx, dword[mem2]
+	inc	byte[mem3]
+	jnae	c4
+	sbb	word[mem4], dx
+	jnp	c3
+	xor	rax, rcx
+c4:	push	ax
+
+d1:	dec	eax
+	add	ebx, dword[mem1]
+	pop	word[mem2]
+	inc	rbx
+	jnle	d1
+d2:	xor	eax, dword[mem1]
+	adc	ebx, eax
+	neg	dword[mem1]
+d3:	sub	dword[mem1], 5
+	jge	d2
+	mul	rbx
+	push	1
+	not	word[mem2]
+	and	word[mem2], ax
+	jna	d4
+	mov	dx, word[mem2]
+	mov	eax, dword[mem1]
+	or	eax, ebx
+	add	dx, 16
+	jns	d1
+d4:	dec	word[mem2]
+	jnbe	d3
+	imul	eax
+	sbb	eax, dword[mem1]
+
+	inc	ax
+	sub	dx, word[mem2]
+	mov	rax, qword[mem3]
+	sub	rax, 16
+	jc	e2
+e1:	imul	ax, dx
+	push	dword[mem1]
+	mov	ax, 5
+	adc	eax, dword[mem1]
+e2:	pop	word[mem2]
+	inc	dx
+	jp	e1
+	neg	qword[mem3]
+	div	qword[mem3]
+	cmp	edx, dword[mem1]
+	jpo	e4
+	xor	edx, 8
+e3:	add	qword[mem3], 32
+	add	rax, 32
+	jnb	e2
+	test	qword[mem3], rax
+	jz	e3
+e4:	pop	rax
+	not	dx
+
+f1:	add	bx, 16
+	add	cx, word[mem3]
+	mov	rdx, qword[mem1]
+	test	bx, cx
+	js	f2
+	or	qword[mem1], cx
+	not	qword[mem1]
+f2:	sub	eax, dword[mem4]
+	inc	edx
+	jng	f1
+	push	edx
+f3:	mov	rbx, 64
+	mov	rax, qword[mem2]
+	xor	rbx, rax
+	pop	qword[mem2]
+	add	rax, 5
+	jno	f4
+	not	dword[mem4]
+	inc	eax
+	ja	f3
+	sub	edx, 32
+	jpe	f1
+f4:	mov	dword[mem4], 5
+	idiv	dword[mem4]
+
+	mov	rdx, 64
+	inc	rax
+	push	dword[mem1]
+	sbb	rax, rdx
+	jbe	g1
+	pop	rax
+	neg	word[mem3]
+	mul	word[mem3]
+	cmp	edx, ebx
+	jna	g4
+g1:	div	dx
+g2:	sub	rax, 16
+	and	dx, word[mem2]
+g3:	not	dx
+	add	ax, 8
+	jnz	g2
+	xor	edx, dword[mem1]
+	push	ax
+	dec	dx
+	je	g4
+	test	rdx, qword[mem5]
+	jng	g3
+	or	qword[mem5], 5
+g4:	mov	ax, dword[mem1]
+
+	pop	dword[mem3]
+	mov	ecx, dword[mem4]
+h1:	add	eax, ecx
+	sub	eax, 16
+	jnp	h2
+	or	qword[mem1], 2
+	adc	word[mem5], 3
+	mov	rbx, qword[mem2]
+h2:	add	ax, word[mem6]
+	imul	ax, word[mem5]
+	sbb	rbx, qword[mem1]
+	jle	h1
+	neg	rbx
+	sub	dx, word[mem5]
+	jc	h4
+	idiv	dword[mem3]
+	not	dword[mem4]
+	or	ebx, dword[mem4]
+h3:	inc	ebx
+	jnp	h2
+	cmp	ax, ebx
+	jns	h3
+	neg	ax
+h4:	dec	ebx
+
+	mov	dx, 18
+i1:	imul	dx
+i2:	sub	eax, dword[mem1]
+i3:	add	bx, dx
+	jna	i4
+	xor	qword[mem2], 54
+	push	word[mem3]
+	and	word[mem3], dx
+	mov	rcx, qword[mem2]
+	or	rcx, bx
+	je	i2
+	pop	dword[mem1]
+	add	rcx, bx
+	cmp	bx, 5
+	jno	i1
+	sbb	dword[mem6], rcx
+	mov	eax, 15
+	not	dword[mem5]
+	test	eax, dword[mem4]
+	jp	i3
+	dec	rcx
+	jb	i3
+i4:	mul	dx
+	xor	dword[mem6], dx
+
+	push	byte[mem5]
+j1:	add	eax, dword[mem1]
+	mov	rbx, 12
+j2:	add	dx, 4
+	jpo	j3
+	mov	dword[mem2], dx
+	sub	dx, word[mem4]
+	not	byte[mem5]
+	sub	rbx, qword[mem3]
+	pop	word[mem4]
+	mov	dword[mem2], eax
+	sbb	word[mem4], dx
+	js	j1
+j3:	mul	rbx
+	inc	dword[mem2]
+	jnbe	j4
+	or	qword[mem3], 16
+	dec	ecx
+	and	eax, ecx
+	jns	j3
+j4:	dec	rbx
+	jnz	j2
+	push	dword[mem1]
+	inc	dword[mem2]
+
+	mov	rdx, qword[mem2]
+k1:	inc	dx
+	push	dword[mem4]
+	add	eax, dword[mem4]
+	jg	k4
+	or	dx, word[mem1]
+k2:	div	rdx
+	sbb	byte[mem5], 6
+	adc	qword[mem2], rdx
+	jnp	k3
+	not	rdx
+k3:	sub	eax, 16
+	mov	bx, 5
+	xor	dx, bx
+	jne	k1
+	inc	eax
+	jz	k2
+	and	dword[mem4], eax
+	dec	rdx
+	ja	k4
+	sub	bx, dx
+	jnc	k3
+	test	dword[mem4], dword[mem3]
+k4:	dec	dword[mem3]
+
+l1:	inc	eax
+	add	cx, word[mem2]
+	mov	dword[mem3], eax
+	dec	rbx
+	jge	l2
+	sub	rbx, 16
+	neg	eax
+l2:	inc	word[mem2]
+	mov	dx, word[mem2]
+	and	cx, dx
+	jle	l1
+l3:	add	qword[mem1], rbx
+	mov	word[mem2], 15
+	or	eax, dword[mem3]
+	jna	l4
+	pop	qword[mem1]
+	not	eax
+l4:	dec	word[mem2]
+	cmp	word[mem2], cx
+	jc	l2
+	test	rbx, 5
+	jnb	l3
+	imul	eax
+	div	dx
+
+m1:	add	ebx, 53
+	mov	ax, word[mem3]
+	mov	rdx, 15
+	sbb	rdx, qword[mem1]
+	jb	m2
+	neg	rdx
+	mul	word[mem4]
+m2:	inc	dword[mem2]
+	xor	dword[mem2], ebx
+	sbb	ax, word[mem4]
+	jc	m4
+m3:	sub	qword[mem1], 65
+	imul	rdx, qword[mem5]
+	sub	word[mem4], 6
+m4:	inc	cx
+	jnp	m1
+	and	ax, word[mem3]
+	pop	word[mem3]
+	test	cx, word[mem5]
+	jne	m3
+	add	ebx, dword[mem6]
+	jna	m4
+	push	qword[mem1]
+	pop	ax
+
+	add	dx, 23
+	imul	qword[mem1]
+	mov	rax, qword[mem1]
+	inc	ebx
+	jnae	n2
+	mov	ax, word[mem2]
+n1:	idiv	ax
+	pop	word[mem2]
+	not	ebx
+	and	ax, word[mem4]
+	jno	n4
+	push	ax
+n2:	sub	rdx, 5
+	xor	rdx, qword[mem3]
+	jnbe	n1
+	cmp	ax, 1
+	jnb	n3
+	or	rax, qword[mem5]
+	test	rax, qword[mem1]
+	jnl	n2
+n3:	add	ebx, 16
+	jc	n1
+n4:	and	ebx, dword[mem7]
+	sbb	rax, qword[mem1]
+
+	add	rax, 164
+o1:	add	dx, 5
+	mov	ebx, dword[mem2]
+	sub	rcx, rax
+	jpe	o2
+	test	rcx, qword[mem3]
+	div	rax
+	push	dword[mem2]
+o2:	inc	ebx
+	jnb	o1
+	mov	ebx, 55
+	imul	rax
+	dec	dx
+	idiv	dword[mem5]
+o3:	add	ebx, 54
+	jns	o4
+	test	ebx, dword[mem5]
+	xor	dx, word[mem4]
+	cmp	rax, rcx
+	jz	o3
+o4:	dec	ebx
+	jna	o1
+	pop	rax
+	adc	ebx, dword[mem5]

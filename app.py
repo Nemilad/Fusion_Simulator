@@ -1,5 +1,8 @@
 import copy
+import os
 import sys
+
+from PyQt5.QtWidgets import QFileDialog
 from PyQt5.uic.uiparser import QtWidgets
 from mainwindow import Ui_MainWindow
 import app_settings
@@ -29,6 +32,8 @@ Micro_Dict = {
     'Skylake': app_settings.Macro_micro_dict_Skylake
 }
 
+Code_Dict = {}
+
 
 class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
     current_radio = 'none'
@@ -55,8 +60,7 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
         for box in self.scrollArea_micro_conditions.findChildren(QtWidgets.QCheckBox):
             box.stateChanged.connect(self.micro_conditions_change_state)
         # ____Macro_tab_init____
-        for template in app_settings.Code_Templates.keys():
-            self.comboBox_macro_template.addItem(template)
+        self.pushButton_macro_import.clicked.connect(self.import_code)
         self.pushButton_simulate.clicked.connect(self.simulate)
         self.textEdit_macro.enterEvent = self.clear_color
         self.set_enabled_second_pair(0)
@@ -195,12 +199,31 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
 
     # ____Macro tab functions____
 
+    def import_code(self):
+        filename = QFileDialog.getOpenFileName(self, 'Импорт вариантов кода', None, 'Текстовый файл (*.txt)')[0]
+        if os.path.isfile(str(filename)):
+            file = open(filename, 'r')
+            code = ''
+            Code_Dict.clear()
+            self.comboBox_macro_template.clear()
+            self.comboBox_macro_template.addItem('')
+            for line in file:
+                if line == '\n':
+                    Code_Dict['Вариант ' + str(self.comboBox_macro_template.count())] = code
+                    self.comboBox_macro_template.addItem('Вариант ' + str(self.comboBox_macro_template.count()))
+                    code = ''
+                else:
+                    code += line
+            Code_Dict['Вариант ' + str(self.comboBox_macro_template.count())] = code
+            self.comboBox_macro_template.addItem('Вариант ' + str(self.comboBox_macro_template.count()))
+            file.close()
+
     def template_changed(self):
         sender = self.sender()
         if sender.currentText() != '':
             self.textEdit_macro.setReadOnly(1)
             self.textEdit_macro.clear()
-            self.textEdit_macro.setPlainText(app_settings.Code_Templates[sender.currentText()])
+            self.textEdit_macro.setPlainText(Code_Dict[sender.currentText()])
         else:
             self.textEdit_macro.setReadOnly(0)
 
@@ -222,7 +245,7 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                 if words[1] == '' or ' ' in words[1] or ',' in words[1] or \
                         words[1].upper() not in app_settings.Macro_command_list:
                     self.error_flag, local_error_flag = 1, 1
-                elif (words[1][0] == 'j' or words[1][0] == 'J') and words[2].upper() not in code_marks:
+                elif (words[1][0] == 'j' or words[1][0] == 'J') and (words[2].upper() + ':\t') not in code.upper():
                     self.error_flag, local_error_flag = 1, 1
             if len(words) > 2 and words[1][0] != 'j' and words[1][0] != 'J' and not local_error_flag:
                 try:

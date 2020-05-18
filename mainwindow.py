@@ -677,6 +677,9 @@ class Ui_MainWindow(object):
         self.comboBox_macro_template.setItemText(0, "")
         self.verticalLayout_4.addWidget(self.comboBox_macro_template)
         self.horizontalLayout_3.addLayout(self.verticalLayout_4)
+        self.pushButton_macro_import = QtWidgets.QPushButton(self.macro)
+        self.pushButton_macro_import.setObjectName("pushButton_macro_import")
+        self.horizontalLayout_3.addWidget(self.pushButton_macro_import)
         self.verticalLayout_5 = QtWidgets.QVBoxLayout()
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.horizontalLayout_3.addLayout(self.verticalLayout_5)
@@ -709,7 +712,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -824,6 +827,7 @@ class Ui_MainWindow(object):
         self.checkBox_micro_Imm.setText(_translate("MainWindow", "Непосредственные операнды"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.settings), _translate("MainWindow", "Параметры"))
         self.label_macro_template.setText(_translate("MainWindow", "Вариант готового программного кода"))
+        self.pushButton_macro_import.setText(_translate("MainWindow", "Импорт вариантов"))
         self.pushButton_simulate.setText(_translate("MainWindow", "Моделировать"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.macro), _translate("MainWindow", "Макро уровень"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.micro), _translate("MainWindow", "Микро уровень"))
