@@ -3849,8 +3849,6 @@ Template_settings = {
         'Reg_RIP': 0
     },
     'Macro_Conditions': {
-        '16_Bit_Border_Start': 0,
-        '16_Bit_Border_Cross': 0,
         'Two_Pairs': 0,
         'Transfer': 0,
         '16_Bit_Mode': 0,
@@ -4361,8 +4359,6 @@ Pentium_M_settings = {
         'Reg_RIP': 0
     },
     'Macro_Conditions': {
-        '16_Bit_Border_Start': 0,
-        '16_Bit_Border_Cross': 0,
         'Two_Pairs': 0,
         'Transfer': 0,
         '16_Bit_Mode': 0,
@@ -4873,8 +4869,6 @@ Core_2_settings = {
         'Reg_RIP': 0,
     },
     'Macro_Conditions': {
-        '16_Bit_Border_Start': 0,
-        '16_Bit_Border_Cross': 0,
         'Two_Pairs': 0,
         'Transfer': 1,
         '16_Bit_Mode': 1,
@@ -5385,8 +5379,6 @@ Nehalem_settings = {
         'Reg_RIP': 0,
     },
     'Macro_Conditions': {
-        '16_Bit_Border_Start': 0,
-        '16_Bit_Border_Cross': 0,
         'Two_Pairs': 0,
         'Transfer': 1,
         '16_Bit_Mode': 1,
@@ -5896,8 +5888,6 @@ Sandy_Bridge_settings = {
         'Reg_RIP': 0,
     },
     'Macro_Conditions': {
-        '16_Bit_Border_Start': 0,
-        '16_Bit_Border_Cross': 0,
         'Two_Pairs': 0,
         'Transfer': 1,
         '16_Bit_Mode': 1,
@@ -6407,8 +6397,6 @@ Ivy_Bridge_settings = {
         'Reg_RIP': 0,
     },
     'Macro_Conditions': {
-        '16_Bit_Border_Start': 0,
-        '16_Bit_Border_Cross': 1,
         'Two_Pairs': 0,
         'Transfer': 1,
         '16_Bit_Mode': 1,
@@ -6918,8 +6906,6 @@ Haswell_settings = {
         'Reg_RIP': 0,
     },
     'Macro_Conditions': {
-        '16_Bit_Border_Start': 0,
-        '16_Bit_Border_Cross': 1,
         'Two_Pairs': 1,
         'Transfer': 1,
         '16_Bit_Mode': 1,
@@ -7429,8 +7415,6 @@ Broadwell_settings = {
         'Reg_RIP': 0,
     },
     'Macro_Conditions': {
-        '16_Bit_Border_Start': 0,
-        '16_Bit_Border_Cross': 1,
         'Two_Pairs': 1,
         'Transfer': 1,
         '16_Bit_Mode': 1,
@@ -7940,8 +7924,6 @@ Skylake_settings = {
         'Reg_RIP': 0,
     },
     'Macro_Conditions': {
-        '16_Bit_Border_Start': 0,
-        '16_Bit_Border_Cross': 1,
         'Two_Pairs': 1,
         'Transfer': 1,
         '16_Bit_Mode': 1,

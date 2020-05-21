@@ -39,10 +39,12 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
     current_radio = 'none'
     error_flag = 0
     macro_tact_shift = 0
+    current_language = 'ru'
 
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
         self.setupUi(self)
+        self.pushButton_translate.clicked.connect(self.translate)
         # ____Settings_tab_init____
         self.comboBox_arch.currentTextChanged.connect(self.arch_changed)
         for radio in self.scrollArea_macro_first_pair.findChildren(QtWidgets.QRadioButton):
@@ -77,9 +79,127 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.show()
 
+    def translate(self):
+        if self.current_language == 'ru':
+            self.current_language = 'en'
+        else:
+            self.current_language = 'ru'
+
+        self.comboBox_macro_template.clear()
+        self.comboBox_macro_template.addItem('')
+
+        if self.current_language == 'ru':
+            self.tableWidget_macro.setHorizontalHeaderLabels(('Макро-операция', 'Операнд 1', ' Операнд 2', 'Такт'))
+            self.tableWidget_micro.setHorizontalHeaderLabels(('Макро-операция', 'Операнд 1', ' Операнд 2',
+                                                              'READ', 'MODIFY', 'ADDRESS', 'WRITE',
+                                                              'Unfused domain', 'Fused domain', 'Тип'))
+            self.label_arch_settings.setText('Настройки архитектуры')
+            self.label_arch_processor.setText('Архитектура процессора')
+            self.checkBox_arch_macro.setText('Макро слияние')
+            self.checkBox_arch_micro.setText('Микро слияние')
+            self.label_user_arch.setText('Настройки своей архитектуры')
+            self.label_user_micro.setText('Микро-операции из архитектуры')
+            self.label_macro_fusion_settings.setText('Настройки слияния макро-операций')
+            self.label_macro_pairs_settings.setText('Сливаемые пары операций')
+            self.label_macro_first_pair.setText('Первая операция')
+            self.label_macro_second_pair.setText('Вторая операция')
+            self.label_macro_first_pair_operands.setText('Допустимые операнды первой операции')
+            self.checkBox_Reg_Reg.setText('Регистр + Регистр')
+            self.checkBox_Reg_Imm.setText('Регистр + Непосредственный операнд')
+            self.checkBox_Reg_Mem.setText('Регистр + Память')
+            self.checkBox_Reg_RIP.setText('Регистр + RIP Адрес')
+            self.checkBox_Mem_Imm.setText('Память + Непосредственный операнд')
+            self.checkBox_Mem_Reg.setText('Память + Регистр')
+            self.checkBox_Reg.setText('Регистр')
+            self.checkBox_Mem.setText('Память')
+            self.checkBox_RIP.setText('RIP Адрес')
+            self.label_macro_conditions.setText('Условия')
+            self.checkBox_Two_Pairs.setText('Две пары в такт')
+            self.checkBox_Transfer.setText(
+                'Перенос первой инструкции на следующий такт при попадании на последний декодер')
+            self.label_macro_mode.setText('Режимы слияния')
+            self.checkBox_16_Bit_Mode.setText('16 бит')
+            self.checkBox_32_Bit_Mode.setText('32 бит')
+            self.checkBox_64_Bit_Mode.setText('64 бит')
+            self.label_micro_fusion_settings.setText('Настройки слияния микро-операций')
+            self.label_micro_pairs_settings.setText('Сливаемые пары операций')
+            self.checkBox_Address_Write.setText('Вычисление адреса + Запись данных')
+            self.checkBox_Read_Modify.setText('Чтение данных + Изменение данных')
+            self.label_micro_conditions.setText('Условия')
+            self.checkBox_micro_Combo.setText('Слияние двух типов пар операций')
+            self.checkBox_micro_Rip_Imm.setText('RIP и непосредственный операнд в одной иструкции')
+            self.label_micro_operated_registers.setText('Оперируемые регистры и операнды')
+            self.checkBox_micro_Reg.setText('Регистры')
+            self.checkBox_micro_Mem.setText('Память')
+            self.checkBox_micro_Mmx.setText('MMX')
+            self.checkBox_micro_Xmm.setText('XMM')
+            self.checkBox_micro_Rip.setText('RIP Адрес')
+            self.checkBox_micro_Imm.setText('Непосредственные операнды')
+            self.tabWidget.setTabText(0, 'Параметры')
+            self.tabWidget.setTabText(1, 'Макро уровень')
+            self.tabWidget.setTabText(2, 'Микро уровень')
+            self.label_macro_template.setText('Вариант программного кода')
+            self.pushButton_macro_import.setText('Импорт вариантов')
+            self.pushButton_simulate.setText('Моделировать')
+            self.comboBox_arch.setItemText(0, 'Своя')
+        else:
+            self.tableWidget_macro.setHorizontalHeaderLabels(('Macro-operation', 'Operand 1', ' Operand 2', 'Tact'))
+            self.tableWidget_micro.setHorizontalHeaderLabels(('Macro-operation', 'Operand 1', ' Operand 2',
+                                                              'READ', 'MODIFY', 'ADDRESS', 'WRITE',
+                                                              'Unfused domain', 'Fused domain', 'Type'))
+            self.label_arch_settings.setText('Architecture settings')
+            self.label_arch_processor.setText('Processor architecture')
+            self.checkBox_arch_macro.setText('Macro fusion')
+            self.checkBox_arch_micro.setText('Micro fusion')
+            self.label_user_arch.setText('Custom architecture settings')
+            self.label_user_micro.setText('Micro-operations used from')
+            self.label_macro_fusion_settings.setText('Macro fusion settings')
+            self.label_macro_pairs_settings.setText('Fuseable operation pairs')
+            self.label_macro_first_pair.setText('First operation')
+            self.label_macro_second_pair.setText('Second operation')
+            self.label_macro_first_pair_operands.setText('Valid operands for first operation')
+            self.checkBox_Reg_Reg.setText('Register + Register')
+            self.checkBox_Reg_Imm.setText('Register + Immediate operand')
+            self.checkBox_Reg_Mem.setText('Register + Memory')
+            self.checkBox_Reg_RIP.setText('Register + RIP Address')
+            self.checkBox_Mem_Imm.setText('Memory + Immediate operand')
+            self.checkBox_Mem_Reg.setText('Memory + Register')
+            self.checkBox_Reg.setText('Register')
+            self.checkBox_Mem.setText('Memory')
+            self.checkBox_RIP.setText('RIP Address')
+            self.label_macro_conditions.setText('Conditions')
+            self.checkBox_Two_Pairs.setText('Two pairs in one tact')
+            self.checkBox_Transfer.setText(
+                'Transferring the first instruction to the next tact when it get on the last decoder')
+            self.label_macro_mode.setText('Fusion modes')
+            self.checkBox_16_Bit_Mode.setText('16 bit')
+            self.checkBox_32_Bit_Mode.setText('32 bit')
+            self.checkBox_64_Bit_Mode.setText('64 bit')
+            self.label_micro_fusion_settings.setText('Micro fusion settings')
+            self.label_micro_pairs_settings.setText('Fuseable operation pairs')
+            self.checkBox_Address_Write.setText('Address calculation + Data write')
+            self.checkBox_Read_Modify.setText('Read data + Data modification')
+            self.label_micro_conditions.setText('Conditions')
+            self.checkBox_micro_Combo.setText('Fusion two types of operation pairs')
+            self.checkBox_micro_Rip_Imm.setText('RIP and immediate operand in one instruction')
+            self.label_micro_operated_registers.setText('Manageable registers and operands')
+            self.checkBox_micro_Reg.setText('Registers')
+            self.checkBox_micro_Mem.setText('Memory')
+            self.checkBox_micro_Mmx.setText('MMX')
+            self.checkBox_micro_Xmm.setText('XMM')
+            self.checkBox_micro_Rip.setText('RIP Address')
+            self.checkBox_micro_Imm.setText('Immediate operands')
+            self.tabWidget.setTabText(0, 'Settings')
+            self.tabWidget.setTabText(1, 'Macro level')
+            self.tabWidget.setTabText(2, 'Micro level')
+            self.label_macro_template.setText('Assembly code option')
+            self.pushButton_macro_import.setText('Import options')
+            self.pushButton_simulate.setText('Simulate')
+            self.comboBox_arch.setItemText(0, 'Custom')
+
     # Main button to start simulation
     def simulate(self):
-        if self.comboBox_arch.currentText() == 'Своя':
+        if self.comboBox_arch.currentText() == 'Своя' or self.comboBox_arch.currentText() == 'Custom':
             current_settings = User_settings
         else:
             current_settings = Arch_Dict[self.comboBox_arch.currentText()]
@@ -92,7 +212,7 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
     def arch_changed(self):
         sender = self.sender()
         last_item = sender.property('last_item')
-        if sender.currentText() != 'Своя':
+        if sender.currentText() != 'Своя' and self.comboBox_arch.currentText() != 'Custom':
             current_dict = Arch_Dict[sender.currentText()]
             for box in self.scrollArea_macro_conditions.findChildren(QtWidgets.QCheckBox):
                 box.setChecked(current_dict['Macro_Conditions'][box.objectName()[9:]])
@@ -107,7 +227,8 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
             self.set_enabled_all(0)
         else:
             self.set_enabled_all(1)
-            if last_item != 'Своя' or 'None':
+            if last_item != 'Своя' and last_item is not None and last_item != 'Custom':
+
                 global User_settings
                 User_settings = copy.deepcopy(Arch_Dict[last_item])
         self.clear_second_operators()
@@ -116,49 +237,50 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
     def macro_fusion_change_state(self):
         sender = self.sender()
         global User_settings
-        if self.comboBox_arch.currentText() == 'Своя':
+        if self.comboBox_arch.currentText() == 'Своя' or self.comboBox_arch.currentText() == 'Custom':
             User_settings['Macro_Micro']['Macro'] = int(sender.isChecked())
 
     def micro_fusion_change_state(self):
         sender = self.sender()
         global User_settings
-        if self.comboBox_arch.currentText() == 'Своя':
+        if self.comboBox_arch.currentText() == 'Своя' or self.comboBox_arch.currentText() == 'Custom':
             User_settings['Macro_Micro']['Micro'] = int(sender.isChecked())
 
     def second_operator_change_state(self):
         sender = self.sender()
         global User_settings
-        if self.comboBox_arch.currentText() == 'Своя' and self.current_radio != 'none':
+        if self.comboBox_arch.currentText() == 'Своя' or self.comboBox_arch.currentText() == 'Custom' \
+                and self.current_radio != 'none':
             User_settings['Macro_Pairs'][self.current_radio][sender.objectName()[9:]] = int(sender.isChecked())
 
     def macro_operands_change_state(self):
         sender = self.sender()
         global User_settings
-        if self.comboBox_arch.currentText() == 'Своя':
+        if self.comboBox_arch.currentText() == 'Своя' or self.comboBox_arch.currentText() == 'Custom':
             User_settings['Macro_Operands'][sender.objectName()[9:]] = int(sender.isChecked())
 
     def macro_conditions_change_state(self):
         sender = self.sender()
         global User_settings
-        if self.comboBox_arch.currentText() == 'Своя':
+        if self.comboBox_arch.currentText() == 'Своя' or self.comboBox_arch.currentText() == 'Custom':
             User_settings['Macro_Conditions'][sender.objectName()[9:]] = int(sender.isChecked())
 
     def micro_conditions_change_state(self):
         sender = self.sender()
         global User_settings
-        if self.comboBox_arch.currentText() == 'Своя':
+        if self.comboBox_arch.currentText() == 'Своя' or self.comboBox_arch.currentText() == 'Custom':
             User_settings['Micro_Conditions'][sender.objectName()[15:]] = int(sender.isChecked())
 
     def micro_pairs_change_state(self):
         sender = self.sender()
         global User_settings
-        if self.comboBox_arch.currentText() == 'Своя':
+        if self.comboBox_arch.currentText() == 'Своя' or self.comboBox_arch.currentText() == 'Custom':
             User_settings['Micro_Pairs'][sender.objectName()[9:]] = int(sender.isChecked())
 
     def show_second_operators(self):
         sender = self.sender()
         self.current_radio = sender.objectName()[12:]
-        if self.comboBox_arch.currentText() == 'Своя':
+        if self.comboBox_arch.currentText() == 'Своя' or self.comboBox_arch.currentText() == 'Custom':
             current_dict = User_settings
             self.set_enabled_second_pair(1)
         else:
@@ -200,7 +322,10 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
     # ____Macro tab functions____
 
     def import_code(self):
-        filename = QFileDialog.getOpenFileName(self, 'Импорт вариантов кода', None, 'Текстовый файл (*.txt)')[0]
+        if self.current_language == 'ru':
+            filename = QFileDialog.getOpenFileName(self, 'Импорт вариантов кода', None, 'Текстовый файл (*.txt)')[0]
+        else:
+            filename = QFileDialog.getOpenFileName(self, 'Import code examples', None, 'Text file (*.txt)')[0]
         if os.path.isfile(str(filename)):
             file = open(filename, 'r')
             code = ''
@@ -209,13 +334,21 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
             self.comboBox_macro_template.addItem('')
             for line in file:
                 if line == '\n':
-                    Code_Dict['Вариант ' + str(self.comboBox_macro_template.count())] = code
-                    self.comboBox_macro_template.addItem('Вариант ' + str(self.comboBox_macro_template.count()))
+                    if self.current_language == 'ru':
+                        Code_Dict['Вариант ' + str(self.comboBox_macro_template.count())] = code
+                        self.comboBox_macro_template.addItem('Вариант ' + str(self.comboBox_macro_template.count()))
+                    else:
+                        Code_Dict['Example ' + str(self.comboBox_macro_template.count())] = code
+                        self.comboBox_macro_template.addItem('Example ' + str(self.comboBox_macro_template.count()))
                     code = ''
                 else:
                     code += line
-            Code_Dict['Вариант ' + str(self.comboBox_macro_template.count())] = code
-            self.comboBox_macro_template.addItem('Вариант ' + str(self.comboBox_macro_template.count()))
+            if self.current_language == 'ru':
+                Code_Dict['Вариант ' + str(self.comboBox_macro_template.count())] = code
+                self.comboBox_macro_template.addItem('Вариант ' + str(self.comboBox_macro_template.count()))
+            else:
+                Code_Dict['Example ' + str(self.comboBox_macro_template.count())] = code
+                self.comboBox_macro_template.addItem('Example ' + str(self.comboBox_macro_template.count()))
             file.close()
 
     def template_changed(self):
@@ -419,7 +552,7 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                               row_count]
                 op1 = current_op[1].text()
                 op2 = current_op[2].text()
-                if self.comboBox_arch.currentText() != 'Своя':
+                if self.comboBox_arch.currentText() != 'Своя' and self.comboBox_arch.currentText() != 'Custom':
                     Current_Micro_dict = Micro_Dict[self.comboBox_arch.currentText()]
                 else:
                     Current_Micro_dict = Micro_Dict[self.comboBox_arch_micro.currentText()]
@@ -637,4 +770,5 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
 # Launch
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()
+app.setStyle('')
 sys.exit(app.exec())
