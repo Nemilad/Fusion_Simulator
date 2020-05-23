@@ -1424,14 +1424,17 @@
             <item>
              <widget class="QLabel" name="label">
               <property name="text">
-               <string/>
+               <string>Импорт вариантов</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
               </property>
              </widget>
             </item>
             <item>
              <widget class="QPushButton" name="pushButton_macro_import">
               <property name="text">
-               <string>Импорт вариантов</string>
+               <string>Файл...</string>
               </property>
              </widget>
             </item>
@@ -1443,6 +1446,9 @@
              <widget class="QLabel" name="label_macro_template">
               <property name="text">
                <string>Вариант готового программного кода</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
