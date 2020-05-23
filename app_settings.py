@@ -1305,6 +1305,56 @@ Macro_micro_dict_Nehalem = {
             'WRITE': 0
         },
     },
+    'IMUL': {
+        'Reg64': {
+            'READ': 0,
+            'MODIFY': 3,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg16_Reg16': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg32_Reg32': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Reg64_Reg64': {
+            'READ': 0,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64': {
+            'READ': 1,
+            'MODIFY': 2,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem16_Mem16': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem32_Mem32': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+        'Mem64_Mem64': {
+            'READ': 1,
+            'MODIFY': 1,
+            'ADDRESS': 0,
+            'WRITE': 0
+        },
+    },
     'DIV': {
         'Reg8': {
             'READ': 0,
