@@ -69,7 +69,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="settings">
        <attribute name="title">
@@ -434,7 +434,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>284</width>
+                 <width>285</width>
                  <height>350</height>
                 </rect>
                </property>
@@ -593,7 +593,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>283</width>
+                 <width>285</width>
                  <height>896</height>
                 </rect>
                </property>
@@ -889,7 +889,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>592</width>
+                 <width>595</width>
                  <height>246</height>
                 </rect>
                </property>
@@ -1021,7 +1021,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>594</width>
+               <width>597</width>
                <height>170</height>
               </rect>
              </property>
@@ -1172,8 +1172,8 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>611</width>
-               <height>215</height>
+               <width>613</width>
+               <height>217</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1239,7 +1239,7 @@
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>611</width>
+               <width>613</width>
                <height>288</height>
               </rect>
              </property>
@@ -1404,11 +1404,11 @@
             <attribute name="horizontalHeaderCascadingSectionResizes">
              <bool>true</bool>
             </attribute>
-            <attribute name="horizontalHeaderMinimumSectionSize">
-             <number>25</number>
-            </attribute>
             <attribute name="horizontalHeaderDefaultSectionSize">
              <number>120</number>
+            </attribute>
+            <attribute name="horizontalHeaderMinimumSectionSize">
+             <number>25</number>
             </attribute>
             <attribute name="horizontalHeaderStretchLastSection">
              <bool>false</bool>
@@ -1419,6 +1419,24 @@
         </item>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_14">
+            <item>
+             <widget class="QLabel" name="label_macro_template_2">
+              <property name="text">
+               <string>Импорт вариантов</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_macro_import">
+              <property name="text">
+               <string>Выбрать файл</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_4">
             <item>
@@ -1440,27 +1458,21 @@
            </layout>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_macro_import">
-            <property name="text">
-             <string>Импорт вариантов</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_5"/>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <spacer name="horizontalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QPushButton" name="pushButton_simulate">
@@ -1497,7 +1509,7 @@
      <x>0</x>
      <y>0</y>
      <width>1520</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
