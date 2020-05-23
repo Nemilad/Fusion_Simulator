@@ -139,7 +139,8 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tabWidget.setTabText(1, 'Макро уровень')
             self.tabWidget.setTabText(2, 'Микро уровень')
             self.label_macro_template.setText('Вариант программного кода')
-            self.pushButton_macro_import.setText('Импорт вариантов')
+            self.label.setText('Импорт вариантов')
+            self.pushButton_macro_import.setText('Файл...')
             self.pushButton_simulate.setText('Моделировать')
             self.comboBox_arch.setItemText(0, 'Своя')
         else:
@@ -193,7 +194,8 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
             self.tabWidget.setTabText(1, 'Macro level')
             self.tabWidget.setTabText(2, 'Micro level')
             self.label_macro_template.setText('Assembly code option')
-            self.pushButton_macro_import.setText('Import options')
+            self.label.setText('Import options')
+            self.pushButton_macro_import.setText('File...')
             self.pushButton_simulate.setText('Simulate')
             self.comboBox_arch.setItemText(0, 'Custom')
 
@@ -342,7 +344,8 @@ class Ui(QtWidgets.QMainWindow, Ui_MainWindow):
                         self.comboBox_macro_template.addItem('Example ' + str(self.comboBox_macro_template.count()))
                     code = ''
                 else:
-                    code += line
+                    if line[0] != '#':
+                        code += line
             if self.current_language == 'ru':
                 Code_Dict['Вариант ' + str(self.comboBox_macro_template.count())] = code
                 self.comboBox_macro_template.addItem('Вариант ' + str(self.comboBox_macro_template.count()))

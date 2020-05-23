@@ -1,3 +1,4 @@
+#Вариант 1#
 a1:	add	rax, qword[mem1]
 	mov	rbx, qword[mem2]
 	push	rax
@@ -23,6 +24,7 @@ a3:	imul	rbx, qword[mem2]
 a4:	mov	dword[mem4], eax
 	pop	dword[mem4]
 
+#Вариант 2#
 	mov	eax, edx
 	mov	ebx, dword[mem3]
 	div	ebx
@@ -48,6 +50,7 @@ b3:	add	rdx, rax
 b4:	not	ax
 	mov	ax, dx
 
+#Вариант 3#
 	xor	ebx, 64
 c1:	add	rax, qword[mem1]
 	not	rax
@@ -71,6 +74,7 @@ c3:	sub	ax, 5
 	xor	rax, rcx
 c4:	push	ax
 
+#Вариант 4#
 d1:	dec	eax
 	add	ebx, dword[mem1]
 	pop	word[mem2]
@@ -96,6 +100,7 @@ d4:	dec	word[mem2]
 	imul	eax
 	sbb	eax, dword[mem1]
 
+#Вариант 5#
 	inc	ax
 	sub	dx, word[mem2]
 	mov	rax, qword[mem3]
@@ -121,6 +126,7 @@ e3:	add	qword[mem3], 32
 e4:	pop	rax
 	not	dx
 
+#Вариант 6#
 f1:	add	bx, 16
 	add	cx, word[mem3]
 	mov	rdx, qword[mem1]
@@ -146,6 +152,8 @@ f3:	mov	rbx, 64
 f4:	mov	dword[mem4], 5
 	idiv	dword[mem4]
 
+
+#Вариант 7#
 	mov	rdx, 64
 	inc	rax
 	push	dword[mem1]
@@ -171,6 +179,7 @@ g3:	not	dx
 	or	qword[mem5], 5
 g4:	mov	ax, dword[mem1]
 
+#Вариант 8#
 	pop	dword[mem3]
 	mov	ecx, dword[mem4]
 h1:	add	eax, ecx
@@ -196,6 +205,7 @@ h3:	inc	ebx
 	neg	ax
 h4:	dec	ebx
 
+#Вариант 9#
 	mov	dx, 18
 i1:	imul	dx
 i2:	sub	eax, dword[mem1]
@@ -221,6 +231,7 @@ i3:	add	bx, dx
 i4:	mul	dx
 	xor	dword[mem6], dx
 
+#Вариант 10#
 	push	byte[mem5]
 j1:	add	eax, dword[mem1]
 	mov	rbx, 12
@@ -246,6 +257,7 @@ j4:	dec	rbx
 	push	dword[mem1]
 	inc	dword[mem2]
 
+#Вариант 11#
 	mov	rdx, qword[mem2]
 k1:	inc	dx
 	push	dword[mem4]
@@ -271,6 +283,7 @@ k3:	sub	eax, 16
 	test	dword[mem4], dword[mem3]
 k4:	dec	dword[mem3]
 
+#Вариант 12#
 l1:	inc	eax
 	add	cx, word[mem2]
 	mov	dword[mem3], eax
@@ -296,6 +309,7 @@ l4:	dec	word[mem2]
 	imul	eax
 	div	dx
 
+#Вариант 13#
 m1:	add	ebx, 53
 	mov	ax, word[mem3]
 	mov	rdx, 15
@@ -321,6 +335,7 @@ m4:	inc	cx
 	push	qword[mem1]
 	pop	ax
 
+#Вариант 14#
 	add	dx, 23
 	imul	qword[mem1]
 	mov	rax, qword[mem1]
@@ -346,6 +361,7 @@ n3:	add	ebx, 16
 n4:	and	ebx, dword[mem7]
 	sbb	rax, qword[mem1]
 
+#Вариант 15#
 	add	rax, 164
 o1:	add	dx, 5
 	mov	ebx, dword[mem2]
